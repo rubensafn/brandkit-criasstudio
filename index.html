@@ -275,8 +275,9 @@ footer .flogo{width:100%;overflow:visible}
 .rk span{position:relative;font-family:"Rakis Outline";font-size:clamp(70px,13vw,170px);line-height:.85;color:var(--ciano)}
 .rk span i{position:absolute;inset:0;font-style:normal;font-family:"Rakis";clip-path:inset(0 100% 0 0)}
 .scale{margin-top:30px;border:1px solid var(--linha)}
-.scale div{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:baseline;padding:16px;border-bottom:1px solid var(--linha);overflow:hidden}
+.scale div{display:grid;grid-template-columns:minmax(0,96px) minmax(0,1fr);gap:12px;align-items:baseline;padding:16px;border-bottom:1px solid var(--linha);overflow:hidden}
 .scale div:last-child{border:0}
+@media(max-width:600px){.scale div{grid-template-columns:1fr;gap:6px}}
 .scale small{font-size:11px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;line-height:1.4}
 
 /* elements */
@@ -661,7 +662,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
     </div>
 
     <div class="scale cut blk" style="padding-bottom:0;margin-bottom:clamp(56px,8vw,110px)">
-      <div><small>Título 1<br>40 / 84 px</small><span style="font-family:var(--t);font-weight:900;font-size:clamp(30px,5vw,64px);line-height:1;text-transform:uppercase;white-space:nowrap">Marcas que ficam</span></div>
+      <div><small>Título 1<br>40 / 84 px</small><span style="font-family:var(--t);font-weight:900;font-size:clamp(30px,5vw,64px);line-height:1;text-transform:uppercase;">Marcas que ficam</span></div>
       <div><small>Título 2<br>24 / 40 px</small><span style="font-family:var(--t);font-weight:700;font-size:clamp(20px,2.8vw,36px);text-transform:uppercase">Novo projeto</span></div>
       <div><small>Label<br>13 px · +18%</small><span class="eyebrow">Identidade visual</span></div>
       <div><small>Texto<br>17 / 20 px</small><span style="font-size:clamp(16px,1.6vw,19px);color:var(--muted)">Identidade, campanha e audiovisual pra marca que quer ser lembrada.</span></div>
@@ -757,7 +758,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 <section id="narua" class="ruas">
   <div class="wrap"><div class="sh"><div class="num">10<span class="fill" aria-hidden="true">10</span></div><div><p class="eyebrow">Na rua</p><h2>No mundo real</h2></div></div></div>
   <div class="stack" id="stack">
-    <div class="bigt" aria-hidden="true"><p>Cartão</p><p>Camiseta</p><p>Boné</p><p>Adesivo</p><p>Ecobag</p><p>Feed</p><p>Crachá</p><p>Caneca</p><p>Lambe</p></div>
+    <div class="bigt" aria-hidden="true"><p>Cartão</p><p>Camiseta</p><p>Boné</p><p>Adesivo</p><p>Ecobag</p><p>Feed</p><p>Crachá</p><p>Caneca</p><p>Cartaz</p></div>
     <div class="frame cut" id="frame">
       <div class="sc" data-t="Cartão de visita" role="img" aria-label="Mockup CRIAS: Cartão de visita"><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i></div>
       <div class="sc" data-t="Camiseta" role="img" aria-label="Mockup CRIAS: Camiseta"><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i></div>
@@ -767,7 +768,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
       <div class="sc" data-t="Instagram" role="img" aria-label="Mockup CRIAS: Instagram"><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i></div>
       <div class="sc" data-t="Crachá de evento" role="img" aria-label="Mockup CRIAS: Crachá de evento"><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i></div>
       <div class="sc" data-t="Caneca" role="img" aria-label="Mockup CRIAS: Caneca"><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i></div>
-      <div class="sc" data-t="Lambe-lambe" role="img" aria-label="Mockup CRIAS: Lambe-lambe"><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i></div>
+      <div class="sc" data-t="Cartaz de rua" role="img" aria-label="Mockup CRIAS: Cartaz de rua"><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i></div>
     </div>
     <div class="skbar"><b id="skn">01</b><span id="skt">Cartão de visita</span><em id="skc">/ 09</em></div>
   </div>
