@@ -102,6 +102,17 @@ canvas.ink{position:absolute;inset:0;width:100%;height:100%;display:block}
 .pre .pl{font-size:11px;letter-spacing:.3em;color:var(--muted);text-transform:uppercase}
 /* footer */
 footer .flogo{width:100%;overflow:visible}
+/* stop-motion */
+.smo{height:100svh;position:relative;overflow:hidden;background:var(--asfalto)}
+.smbg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(40px) brightness(.35);transform:scale(1.1)}
+.smf{position:absolute;left:0;right:0;top:50%;aspect-ratio:941/1615;transform:translateY(-50%);box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.smf img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
+.smf img:first-child{opacity:1}
+@media(min-width:760px){.smf{right:auto;left:50%;height:90svh;transform:translate(-50%,-50%)}}
+.smc{position:absolute;left:var(--pad);top:84px;z-index:3;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(242,239,233,.75)}
+.smc b{font-family:"Rakis";font-weight:400;font-size:18px;color:var(--ciano);letter-spacing:0}
+.smt{position:absolute;left:var(--pad);bottom:clamp(110px,16svh,170px);z-index:3;font-family:var(--t);font-weight:900;font-size:clamp(44px,10vw,120px);line-height:.88;text-transform:uppercase;letter-spacing:-.02em;clip-path:inset(0 100% 0 0)}
+.smt em{font-style:normal;color:var(--ciano)}
 /* mergulho */
 .dive{height:100svh;position:relative;overflow:hidden;background:var(--asfalto)}
 .dive .dstage{position:absolute;left:0;top:0;will-change:transform}
@@ -413,7 +424,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 .snav.on{opacity:1;pointer-events:auto}
 .snav a{display:flex;align-items:center;gap:6px;height:12px;text-decoration:none}
 .snav a i{display:block;width:10px;height:2px;background:rgba(242,239,233,.38);transform:skewY(-12deg);transition:width .35s,background .35s}
-.snav a b{font-family:"Rakis";font-weight:400;font-size:13px;color:var(--ciano);opacity:0;transform:translateX(6px);transition:opacity .3s,transform .3s}
+.snav a b{font-family:var(--s);font-weight:600;font-size:11px;letter-spacing:.06em;color:var(--ciano);opacity:0;transform:translateX(6px);transition:opacity .3s,transform .3s}
 .snav a.on i{width:22px;background:var(--ciano)}
 .snav a.on b{opacity:1;transform:none}
 .snav.lt a i{background:rgba(14,15,17,.35)}.snav.lt a.on i{background:var(--asfalto)}.snav.lt a b{color:var(--asfalto)}
@@ -529,6 +540,13 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
       <div><h3 class="h3">Fora do vocabulário</h3><div class="words bad"><span>sinergia</span><span>disruptivo</span><span>soluções</span><span>alavancar</span><span>inovador</span><span>empoderar</span></div></div>
     </div>
   </div>
+</section>
+
+<section class="smo" id="montagem" aria-label="Stop-motion: as letras do CRIAS em acrílico se montando sobre a mesa até acender em neon">
+  <div class="smbg" id="smbg"></div>
+  <div class="smf" id="smf"><img src="img/sm/q1.webp" alt="" decoding="async"><img src="img/sm/q2.webp" alt="" loading="lazy" decoding="async"><img src="img/sm/q3.webp" alt="" loading="lazy" decoding="async"><img src="img/sm/q4.webp" alt="" loading="lazy" decoding="async"><img src="img/sm/q5.webp" alt="" loading="lazy" decoding="async"><img src="img/sm/q6.webp" alt="" loading="lazy" decoding="async"></div>
+  <p class="smc">Quadro <b id="smn">01</b> / 06</p>
+  <h2 class="smt" id="smt">Peça<br>por <em>peça.</em></h2>
 </section>
 
 <!-- 03 LOGO -->
@@ -1065,6 +1083,20 @@ if(window.gsap&&window.ScrollTrigger){
       .to(".dive .dcopy > *",{opacity:1,y:0,stagger:.08,duration:.3},1.75)
       .to({},{duration:.3});
   }
+  /* stop-motion: quadro a quadro com tremidinha */
+  {const fr=gsap.utils.toArray("#smf img"),bg=document.getElementById("smbg"),num=document.getElementById("smn"),smf=document.getElementById("smf");
+   const tt=document.getElementById("smt"),SEQ=[0,1,2,3,4,5,4,5,4,5,5],W=[1,1,1,1,1.2,.25,.25,.25,.25,1.4,.4],TOT=W.reduce((a,b)=>a+b,0);
+   const desk=()=>matchMedia("(min-width:760px)").matches;let cur=-1;
+   const show=k=>{if(k===cur)return;cur=k;const f=SEQ[k];fr.forEach((im,i)=>im.style.opacity=i===f?1:0);num.textContent=String(f+1).padStart(2,"0");
+     bg.style.backgroundImage=`url(${fr[f].getAttribute("src")})`;
+     const j={x:gsap.utils.random(-5,5),y:gsap.utils.random(-5,5),rotation:gsap.utils.random(-.35,.35)};
+     gsap.set(smf,desk()?{xPercent:-50,yPercent:-50,...j}:{yPercent:-50,...j})};
+   show(0);
+   if(!reduce){
+     ScrollTrigger.create({trigger:"#montagem",start:"top top",end:"+=260%",pin:true,scrub:true,onUpdate:st=>{let p=st.progress*TOT,k=0;while(k<W.length-1&&p>W[k]){p-=W[k];k++}show(k);const r=Math.min(1,Math.max(0,(st.progress-.8)/.14));tt.style.clipPath=`inset(0 ${100-r*100}% 0 0)`}});
+   }else{show(10);gsap.set("#smt",{clipPath:"inset(0 0% 0 0)"})}
+  }
+
   /* laje: paralaxe */
   if(!reduce){
     gsap.timeline({scrollTrigger:{trigger:"#laje",start:"top top",end:"+=160%",scrub:1,pin:true}})
@@ -1219,8 +1251,8 @@ if(window.gsap&&window.ScrollTrigger){
   ScrollTrigger.sort((a,b)=>{const ea=a.trigger||document.body,eb=b.trigger||document.body;if(ea===eb)return 0;return ea.compareDocumentPosition(eb)&Node.DOCUMENT_POSITION_FOLLOWING?-1:1});
   ScrollTrigger.refresh();
   /* seções ativas na lateral */
-  const zones=[["inicio","inicio"],["cria","inicio"],["mergulho","inicio"],["traco","inicio"],["laje","inicio"],["essencia","essencia"],["voz","voz"],["logo","logo"],["cores","cores"],["tipografia","tipografia"],["flood","tipografia"],["elementos","elementos"],["motion","motion"],["social","social"],["aplicacoes","aplicacoes"],["narua","narua"],["cta","narua"],["arquivos","arquivos"],["foot","arquivos"]];
-  zones.forEach(([el,id])=>{const node=document.getElementById(el);if(!node)return;ScrollTrigger.create({trigger:node,start:"top 50%",end:"bottom 50%",onToggle:e=>{if(e.isActive){setSnav(id);snav.classList.toggle("lt",LIGHT.has(el))}}})});
+  const zones=[["inicio","inicio"],["cria","inicio"],["mergulho","inicio"],["traco","inicio"],["laje","inicio"],["essencia","essencia"],["voz","voz"],["montagem","logo"],["logo","logo"],["cores","cores"],["tipografia","tipografia"],["flood","tipografia"],["elementos","elementos"],["motion","motion"],["social","social"],["aplicacoes","aplicacoes"],["narua","narua"],["cta","narua"],["arquivos","arquivos"],["foot","arquivos"]];
+  zones.forEach(([el,id])=>{let node=document.getElementById(el);if(!node)return;if(node.parentElement.classList.contains("pin-spacer"))node=node.parentElement;ScrollTrigger.create({trigger:node,start:"top 50%",end:"bottom 50%",onToggle:e=>{if(e.isActive){setSnav(id);snav.classList.toggle("lt",LIGHT.has(el))}}})});
   ScrollTrigger.create({start:()=>innerHeight*.8,end:"max",onToggle:e=>{totop.classList.toggle("on",e.isActive);snav.classList.toggle("on",e.isActive)}});
   const hdr=document.getElementById("hdr");
   ScrollTrigger.create({trigger:"#cria",start:"top 70%",onEnter:()=>hdr.classList.add("on"),onLeaveBack:()=>hdr.classList.remove("on")});
