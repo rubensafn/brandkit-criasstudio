@@ -29,6 +29,7 @@ a{color:inherit}
 ::selection{background:var(--ciano);color:var(--asfalto)}
 .grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:90;opacity:.07;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.cut-r{clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut))}
 .cut{clip-path:polygon(0 0,calc(100% - var(--cut)) 0,100% var(--cut),100% 100%,var(--cut) 100%,0 calc(100% - var(--cut)))}
 .eyebrow{font-family:var(--s);font-weight:500;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--magenta)}
 .lead{font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:34em}
@@ -234,7 +235,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 <div class="prog" aria-hidden="true"></div>
 
 <header class="hdr" id="hdr">
-  <a href="#inicio" class="mini" aria-label="CRIAS Studio, voltar ao início" data-lg="principal"></a>
+  <a href="#inicio" class="mini cut-r" aria-label="CRIAS Studio, voltar ao início" data-lg="principal"></a>
   <button class="mbtn cut" id="mopen" aria-expanded="false" aria-controls="menu"><i></i>MENU</button>
 </header>
 
