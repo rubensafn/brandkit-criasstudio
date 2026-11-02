@@ -69,6 +69,25 @@ section{position:relative}
 .hero .hint i{display:block;width:1px;height:38px;margin:10px auto 0;background:linear-gradient(var(--ciano),transparent);animation:drip 1.8s infinite}
 @keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
+canvas.ink{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero.gl .orb{display:none}
+.paper{position:relative;isolation:isolate}
+.paper:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.55;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.035 .06' numOctaves='5' seed='7'/%3E%3CfeDiffuseLighting lighting-color='%23F2EFE9' surfaceScale='1.4'%3E%3CfeDistantLight azimuth='40' elevation='62'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E")}
+/* traço */
+.trace{height:100svh;background:var(--cal);color:var(--asfalto);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:0 var(--pad);text-align:center}
+.trace .eyebrow{color:#5B3FD9}
+.tr-stage{position:relative;width:min(88vw,900px);margin:28px 0 30px}
+.tr-stage svg{width:100%;display:block}
+.tr-stage #trFinal{position:absolute;inset:0;clip-path:inset(0 100% 0 0)}
+.tr-stage .needle{position:absolute;top:-14%;bottom:-14%;left:0;width:2px;background:var(--magenta);opacity:0}
+.tr-stage .needle:after{content:"";position:absolute;left:-5px;top:-6px;width:12px;height:12px;background:var(--magenta);clip-path:polygon(50% 100%,0 0,100% 0)}
+#trStencil path{fill:none;stroke:#5B3FD9;stroke-width:1.4;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+#trStencil .bleed path{stroke-width:3;opacity:.18}
+.tr-cap{font-family:var(--t);font-weight:800;font-size:clamp(24px,5vw,56px);line-height:1;text-transform:uppercase}
+.tr-cap em{font-style:normal;color:#5B3FD9}
+.tr-sub{margin-top:14px;color:rgba(14,15,17,.62);font-size:clamp(15px,1.5vw,18px);max-width:28em}
+.flood{height:100svh;position:relative;overflow:hidden;background:var(--asfalto)}
 /* cria -> criação */
 .cria{height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;text-align:center;padding:0 var(--pad)}
 .word{font-family:var(--t);font-weight:900;font-size:clamp(38px,12vw,200px);line-height:.9;letter-spacing:-.02em;white-space:nowrap;display:flex}
@@ -253,7 +272,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 
 <main>
 <section class="hero" id="inicio">
-  <div class="orb" aria-hidden="true"></div>
+  <canvas class="ink" id="inkHero" aria-hidden="true"></canvas><div class="orb" aria-hidden="true"></div>
   <div class="ghost" aria-hidden="true">CRIAS</div>
   <p class="corner">Brand kit · 2026</p>
   <svg class="logo" id="heroLogo" viewBox="616 458 688 164" role="img" aria-label="CRIAS Studio"></svg>
@@ -264,6 +283,13 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 <section class="cria" id="cria">
   <div class="word" aria-label="Criação"><span>CRIA</span><span class="tail">ÇÃO</span></div>
   <p class="sub">Do verbo <b>criar</b>. Tudo que sai daqui nasce do zero: <b>marca, campanha, filme</b>. Feito com atitude, entregue com acabamento.</p>
+</section>
+
+<section class="trace paper" id="traco">
+  <p class="eyebrow">Processo</p>
+  <div class="tr-stage"><svg id="trStencil" viewBox="616 458 688 164" aria-hidden="true"></svg><svg id="trFinal" viewBox="616 458 688 164" role="img" aria-label="CRIAS Studio"></svg><i class="needle" aria-hidden="true"></i></div>
+  <p class="tr-cap">Do traço <em>à marca.</em></p>
+  <p class="tr-sub">Todo projeto começa no papel, a mão. O acabamento vem depois.</p>
 </section>
 
 <!-- 01 LOGO -->
@@ -316,7 +342,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 </section>
 
 <!-- 02 CORES -->
-<section id="cores" class="light">
+<section id="cores" class="light paper">
   <div class="wrap">
     <div class="sh"><div class="num">02<span class="fill" aria-hidden="true">02</span></div><div><p class="eyebrow">Cores</p><h2>Paleta</h2></div></div>
     <p class="lead" style="margin-bottom:26px">O ciano é a cor da marca e sempre aparece primeiro. Magenta é a segunda voz, pra destaque e chamada. O azul serve de ponte entre os dois, no gradiente. Toque numa cor pra copiar o código.</p>
@@ -378,6 +404,8 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
   </div>
 </section>
 
+<div class="flood" id="flood" aria-hidden="true"><canvas class="ink" id="inkFlood"></canvas></div>
+
 <!-- 04 ELEMENTOS -->
 <section id="elementos" class="cyan">
   <div class="wrap">
@@ -411,7 +439,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 </section>
 
 <!-- 06 ARQUIVOS -->
-<section id="arquivos" class="light">
+<section id="arquivos" class="light paper">
   <div class="wrap">
     <div class="sh"><div class="num">06<span class="fill" aria-hidden="true">06</span></div><div><p class="eyebrow">Arquivos</p><h2>Pronto pra usar</h2></div></div>
     <p class="lead">Logos em SVG e PNG, paleta, grafismos e modelos, tudo organizado em pastas. O guia completo sai em PDF.</p>
@@ -505,6 +533,54 @@ document.getElementById("pairs").innerHTML=PR.map(([f,b,n,u])=>{const r=ratio(f,
 document.getElementById("tee").innerHTML=`<path d="M120 20 L160 8 Q200 40 240 8 L280 20 L390 80 L350 160 L310 140 L310 410 L90 410 L90 140 L50 160 L10 80 Z" fill="#151618" stroke="#2a2b2e" stroke-width="2"/><path d="M160 8 Q200 40 240 8" fill="none" stroke="#2a2b2e" stroke-width="6"/><g transform="translate(200 130) scale(.24) translate(-960 -540)">${ORDER.map(k=>`<path fill="${C.ciano}" d="${PATHS.main[k]}"/>`).join("")}${PATHS.studio.map(d=>`<path fill="${C.cal}" d="${d}"/>`).join("")}</g><polygon points="330,98 372,107 362,128 322,119" fill="${C.ciano}"/>`;
 document.getElementById("stk").innerHTML=`<g fill="#fff" stroke="#fff" stroke-width="36" stroke-linejoin="miter">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g><g fill="${C.ciano}">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}</g><g fill="${C.asfalto}">${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g>`;
 
+/* traço */
+document.getElementById("trStencil").innerHTML=`<g class="bleed" transform="translate(1.6 1.2)">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}</g><g class="ln">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g>`;
+document.getElementById("trFinal").innerHTML=`<g fill="${C.asfalto}">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g>`;
+
+/* tinta viva (WebGL) */
+const INK_FS=`precision highp float;uniform vec2 r;uniform float t,s,fill,dim;
+float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float n(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),u.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),u.x),u.y);}
+float fbm(vec2 p){float v=0.,a=.5;mat2 m=mat2(1.6,1.2,-1.2,1.6);for(int i=0;i<5;i++){v+=a*n(p);p=m*p;a*=.5;}return v;}
+void main(){vec2 uv=(gl_FragCoord.xy-.5*r)/min(r.x,r.y);uv*=1.5-s*.5;
+float a=t*6.2831853/40.;vec2 o=vec2(cos(a),sin(a))*.9,o2=vec2(sin(a*2.),cos(a))*.7;
+vec2 q=vec2(fbm(uv+o),fbm(uv+vec2(5.2,1.3)-o));
+vec2 w=vec2(fbm(uv+3.2*q+vec2(1.7,9.2)+o2),fbm(uv+3.2*q+vec2(8.3,2.8)-o2));
+float f=fbm(uv+3.4*w+s*.8);
+vec3 asf=vec3(.055,.059,.067),ci=vec3(0.,1.,.855),az=vec3(.302,.486,1.),mg=vec3(1.,.18,.576);
+vec3 col=asf;
+col=mix(col,az*.6,smoothstep(.38,.78,f)*.85);
+col=mix(col,mg*.85,smoothstep(.5,1.,length(q))*smoothstep(.42,.8,f)*.75);
+col=mix(col,ci,smoothstep(.55,.92,w.x*f*1.7)*.85);
+col*=mix(.35,1.,smoothstep(1.5,.15,length(uv)))*dim;
+float th=1.-fill*1.35,m=smoothstep(th,th+.07,f*.75+.32*(1.-length(uv)*.55));
+col=mix(col,ci,m);col=mix(col,mg,m*(1.-m)*2.2*step(.001,fill));
+gl_FragColor=vec4(col,1.);}`;
+function makeInk(cv,{scale=.5,dim=1,keep=false}={}){
+  let gl;try{gl=cv.getContext("webgl",{antialias:false,preserveDrawingBuffer:keep})}catch(e){}
+  if(!gl)return null;
+  const sh=(ty,src)=>{const o=gl.createShader(ty);gl.shaderSource(o,src);gl.compileShader(o);return o};
+  const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,"attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}"));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,INK_FS));gl.linkProgram(pr);
+  if(!gl.getProgramParameter(pr,gl.LINK_STATUS))return null;gl.useProgram(pr);
+  const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  const lp=gl.getAttribLocation(pr,"p");gl.enableVertexAttribArray(lp);gl.vertexAttribPointer(lp,2,gl.FLOAT,false,0,0);
+  const U={};["r","t","s","fill","dim"].forEach(k=>U[k]=gl.getUniformLocation(pr,k));
+  const st={s:0,fill:0,dim};let raf=0,on=false,t0=performance.now();
+  function size(){const w=Math.max(2,Math.round(cv.clientWidth*scale)),h=Math.max(2,Math.round(cv.clientHeight*scale));if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;gl.viewport(0,0,w,h)}}
+  function draw(t){size();gl.uniform2f(U.r,cv.width,cv.height);gl.uniform1f(U.t,t);gl.uniform1f(U.s,st.s);gl.uniform1f(U.fill,st.fill);gl.uniform1f(U.dim,st.dim);gl.drawArrays(gl.TRIANGLES,0,3)}
+  function loop(){draw((performance.now()-t0)/1000);raf=requestAnimationFrame(loop)}
+  const api={st,draw,start(){if(!on){on=true;loop()}},stop(){on=false;cancelAnimationFrame(raf)}};
+  new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?api.start():api.stop())).observe(cv);
+  addEventListener("resize",()=>draw((performance.now()-t0)/1000));
+  return api;
+}
+const reduceInk=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const inkHero=makeInk(document.getElementById("inkHero"),{scale:.5,dim:.8});
+if(inkHero)document.querySelector(".hero").classList.add("gl");
+const inkFlood=makeInk(document.getElementById("inkFlood"),{scale:.5,dim:.9});
+if(!inkFlood)document.getElementById("flood").style.background="var(--ciano)";
+if(reduceInk){inkHero&&inkHero.stop();}
+
 /* toast + copy */
 const toast=document.getElementById("toast");let tt;
 function say(m){toast.textContent=m;toast.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove("on"),1900)}
@@ -546,6 +622,7 @@ if(window.gsap&&window.ScrollTrigger){
     tl.to(pcs,{x:0,y:0,rotation:0,scale:1,duration:1,ease:"power3.inOut",stagger:{each:.06,from:"random"}},0)
       .to(pcs,{fillOpacity:1,duration:.35,stagger:.04},.62)
       .to(".hero .orb",{scale:.55,rotation:120,opacity:.22,duration:1.2,ease:"none"},0)
+      .to(inkHero?inkHero.st:{},{s:1,dim:.45,duration:1.2,ease:"none"},0)
       .to(".hero .ghost",{yPercent:-30,opacity:0,duration:1},0)
       .to(".hero .hint",{opacity:0,duration:.2},0)
       .to("#heroLogo .st",{opacity:1,x:0,duration:.3,ease:"power2.out"},1.05)
@@ -563,6 +640,23 @@ if(window.gsap&&window.ScrollTrigger){
       .fromTo(tail,{color:C.cal},{color:C.ciano,duration:.3},.2)
       .to(".cria .sub",{opacity:1,y:0,duration:.35},.6)
       .to({},{duration:.3});
+  }
+
+  /* traço -> marca */
+  if(!reduce){
+    const ln=gsap.utils.toArray("#trStencil path");
+    ln.forEach(l=>{const L=l.getTotalLength();gsap.set(l,{strokeDasharray:L,strokeDashoffset:L})});
+    gsap.set(".trace .tr-cap,.trace .tr-sub",{opacity:0,y:24});
+    gsap.timeline({scrollTrigger:{trigger:"#traco",start:"top top",end:"+=150%",scrub:1,pin:true}})
+      .to(ln,{strokeDashoffset:0,duration:1,stagger:.02,ease:"none"})
+      .set(".tr-stage .needle",{opacity:1})
+      .to("#trFinal",{clipPath:"inset(0 0% 0 0)",duration:1,ease:"power1.inOut"},"+=.1")
+      .fromTo(".tr-stage .needle",{left:"0%"},{left:"100%",duration:1,ease:"power1.inOut"},"<")
+      .set(".tr-stage .needle",{opacity:0})
+      .to(".trace .tr-cap,.trace .tr-sub",{opacity:1,y:0,stagger:.1,duration:.4})
+      .to({},{duration:.3});
+    if(inkFlood){gsap.timeline({scrollTrigger:{trigger:"#flood",start:"top top",end:"+=110%",scrub:1,pin:true}})
+      .fromTo(inkFlood.st,{fill:0},{fill:1,duration:1,ease:"power1.in"}).to({},{duration:.15});}
   }
 
   /* números de seção: outline -> preenchido */
