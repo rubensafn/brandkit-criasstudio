@@ -32,6 +32,8 @@ a{color:inherit}
 .grain{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:90;opacity:.07;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .cut-r{clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut))}
+.cs{--cut:6px}
+.words span,.rules li,.pair .st,.sw .cp,.toast,.feed,.traits div{clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))}
 .cut{clip-path:polygon(0 0,calc(100% - var(--cut)) 0,100% var(--cut),100% 100%,var(--cut) 100%,0 calc(100% - var(--cut)))}
 .eyebrow{font-family:var(--s);font-weight:500;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--magenta)}
 .lead{font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:34em}
@@ -102,8 +104,9 @@ canvas.ink{position:absolute;inset:0;width:100%;height:100%;display:block}
 footer .flogo{width:100%;overflow:visible}
 /* mergulho */
 .dive{height:100svh;position:relative;overflow:hidden;background:var(--asfalto)}
-.dive picture,.dive .dimg{position:absolute;inset:0;width:100%;height:100%}
-.dive .dimg{object-fit:cover;transform-origin:50% 50%}
+.dive .dstage{position:absolute;left:0;top:0;will-change:transform}
+.dive .dimg,.dive .dscr{position:absolute;inset:0;width:100%;height:100%;display:block}
+.dive .dimg{object-fit:fill}
 .dive .dmask{position:absolute;inset:0;width:100%;height:100%;display:block}
 .dive .dcopy{position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(40px,9svh,90px);z-index:3}
 .dive .dcopy h2{font-family:var(--t);font-weight:900;font-size:clamp(40px,9vw,120px);line-height:.9;text-transform:uppercase;letter-spacing:-.02em;margin:10px 0 12px}
@@ -403,6 +406,18 @@ footer .lg{width:150px}
 footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
 .toast{visibility:hidden;position:fixed;left:50%;bottom:24px;transform:translate(-50%,140%);background:var(--ciano);color:var(--asfalto);font-weight:600;font-size:14px;padding:12px 18px;z-index:95;transition:transform .35s cubic-bezier(.2,.9,.3,1)}
 .toast.on{transform:translate(-50%,0);visibility:visible}
+.totop{position:fixed;right:16px;bottom:18px;z-index:72;width:46px;height:46px;display:flex;align-items:center;justify-content:center;background:rgba(14,15,17,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--ciano);border:1px solid var(--linha);opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .35s,transform .35s}
+.totop.on{opacity:1;transform:none;pointer-events:auto}
+.totop svg{width:20px;height:20px}
+.snav{position:fixed;right:10px;top:50%;transform:translateY(-50%);z-index:72;display:flex;flex-direction:column;gap:9px;align-items:flex-end;opacity:0;transition:opacity .4s;pointer-events:none}
+.snav.on{opacity:1;pointer-events:auto}
+.snav a{display:flex;align-items:center;gap:6px;height:12px;text-decoration:none}
+.snav a i{display:block;width:10px;height:2px;background:rgba(242,239,233,.38);transform:skewY(-12deg);transition:width .35s,background .35s}
+.snav a b{font-family:"Rakis";font-weight:400;font-size:13px;color:var(--ciano);opacity:0;transform:translateX(6px);transition:opacity .3s,transform .3s}
+.snav a.on i{width:22px;background:var(--ciano)}
+.snav a.on b{opacity:1;transform:none}
+.snav.lt a i{background:rgba(14,15,17,.35)}.snav.lt a.on i{background:var(--asfalto)}.snav.lt a b{color:var(--asfalto)}
+@media(max-width:700px){.snav{right:6px;gap:7px}.snav a i{width:7px}.snav a.on i{width:16px}.snav a b{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.gradbox{animation:none}.hero .hint i{animation:none}}
 </style>
 </head>
@@ -449,7 +464,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 </section>
 
 <section class="dive" id="mergulho">
-  <picture><source media="(min-aspect-ratio: 1/1)" srcset="img/mergulho-h.webp"><img class="dimg" src="img/mergulho-v.webp" alt="O estúdio CRIAS à noite: mesa com câmera, sprays, máquina de tatuagem e o logo no monitor" decoding="async"></picture>
+  <div class="dstage" id="dstage"><img class="dimg" id="dimg" src="img/mergulho-v.webp" alt="O estúdio CRIAS à noite: mesa com câmera, sprays, máquina de tatuagem e o monitor ligando com o logo" decoding="async"><svg class="dscr" id="dscr" aria-hidden="true"></svg></div>
   <svg class="dmask" id="dmask" viewBox="596 380 728 320" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
   <div class="dcopy"><p class="eyebrow" style="color:var(--ciano)">O estúdio</p><h2>Aqui<br>dentro.</h2><p>Câmera, tinta, papel e tela. É daqui que sai cada marca.</p></div>
 </section>
@@ -476,10 +491,10 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
     <p class="purpose" id="purpose"><span class="w"><i>Criar</i></span> <span class="w"><i>marcas</i></span> <span class="w"><i>que</i></span> <span class="w"><i><em>ninguém</em></i></span> <span class="w"><i><em>esquece.</em></i></span></p>
     <h3 class="h3">Pilares</h3>
     <div class="pil blk" id="pil">
-      <article><b>01</b><h4>Do zero</h4><p>Nada de template. Tudo nasce aqui, autoral, pensado pra marca de quem contrata.</p></article>
-      <article><b>02</b><h4>Atitude</h4><p>Ideia com coragem. A gente propõe o que ninguém tá fazendo ainda.</p></article>
-      <article><b>03</b><h4>Acabamento</h4><p>Detalhe de galeria em tudo: do pixel ao impresso, nada sai pela metade.</p></article>
-      <article><b>04</b><h4>Resultado</h4><p>Criação que vende. Bonito é o mínimo, o objetivo é a marca crescer.</p></article>
+      <article class="cut"><b>01</b><h4>Do zero</h4><p>Nada de template. Tudo nasce aqui, autoral, pensado pra marca de quem contrata.</p></article>
+      <article class="cut"><b>02</b><h4>Atitude</h4><p>Ideia com coragem. A gente propõe o que ninguém tá fazendo ainda.</p></article>
+      <article class="cut"><b>03</b><h4>Acabamento</h4><p>Detalhe de galeria em tudo: do pixel ao impresso, nada sai pela metade.</p></article>
+      <article class="cut"><b>04</b><h4>Resultado</h4><p>Criação que vende. Bonito é o mínimo, o objetivo é a marca crescer.</p></article>
     </div>
     <h3 class="h3">Personalidade</h3>
     <p class="lead" style="margin-bottom:26px">Onde a CRIAS fica entre os extremos.</p>
@@ -504,10 +519,10 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
     </div>
     <h3 class="h3">Fala assim, não assim</h3>
     <div class="say blk" id="say">
-      <div class="row"><p class="yes">Bora tirar sua marca do papel.</p><p class="no2">Oferecemos soluções inovadoras de branding.</p></div>
-      <div class="row"><p class="yes">A gente cria do zero.</p><p class="no2">Desenvolvemos ativos visuais customizados.</p></div>
-      <div class="row"><p class="yes">Pronto pra rodar.</p><p class="no2">Entregáveis finalizados conforme escopo.</p></div>
-      <div class="row"><p class="yes">Sua marca, do jeito que ela merece.</p><p class="no2">Potencialize sua presença digital com sinergia.</p></div>
+      <div class="row cut"><p class="yes">Bora tirar sua marca do papel.</p><p class="no2">Oferecemos soluções inovadoras de branding.</p></div>
+      <div class="row cut"><p class="yes">A gente cria do zero.</p><p class="no2">Desenvolvemos ativos visuais customizados.</p></div>
+      <div class="row cut"><p class="yes">Pronto pra rodar.</p><p class="no2">Entregáveis finalizados conforme escopo.</p></div>
+      <div class="row cut"><p class="yes">Sua marca, do jeito que ela merece.</p><p class="no2">Potencialize sua presença digital com sinergia.</p></div>
     </div>
     <div class="split blk" style="align-items:start">
       <div><h3 class="h3">Palavras da casa</h3><div class="words"><span>criar</span><span>do zero</span><span>recorte</span><span>rodar</span><span>acabamento</span><span>na rua</span><span>bora</span></div></div>
@@ -574,7 +589,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 
     <h3 class="h3">Proporção</h3>
     <p class="lead">Muito escuro, bastante respiro claro, cor na medida certa.</p>
-    <div class="ratio blk" id="ratio" style="padding-bottom:0;margin-bottom:clamp(56px,8vw,110px)"></div>
+    <div class="ratio cut blk" id="ratio" style="padding-bottom:0;margin-bottom:clamp(56px,8vw,110px)"></div>
 
     <h3 class="h3">Gradiente Cria</h3>
     <p class="lead" style="margin-bottom:20px">Ciano → azul → magenta. Pra fundos grandes e momentos de impacto. Nunca atrás de texto pequeno.</p>
@@ -595,7 +610,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
     <div class="font">
       <div class="aa" style="font-family:var(--t);font-weight:900">Aa</div>
       <div>
-        <span class="role">Títulos</span>
+        <span class="role cut cs">Títulos</span>
         <h4 style="font-family:var(--t)">Unbounded</h4>
         <p class="chars" style="font-family:var(--t)">ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789</p>
         <div class="weights" style="font-family:var(--t)"><span style="font-weight:500">Medium</span><span style="font-weight:700">Bold</span><span style="font-weight:800">ExtraBold</span><span style="font-weight:900">Black</span></div>
@@ -604,7 +619,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
     <div class="font">
       <div class="aa" style="font-family:var(--s);font-weight:500">Aa</div>
       <div>
-        <span class="role">Texto, labels e botões</span>
+        <span class="role cut cs">Texto, labels e botões</span>
         <h4 style="font-family:var(--s);font-weight:700">Space Grotesk</h4>
         <p class="chars">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz 0123456789 ,.;!?</p>
         <div class="weights"><span style="font-weight:300">Light</span><span style="font-weight:400">Regular</span><span style="font-weight:500">Medium</span><span style="font-weight:700">Bold</span></div>
@@ -612,14 +627,14 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
     </div>
     <div class="font">
       <div>
-        <span class="role" style="background:var(--magenta);color:#fff">Só impacto</span>
+        <span class="role cut cs" style="background:var(--magenta);color:#fff">Só impacto</span>
         <h4 style="font-family:var(--s);font-weight:700">Rakis · Regular e Outline</h4>
         <p class="lead" style="font-size:15px">A fonte que deu origem ao logo. Usada só em números e momentos de impacto, nunca em frases.</p>
       </div>
       <div class="rk" id="rk"><span>01<i aria-hidden="true">01</i></span><span>+120<i aria-hidden="true">+120</i></span><span>26<i aria-hidden="true">26</i></span></div>
     </div>
 
-    <div class="scale blk" style="padding-bottom:0;margin-bottom:clamp(56px,8vw,110px)">
+    <div class="scale cut blk" style="padding-bottom:0;margin-bottom:clamp(56px,8vw,110px)">
       <div><small>Título 1<br>40 / 84 px</small><span style="font-family:var(--t);font-weight:900;font-size:clamp(30px,5vw,64px);line-height:1;text-transform:uppercase;white-space:nowrap">Marcas que ficam</span></div>
       <div><small>Título 2<br>24 / 40 px</small><span style="font-family:var(--t);font-weight:700;font-size:clamp(20px,2.8vw,36px);text-transform:uppercase">Novo projeto</span></div>
       <div><small>Label<br>13 px · +18%</small><span class="eyebrow">Identidade visual</span></div>
@@ -661,7 +676,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
       <div class="mdemo cut"><div class="stg" id="dm3"><canvas class="ink" id="inkDemo"></canvas></div><div class="txt"><h4><b>03</b>Tinta muda de cena</h4><p>Pra trocar de assunto, a tinta toma a tela. Usar uma vez por peça.</p></div></div>
       <div class="mdemo cut"><div class="stg" id="dm4"><i class="dot"></i><p class="punch">Bora<em>?</em></p></div><div class="txt"><h4><b>04</b>Respira antes do impacto</h4><p>Uma pausa curta antes do momento forte. O silêncio faz o impacto.</p></div></div>
     </div>
-    <div class="tok blk" style="padding-bottom:0;margin-bottom:clamp(56px,8vw,110px)">
+    <div class="tok cut blk" style="padding-bottom:0;margin-bottom:clamp(56px,8vw,110px)">
       <div><span>Entrada<br><code>0.8s · cubic-bezier(.16, 1, .3, 1)</code></span><svg class="cv" viewBox="0 0 64 22"><path d="M2 20 C12 0 20 2 62 2" fill="none" stroke="#00FFDA" stroke-width="2"/></svg></div>
       <div><span>Saída<br><code>0.5s · cubic-bezier(.7, 0, .84, 0)</code></span><svg class="cv" viewBox="0 0 64 22"><path d="M2 20 C44 20 54 20 62 2" fill="none" stroke="#FF2E93" stroke-width="2"/></svg></div>
       <div><span>Corte 12°<br><code>0.6s · cubic-bezier(.87, 0, .13, 1)</code></span><svg class="cv" viewBox="0 0 64 22"><path d="M2 20 C56 20 8 2 62 2" fill="none" stroke="#4D7CFF" stroke-width="2"/></svg></div>
@@ -702,10 +717,10 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
   <div class="wrap"><div class="sh"><div class="num">09<span class="fill" aria-hidden="true">09</span></div><div><p class="eyebrow">Aplicações</p><h2>Peças da marca</h2></div></div></div>
   <div class="track" id="track">
     <div class="panel"><div class="stage cut"><div class="phone"><div class="scr"><div class="lg" data-lg="preto"></div><h5>Novo<br>projeto<br>no ar.</h5><p>@criasstudio</p></div></div></div><div class="cap"><b>Stories</b><span>1080 × 1920</span></div></div>
-    <div class="panel"><div class="stage cut"><div class="post"><div class="rkn">01</div><h5>Marcas<br>que <em>ficam.</em></h5><div style="display:flex;justify-content:space-between;align-items:flex-end"><div class="lg" data-lg="principal"></div><span style="font-size:11px;letter-spacing:.16em;color:var(--muted)">IDENTIDADE</span></div></div></div><div class="cap"><b>Feed</b><span>1080 × 1350</span></div></div>
-    <div class="panel"><div class="stage cut"><div class="card3d" id="bcard"><div class="f fr"><div class="lg" data-lg="principal"></div></div><div class="f bk"><div><h6>Nome Sobrenome</h6><p style="letter-spacing:.14em;text-transform:uppercase;font-size:11px">Direção criativa</p></div><p>(62) 9 0000-0000<br>nome@dominio.com<br>Goiânia · GO</p></div></div></div><div class="cap"><b>Cartão</b><span>85 × 55 mm</span></div></div>
-    <div class="panel"><div class="stage cut" style="background:#18191c"><div class="sheet"><div class="lg" data-lg="preto"></div><div style="margin-top:16%"><div class="ln" style="width:40%;background:#cfcac0"></div><div class="ln" style="margin-top:14px"></div><div class="ln"></div><div class="ln" style="width:86%"></div><div class="ln"></div><div class="ln" style="width:62%"></div><div class="ln" style="margin-top:14px"></div><div class="ln" style="width:90%"></div><div class="ln" style="width:70%"></div></div><p class="ft">CRIAS STUDIO · Goiânia · GO</p><i class="corner"></i></div></div><div class="cap"><b>Papel timbrado</b><span>A4</span></div></div>
-    <div class="panel"><div class="stage cut"><div class="mail"><div class="hd"><i></i><i></i><i></i><span style="margin-left:8px">Nova mensagem</span></div><div class="body">Fala, tudo certo? Segue a proposta do projeto em anexo. Qualquer dúvida, bora conversar.</div><div class="sig"><div class="bk"><div class="lg" data-lg="principal" style="width:100%"></div></div><div><b>Nome Sobrenome</b><span>Direção criativa</span><span>(62) 9 0000-0000</span><span><em>@criasstudio</em></span></div></div></div></div><div class="cap"><b>Assinatura de e-mail</b><span>600 × 200</span></div></div>
+    <div class="panel"><div class="stage cut"><div class="post cut"><div class="rkn">01</div><h5>Marcas<br>que <em>ficam.</em></h5><div style="display:flex;justify-content:space-between;align-items:flex-end"><div class="lg" data-lg="principal"></div><span style="font-size:11px;letter-spacing:.16em;color:var(--muted)">IDENTIDADE</span></div></div></div><div class="cap"><b>Feed</b><span>1080 × 1350</span></div></div>
+    <div class="panel"><div class="stage cut"><div class="card3d" id="bcard"><div class="f fr cut"><div class="lg" data-lg="principal"></div></div><div class="f bk cut"><div><h6>Nome Sobrenome</h6><p style="letter-spacing:.14em;text-transform:uppercase;font-size:11px">Direção criativa</p></div><p>(62) 9 0000-0000<br>nome@dominio.com<br>Goiânia · GO</p></div></div></div><div class="cap"><b>Cartão</b><span>85 × 55 mm</span></div></div>
+    <div class="panel"><div class="stage cut" style="background:#18191c"><div class="sheet cut"><div class="lg" data-lg="preto"></div><div style="margin-top:16%"><div class="ln" style="width:40%;background:#cfcac0"></div><div class="ln" style="margin-top:14px"></div><div class="ln"></div><div class="ln" style="width:86%"></div><div class="ln"></div><div class="ln" style="width:62%"></div><div class="ln" style="margin-top:14px"></div><div class="ln" style="width:90%"></div><div class="ln" style="width:70%"></div></div><p class="ft">CRIAS STUDIO · Goiânia · GO</p><i class="corner"></i></div></div><div class="cap"><b>Papel timbrado</b><span>A4</span></div></div>
+    <div class="panel"><div class="stage cut"><div class="mail cut"><div class="hd"><i></i><i></i><i></i><span style="margin-left:8px">Nova mensagem</span></div><div class="body">Fala, tudo certo? Segue a proposta do projeto em anexo. Qualquer dúvida, bora conversar.</div><div class="sig"><div class="bk"><div class="lg" data-lg="principal" style="width:100%"></div></div><div><b>Nome Sobrenome</b><span>Direção criativa</span><span>(62) 9 0000-0000</span><span><em>@criasstudio</em></span></div></div></div></div><div class="cap"><b>Assinatura de e-mail</b><span>600 × 200</span></div></div>
     <div class="panel"><div class="stage cut"><svg class="tee" id="tee" viewBox="0 0 400 420"></svg></div><div class="cap"><b>Camiseta</b><span>Silk 1 cor</span></div></div>
     <div class="panel"><div class="stage cut" style="background:#1d1e21"><svg class="tee" id="bag" viewBox="0 0 400 440"></svg></div><div class="cap"><b>Ecobag</b><span>Algodão cru</span></div></div>
     <div class="panel"><div class="stage cut" style="background:var(--grafite)"><svg class="stk" id="stk" viewBox="596 438 728 204"></svg></div><div class="cap"><b>Adesivo</b><span>Corte especial</span></div></div>
@@ -756,6 +771,8 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
   <p>© 2026 CRIAS STUDIO · Goiânia · GO</p>
 </footer>
 <div class="toast" id="toast" role="status"></div>
+<nav class="snav" id="snav" aria-label="Seções"></nav>
+<button class="totop cut cs" id="totop" aria-label="Voltar ao topo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -840,6 +857,34 @@ document.getElementById("pairs").innerHTML=PR.map(([f,b,n,u])=>{const r=ratio(f,
 document.getElementById("tee").innerHTML=`<path d="M120 20 L160 8 Q200 40 240 8 L280 20 L390 80 L350 160 L310 140 L310 410 L90 410 L90 140 L50 160 L10 80 Z" fill="#151618" stroke="#2a2b2e" stroke-width="2"/><path d="M160 8 Q200 40 240 8" fill="none" stroke="#2a2b2e" stroke-width="6"/><g transform="translate(200 130) scale(.24) translate(-960 -540)">${ORDER.map(k=>`<path fill="${C.ciano}" d="${PATHS.main[k]}"/>`).join("")}${PATHS.studio.map(d=>`<path fill="${C.cal}" d="${d}"/>`).join("")}</g><polygon points="330,98 372,107 362,128 322,119" fill="${C.ciano}"/>`;
 document.getElementById("stk").innerHTML=`<g fill="#fff" stroke="#fff" stroke-width="36" stroke-linejoin="miter">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g><g fill="${C.ciano}">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}</g><g fill="${C.asfalto}">${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g>`;
 
+/* palco do mergulho: imagem em "cover" com a tela do PC por cima */
+const DV={v:{src:"img/mergulho-v.webp",W:941,H:1672,quad:"178,500 806,522 806,800 178,800",line:[178,806,650],lg:[230,633,.802,.9]},
+          h:{src:"img/mergulho-h.webp",W:1672,H:941,quad:"586,172 1297,172 1297,470 586,470",line:[586,1297,374],lg:[593,300,.961,.987]}};
+let dvK=null;
+(function buildScreens(){const host=document.getElementById("dstage");
+  const LG=ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")+PATHS.studio.map(dd=>`<path d="${dd}"/>`).join("");
+  host.querySelector(".dscr").remove();
+  Object.entries(DV).forEach(([k,d],n)=>{const [x0,x1,ym]=d.line,[lx,ly,sx,sy]=d.lg,tx=lx-623*sx,ty=ly-465*sy;
+    const sv=document.createElementNS("http://www.w3.org/2000/svg","svg");sv.setAttribute("class","dscr");sv.dataset.k=k;sv.setAttribute("viewBox",`0 0 ${d.W} ${d.H}`);sv.setAttribute("preserveAspectRatio","none");sv.setAttribute("aria-hidden","true");
+    sv.innerHTML=`<defs><linearGradient id="ngr${k}" class="ngr" gradientUnits="userSpaceOnUse" x1="623" y1="0" x2="1296" y2="0" spreadMethod="reflect"><stop offset="0" stop-color="#00FFDA"/><stop offset=".5" stop-color="#4D7CFF"/><stop offset="1" stop-color="#FF2E93"/></linearGradient>
+      <filter id="nbl${k}" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="7"/></filter><filter id="qbl${k}"><feGaussianBlur stdDeviation="2.5"/></filter></defs>
+      <polygon points="${d.quad}" fill="#050608" filter="url(#qbl${k})"/>
+      <rect class="pl" x="${x0}" y="${ym-1.5}" width="${x1-x0}" height="3" fill="#E9FFFB" style="transform-origin:${(x0+x1)/2}px ${ym}px;transform:scaleX(0)"/><rect class="pf" x="${x0}" y="${ym-150}" width="${x1-x0}" height="300" fill="#bffcf2" opacity="0"/>
+      <g transform="matrix(${sx} 0 0 ${sy} ${tx} ${ty})">
+        <g class="nglow" fill="none" stroke="url(#ngr${k})" stroke-width="10" filter="url(#nbl${k})" opacity="0">${LG}</g>
+        <g class="nfill" fill="url(#ngr${k})" fill-opacity="0">${LG}</g>
+        <g class="nline" fill="none" stroke="url(#ngr${k})" stroke-width="2.6">${LG}</g>
+      </g>`;
+    host.appendChild(sv);
+    sv.querySelectorAll(".nline path").forEach(p=>{const L=p.getTotalLength()||800;p.style.strokeDasharray=L;p.style.strokeDashoffset=L;p.dataset.len=L});
+  });})();
+function layoutDive(){const vw=innerWidth,vh=innerHeight,k=vw/vh>=1?"h":"v",d=DV[k];const st=document.getElementById("dstage"),im=document.getElementById("dimg");
+  const sc=Math.max(vw/d.W,vh/d.H),w=d.W*sc,h=d.H*sc,l=(vw-w)/2,t=(vh-h)/2;
+  Object.assign(st.style,{width:w+"px",height:h+"px",left:l+"px",top:t+"px",transformOrigin:`${vw/2-l}px ${vh/2-t}px`});
+  if(dvK===k)return;dvK=k;im.src=d.src;st.querySelectorAll(".dscr").forEach(sv=>sv.style.display=sv.dataset.k===k?"block":"none");
+}
+layoutDive();addEventListener("resize",layoutDive);
+
 /* máscara do mergulho */
 document.getElementById("dmask").innerHTML=`<defs><mask id="dmk" maskUnits="userSpaceOnUse" x="-50000" y="-50000" width="100000" height="100000"><rect x="-50000" y="-50000" width="100000" height="100000" fill="#fff"/><g fill="#000">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g></mask></defs><rect x="-50000" y="-50000" width="100000" height="100000" fill="#0E0F11" mask="url(#dmk)"/><g fill="none" stroke="#00FFDA" stroke-width="1" vector-effect="non-scaling-stroke" class="dline">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}</g>`;
 
@@ -919,6 +964,14 @@ menu.querySelectorAll("a").forEach(a=>a.addEventListener("click",e=>{e.preventDe
 document.querySelector(".hdr .mini").addEventListener("click",e=>{e.preventDefault();goTo("#inicio")});
 addEventListener("keydown",e=>{if(e.key==="Escape"&&mo.getAttribute("aria-expanded")==="true")openMenu(false)});
 
+/* navegação lateral + voltar ao topo */
+const SN=[["inicio","00"],["essencia","01"],["voz","02"],["logo","03"],["cores","04"],["tipografia","05"],["elementos","06"],["motion","07"],["social","08"],["aplicacoes","09"],["narua","10"],["arquivos","11"]];
+const snav=document.getElementById("snav");snav.innerHTML=SN.map(([id,n])=>`<a href="#${id}" data-id="${id}" aria-label="Seção ${n}"><b>${n}</b><i></i></a>`).join("");
+snav.querySelectorAll("a").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();goTo(a.getAttribute("href"))}));
+const totop=document.getElementById("totop");totop.addEventListener("click",()=>{if(lenis)lenis.scrollTo(0,{duration:1.6});else scrollTo({top:0,behavior:"smooth"})});
+const LIGHT=new Set(["traco","voz","cores","elementos","social","arquivos","flood"]);
+function setSnav(id){snav.querySelectorAll("a").forEach(a=>a.classList.toggle("on",a.dataset.id===id))}
+
 /* ===== MOTION ===== */
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 if(window.gsap&&window.ScrollTrigger){
@@ -992,14 +1045,25 @@ if(window.gsap&&window.ScrollTrigger){
     const V0={cx:960,cy:540,w:728,h:320},V1={cx:942.7,cy:561,w:2.2};
     const setVB=()=>{const z=Z.z,w=V0.w*Math.pow(V1.w/V0.w,z),h=w*V0.h/V0.w,cx=V0.cx+(V1.cx-V0.cx)*Math.min(1,z*1.6),cy=V0.cy+(V1.cy-V0.cy)*Math.min(1,z*1.6);dm.setAttribute("viewBox",`${cx-w/2} ${cy-h/2} ${w} ${h}`);dm.style.display=z>=.995?"none":"block"};setVB();
     gsap.set(".dive .dcopy > *",{opacity:0,y:30});
-    gsap.timeline({scrollTrigger:{trigger:"#mergulho",start:"top top",end:"+=200%",scrub:1,pin:true}})
-      .fromTo(".dive .dimg",{scale:1.35,filter:"brightness(.55)"},{scale:1.05,filter:"brightness(1)",duration:1,ease:"none"},0)
+    gsap.utils.toArray(".ngr").forEach(g=>gsap.to(g,{attr:{x1:623+1346,x2:1296+1346},duration:5,repeat:-1,ease:"none"}));
+    const Q=sel=>gsap.utils.toArray("#dstage "+sel);
+    gsap.timeline({scrollTrigger:{trigger:"#mergulho",start:"top top",end:"+=290%",scrub:1,pin:true}})
+      .fromTo("#dstage",{scale:1.35,filter:"brightness(.55)"},{scale:1.05,filter:"brightness(1)",duration:1,ease:"none"},0)
       .fromTo(Z,{z:0},{z:1,duration:1,ease:"power2.in",onUpdate:setVB},0)
       .to(".dive .dline",{opacity:0,duration:.2},.15)
-      .to(".dive .dimg",{scale:1,duration:.6,ease:"none"},1)
-      .to(".dive",{"--sh":1,duration:.3},1)
-      .to(".dive .dcopy > *",{opacity:1,y:0,stagger:.08,duration:.3},1.05)
-      .to({},{duration:.25});
+      .to("#dstage",{scale:1,duration:1.1,ease:"none"},1)
+      /* PC ligando */
+      .fromTo(Q(".pl"),{scaleX:0,opacity:1},{scaleX:1,duration:.1,ease:"power2.out",immediateRender:false},1.02)
+      .fromTo(Q(".pf"),{opacity:0},{opacity:.55,duration:.04,immediateRender:false},1.12)
+      .to(Q(".pl"),{opacity:0,duration:.05},1.14)
+      .to(Q(".pf"),{opacity:0,duration:.12},1.16)
+      /* neon desenha o contorno e preenche */
+      .fromTo(Q(".nline path"),{strokeDashoffset:(i,el)=>el.dataset.len},{strokeDashoffset:0,duration:.4,stagger:.02,ease:"power1.inOut",immediateRender:false},1.22)
+      .fromTo(Q(".nglow"),{opacity:0},{opacity:.9,duration:.25,immediateRender:false},1.3)
+      .fromTo(Q(".nfill"),{fillOpacity:0},{fillOpacity:1,duration:.28,immediateRender:false},1.6)
+      .to(".dive",{"--sh":1,duration:.3},1.7)
+      .to(".dive .dcopy > *",{opacity:1,y:0,stagger:.08,duration:.3},1.75)
+      .to({},{duration:.3});
   }
   /* laje: paralaxe */
   if(!reduce){
@@ -1154,6 +1218,10 @@ if(window.gsap&&window.ScrollTrigger){
   gsap.from(".dl .btn",{y:40,opacity:0,stagger:.12,duration:.9,ease:"power3.out",scrollTrigger:{trigger:".dl",start:"top 88%"}});
   ScrollTrigger.sort((a,b)=>{const ea=a.trigger||document.body,eb=b.trigger||document.body;if(ea===eb)return 0;return ea.compareDocumentPosition(eb)&Node.DOCUMENT_POSITION_FOLLOWING?-1:1});
   ScrollTrigger.refresh();
+  /* seções ativas na lateral */
+  const zones=[["inicio","inicio"],["cria","inicio"],["mergulho","inicio"],["traco","inicio"],["laje","inicio"],["essencia","essencia"],["voz","voz"],["logo","logo"],["cores","cores"],["tipografia","tipografia"],["flood","tipografia"],["elementos","elementos"],["motion","motion"],["social","social"],["aplicacoes","aplicacoes"],["narua","narua"],["cta","narua"],["arquivos","arquivos"],["foot","arquivos"]];
+  zones.forEach(([el,id])=>{const node=document.getElementById(el);if(!node)return;ScrollTrigger.create({trigger:node,start:"top 50%",end:"bottom 50%",onToggle:e=>{if(e.isActive){setSnav(id);snav.classList.toggle("lt",LIGHT.has(el))}}})});
+  ScrollTrigger.create({start:()=>innerHeight*.8,end:"max",onToggle:e=>{totop.classList.toggle("on",e.isActive);snav.classList.toggle("on",e.isActive)}});
   const hdr=document.getElementById("hdr");
   ScrollTrigger.create({trigger:"#cria",start:"top 70%",onEnter:()=>hdr.classList.add("on"),onLeaveBack:()=>hdr.classList.remove("on")});
   addEventListener("load",()=>ScrollTrigger.refresh());
