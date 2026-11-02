@@ -109,7 +109,10 @@ footer .flogo{width:100%;overflow:visible}
 .smbg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 45% at 30% 45%,rgba(0,255,218,.10),transparent 70%),radial-gradient(ellipse 60% 40% at 75% 60%,rgba(255,46,147,.10),transparent 70%)}
 .smf{position:absolute;left:0;right:0;top:50%;aspect-ratio:941/1615;transform:translateY(-50%)}
 .smsub{display:none}
-@media(min-width:900px){.smf{left:auto;right:7vw;height:88svh;transform:translateY(-50%)}.smt{left:7vw;bottom:16svh;font-size:clamp(56px,6vw,120px)}.smsub{display:block;position:absolute;left:7vw;top:22svh;max-width:24em;color:var(--muted);font-size:18px;line-height:1.6}.smsub .eyebrow{color:var(--ciano)}}
+.smf.wide{left:0;right:0;width:100%;height:auto;aspect-ratio:1672/941;top:50%;transform:translateY(-50%)}
+.smf.wide .neon{display:none}
+.smf.wide .lt.on{filter:brightness(1.35) drop-shadow(0 0 14px rgba(0,255,218,.9)) drop-shadow(0 0 40px rgba(0,255,218,.5))}
+@media(min-width:900px){.smt{left:7vw;bottom:7svh;font-size:clamp(52px,5.4vw,110px)}.smsub{display:block;position:absolute;left:7vw;top:14svh;max-width:22em;color:rgba(242,239,233,.8);font-size:17px;line-height:1.6;z-index:3}.smsub .eyebrow{color:var(--ciano)}}
 .smf{overflow:hidden;background:#141518}
 .smf .mesa,.smf .neon{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .smf .neon{opacity:0;z-index:3}
@@ -135,10 +138,9 @@ footer .flogo{width:100%;overflow:visible}
 .laje .lt em{font-style:normal;color:var(--ciano)}
 .laje .lcap{position:absolute;left:var(--pad);bottom:22px;z-index:5;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(242,239,233,.75)}
 .lcard{position:absolute;inset:0;clip-path:none}
-@media(min-width:900px){
-  .lcard{inset:auto;right:7vw;top:6svh;height:88svh;aspect-ratio:941/1500;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.45);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
-  .lcard img{height:108%;top:-4%;object-position:50% 50%}
-  .laje .lt{left:7vw;right:auto;top:auto;bottom:16svh;text-align:left;font-size:clamp(48px,5.4vw,104px)}
+@media(min-width:900px) and (min-aspect-ratio:1/1){
+  .laje img{object-position:50% 50%}
+  .laje .lt{top:7svh;font-size:clamp(64px,8vw,150px)}
 }
 /* na rua */
 .ruas{background:var(--asfalto)}
@@ -500,10 +502,10 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 </section>
 
 <section class="laje" id="laje" aria-label="De Goiânia pro mundo">
-  <img class="l1" src="img/laje-fundo.webp" alt="" decoding="async">
+  <picture><source media="(min-width: 900px) and (min-aspect-ratio: 1/1)" srcset="img/laje-fundo-d.webp"><img class="l1" src="img/laje-fundo.webp" alt="" decoding="async"></picture>
   <h2 class="lt">De Goiânia<br><em>pro mundo.</em></h2>
-  <div class="lcard cut"><img class="l2" src="img/laje-meio.webp" alt="Laje com caixa d'água, varal com camiseta CRIAS e letreiro neon CRIAS na parede de tijolo" decoding="async">
-  <img class="l3" src="img/laje-frente.webp" alt="" decoding="async"></div>
+  <div class="lcard"><picture><source media="(min-width: 900px) and (min-aspect-ratio: 1/1)" srcset="img/laje-meio-d.webp"><img class="l2" src="img/laje-meio.webp" alt="Laje com caixa d'água, varal com camiseta CRIAS e letreiro neon CRIAS na parede de tijolo" decoding="async"></picture>
+  <picture><source media="(min-width: 900px) and (min-aspect-ratio: 1/1)" srcset="img/laje-frente-d.webp"><img class="l3" src="img/laje-frente.webp" alt="" decoding="async"></picture></div>
   <p class="lcap">Goiânia · GO</p>
 </section>
 
@@ -556,7 +558,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 
 <section class="smo" id="montagem" aria-label="Stop-motion: as letras do CRIAS em acrílico se montando sobre a mesa até acender em neon">
   <div class="smbg" id="smbg"></div>
-  <div class="smf cut" id="smf"><img class="mesa" src="img/sm/mesa.webp" alt="" decoding="async"><img class="lt" data-k="c" src="img/sm/l_c.webp" alt="" decoding="async" style="left:1.169%;top:42.786%;width:27.949%"><img class="lt" data-k="r" src="img/sm/l_r.webp" alt="" decoding="async" style="left:19.979%;top:42.848%;width:27.949%"><img class="lt" data-k="i" src="img/sm/l_i.webp" alt="" decoding="async" style="left:39.214%;top:42.786%;width:15.728%"><img class="lt" data-k="a" src="img/sm/l_a.webp" alt="" decoding="async" style="left:46.227%;top:42.848%;width:29.224%"><img class="lt" data-k="s" src="img/sm/l_s.webp" alt="" decoding="async" style="left:64.293%;top:42.91%;width:29.649%"><img class="lt" data-k="st" src="img/sm/l_st.webp" alt="" decoding="async" style="left:84.91%;top:42.786%;width:14.772%"><img class="neon" src="img/sm/neon.webp" alt="" decoding="async"></div>
+  <div class="smf cut" id="smf"><picture><source media="(min-width: 900px) and (min-aspect-ratio: 1/1)" srcset="img/sm/mesa-d.webp"><img class="mesa" src="img/sm/mesa.webp" alt="" decoding="async"></picture><img class="lt" data-k="c" src="img/sm/l_c.webp" alt="" decoding="async" style="left:1.169%;top:42.786%;width:27.949%"><img class="lt" data-k="r" src="img/sm/l_r.webp" alt="" decoding="async" style="left:19.979%;top:42.848%;width:27.949%"><img class="lt" data-k="i" src="img/sm/l_i.webp" alt="" decoding="async" style="left:39.214%;top:42.786%;width:15.728%"><img class="lt" data-k="a" src="img/sm/l_a.webp" alt="" decoding="async" style="left:46.227%;top:42.848%;width:29.224%"><img class="lt" data-k="s" src="img/sm/l_s.webp" alt="" decoding="async" style="left:64.293%;top:42.91%;width:29.649%"><img class="lt" data-k="st" src="img/sm/l_st.webp" alt="" decoding="async" style="left:84.91%;top:42.786%;width:14.772%"><img class="neon" src="img/sm/neon.webp" alt="" decoding="async"></div>
   <p class="smsub"><span class="eyebrow">Montagem</span><br>Cada letra é uma peça. Nada aparece pronto: tudo é encaixado.</p>
   <h2 class="smt" id="smt">Peça<br>por <em>peça.</em></h2>
 </section>
@@ -1096,13 +1098,24 @@ if(window.gsap&&window.ScrollTrigger){
   {const smf=document.getElementById("smf"),sp=gsap.utils.toArray("#smf .lt"),neon=smf.querySelector(".neon"),mesa=smf.querySelector(".mesa"),tt=document.getElementById("smt");
    const SEED={c:[-2,-30,-14],r:[42,-28,20],i:[-6,-26,-10],a:[-8,17,28],s:[4,29,-22],st:[-16,36,-58]},ORD=["c","r","i","a","s","st"];
    const lateE=(a,d,e="power3.inOut")=>{const f=gsap.parseEase(e);return x=>x<=a?0:x>=a+d?1:f((x-a)/d)};
+   const META={};sp.forEach(el=>META[el.dataset.k]=[parseFloat(el.style.left),parseFloat(el.style.top),parseFloat(el.style.width)]);
+   const wideQ=matchMedia("(min-width: 900px) and (min-aspect-ratio: 1/1)");
+   const layoutSM=()=>{const w=wideQ.matches;smf.classList.toggle("wide",w);
+     sp.forEach(el=>{const [l,t,wd]=META[el.dataset.k];
+       if(!w){el.style.left=l+"%";el.style.top=t+"%";el.style.width=wd+"%";return}
+       /* logo ocupa 52% da largura da mesa larga, centrado um pouco acima do meio */
+       const L=46,f=L/98.5,ox=60-L/2-1.169*f;
+       el.style.left=(ox+l*f)+"%";el.style.width=(wd*f)+"%";
+       const pxTop=(t-42.786)/100*1615,stageW=941;el.style.top=(33+pxTop/(stageW/(L/100))*(1672/941)/1)+"%"})};
+   layoutSM();wideQ.addEventListener?wideQ.addEventListener("change",()=>{layoutSM();ScrollTrigger.refresh()}):0;
+   const neonOn=v=>{if(smf.classList.contains("wide")){sp.forEach(el=>el.classList.toggle("on",v>.5));mesa.style.filter=`brightness(${1-.45*v})`}};
    if(!reduce){
      const tl=gsap.timeline({scrollTrigger:{trigger:"#montagem",start:"top top",end:"+=380%",scrub:.8,pin:true,invalidateOnRefresh:true}});
      const bh=()=>Math.min(smf.offsetHeight,innerHeight*.95);
      tl.fromTo(mesa,{scale:1.08},{scale:1,duration:1,ease:"none"},0);
      sp.forEach(el=>{const k=el.dataset.k,[dx,dy,r]=SEED[k],st=.04+ORD.indexOf(k)*.12;
-       tl.fromTo(el,{x:()=>dx/100*smf.offsetWidth,y:()=>dy/100*bh(),rotation:r,scale:1.06},{x:0,y:0,rotation:0,scale:1,duration:1,ease:lateE(st,.24)},0)});
-     tl.fromTo(neon,{opacity:0},{opacity:1,duration:1,ease:x=>x<.86?0:x>.95?1:[0,1,0,1,.35,1,1][Math.floor((x-.86)/.09*7)]??1},0)
+       tl.fromTo(el,{x:()=>dx/100*smf.offsetWidth,y:()=>dy/100*bh()*(smf.classList.contains("wide")&&dy>0?.55:1),rotation:r,scale:1.06},{x:0,y:0,rotation:0,scale:1,duration:1,ease:lateE(st,.24)},0)});
+     tl.fromTo(neon,{opacity:0},{opacity:1,duration:1,ease:x=>x<.86?0:x>.95?1:[0,1,0,1,.35,1,1][Math.floor((x-.86)/.09*7)]??1,onUpdate:function(){neonOn(+gsap.getProperty(neon,"opacity"))}},0)
        .fromTo(tt,{clipPath:"inset(0 100% 0 0)"},{clipPath:"inset(0 0% 0 0)",duration:1,ease:lateE(.9,.1,"power2.out")},0);
    }else{neon.style.opacity=1;tt.style.clipPath="none"}
   }
