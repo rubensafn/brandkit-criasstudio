@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CRIAS STUDIO · Brand Kit</title>
 <meta name="theme-color" content="#0E0F11">
+<script>document.documentElement.classList.add("is-loading");try{history.scrollRestoration="manual"}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Unbounded:wght@400;500;700;800;900&display=swap" rel="stylesheet">
@@ -20,6 +21,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;overflow-x:clip}
+html.is-loading,html.is-loading body{overflow:hidden;touch-action:none;overscroll-behavior:none}
 body{overflow-x:clip}
 .grid>*,.split>*,.pil>*,.mgrid>*,.pairs>*{min-width:0}
 html.lenis,html.lenis body{height:auto}
@@ -832,7 +834,7 @@ document.getElementById("flogo").innerHTML=ORDER.map(k=>`<path class="fp" fill="
 const PRE=document.getElementById("pre");let preDone=false;const preCbs=[];
 function onPre(f){preDone?f():preCbs.push(f)}
 function endPre(){if(preDone)return;preDone=true;PRE.remove();preCbs.forEach(f=>f())}
-setTimeout(()=>{if(!preDone)endPre()},4500);
+setTimeout(()=>{if(!preDone){endPre();document.documentElement.classList.remove("is-loading")}},4500);
 /* construction */
 (function(){
   const s=document.getElementById("consSvg");
@@ -1015,20 +1017,24 @@ if(window.gsap&&window.ScrollTrigger){
   const seeds=[[-260,-230,-140,1.7],[180,260,95,.5],[-40,-300,200,1.3],[-30,240,-60,2],[260,-210,160,.6],[330,150,-110,1.4]];
   const SC=i=>({x:seeds[i][0],y:seeds[i][1],rotation:seeds[i][2],scale:seeds[i][3],fillOpacity:0});
   const AS={x:0,y:0,rotation:0,scale:1,fillOpacity:1};
-  const lock=o=>{if(lenis)o?lenis.stop():lenis.start();document.documentElement.style.overflow=o?"hidden":""};
+  const noTouch=e=>e.preventDefault();
+  const lock=o=>{if(!o)document.documentElement.classList.remove("is-loading");if(lenis)o?lenis.stop():lenis.start();document.documentElement.style.overflow=o?"hidden":"";document.body.style.overflow=o?"hidden":"";
+    if(o){addEventListener("touchmove",noTouch,{passive:false});addEventListener("wheel",noTouch,{passive:false})}else{removeEventListener("touchmove",noTouch);removeEventListener("wheel",noTouch)}};
   gsap.set(pcs,{transformOrigin:"50% 50%"});
   if(!reduce){
     gsap.set(".hero .tag p",{opacity:0,y:20});gsap.set(".hero .hint",{opacity:0});
-    const tl=gsap.timeline({scrollTrigger:{trigger:".hero",start:"top top",end:"+=170%",scrub:1,pin:true,anticipatePin:1}});
-    pcs.forEach((p,i)=>tl.fromTo(p,{...SC(i),fillOpacity:0},{x:0,y:0,rotation:0,scale:1,duration:1,ease:"power3.inOut",immediateRender:false},i*.05));
-    tl.fromTo(pcs,{fillOpacity:0},{fillOpacity:1,duration:.35,stagger:.04,immediateRender:false},.62)
-      .to(".hero .orb",{scale:.55,rotation:120,opacity:.22,duration:1.2,ease:"none"},0)
-      .to(inkHero?inkHero.st:{},{s:1,dim:.45,duration:1.2,ease:"none"},0)
-      .to(".hero .ghost",{yPercent:-30,opacity:0,duration:1},0)
-      .fromTo(".hero .hint",{opacity:1},{opacity:0,duration:.2,immediateRender:false},0)
-      .fromTo("#heroLogo .st",{opacity:0,x:30},{opacity:1,x:0,duration:.3,ease:"power2.out",immediateRender:false},1.05)
-      .to(".hero .tag p",{opacity:1,y:0,stagger:.1,duration:.3},1.15)
-      .to({},{duration:.3});
+    /* todas as animações começam no tempo 0 com "atraso" dentro da curva: assim tudo desfaz certinho quando volta o scroll */
+    const TOT=1.75,late=(st,du,e="power3.inOut")=>{const f=gsap.parseEase(e),a=st/TOT,b=(st+du)/TOT;return x=>x<=a?0:x>=b?1:f((x-a)/(b-a))};
+    const heroTL=gsap.timeline({scrollTrigger:{trigger:".hero",start:"top top",end:"+=170%",scrub:1,pin:true,anticipatePin:1}});
+    pcs.forEach((p,i)=>{
+      heroTL.fromTo(p,{x:seeds[i][0],y:seeds[i][1],rotation:seeds[i][2],scale:seeds[i][3]},{x:0,y:0,rotation:0,scale:1,duration:TOT,ease:late(i*.05,1)},0)
+            .fromTo(p,{fillOpacity:0},{fillOpacity:1,duration:TOT,ease:late(.62+i*.04,.35,"none")},0)});
+    heroTL.fromTo(".hero .orb",{scale:1,rotation:0,opacity:.38},{scale:.55,rotation:120,opacity:.22,duration:TOT,ease:late(0,1.2,"none")},0)
+      .fromTo(inkHero?inkHero.st:{},{s:0,dim:.8},{s:1,dim:.45,duration:TOT,ease:late(0,1.2,"none")},0)
+      .fromTo(".hero .ghost",{yPercent:0,opacity:1},{yPercent:-30,opacity:0,duration:TOT,ease:late(0,1,"none")},0)
+      .fromTo(".hero .hint",{opacity:1},{opacity:0,duration:TOT,ease:late(0,.2,"none"),immediateRender:false},0)
+      .fromTo("#heroLogo .st",{opacity:0,x:30},{opacity:1,x:0,duration:TOT,ease:late(1.05,.3,"power2.out"),immediateRender:false},0);
+    gsap.utils.toArray(".hero .tag p").forEach((t,j)=>heroTL.fromTo(t,{opacity:0,y:20},{opacity:1,y:0,duration:TOT,ease:late(1.15+j*.1,.3,"power2.out")},0));
     /* começa montado (vindo do preloader) */
     gsap.set(pcs,AS);gsap.set("#heroLogo .st",{opacity:1,x:0});
   }
@@ -1039,6 +1045,7 @@ if(window.gsap&&window.ScrollTrigger){
    const cnt={v:0},pe=document.getElementById("pct");lock(true);
    const breakIt=()=>{
      if(reduce){lock(false);return}
+     if(scrollY>8){lock(false);ScrollTrigger.update();return}
      const bt=gsap.timeline({onComplete:()=>lock(false)});
      bt.to("#heroLogo .st",{opacity:0,x:30,duration:.35,ease:"power2.in"},0);
      pcs.forEach((p,i)=>bt.to(p,{x:seeds[i][0],y:seeds[i][1],rotation:seeds[i][2],scale:seeds[i][3],duration:1.25,ease:"expo.out"},.08+[2,1,0,0,1,2][i]*.04));
