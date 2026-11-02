@@ -46,9 +46,10 @@ section{position:relative}
 .mbtn i{display:block;width:18px;height:2px;background:var(--ciano);position:relative;transform:skewY(-12deg)}
 .mbtn i:after{content:"";position:absolute;left:0;top:6px;width:12px;height:2px;background:var(--ciano)}
 .menu{position:fixed;inset:0;z-index:75;background:var(--asfalto);display:flex;flex-direction:column;justify-content:center;padding:80px var(--pad) 40px;clip-path:polygon(0 0,100% 0,100% 0,0 0);visibility:hidden}
-.menu a{display:flex;align-items:baseline;gap:16px;text-decoration:none;padding:8px 0;border-bottom:1px solid var(--linha)}
-.menu a b{font-family:"Rakis Outline";font-weight:400;font-size:28px;color:var(--ciano);width:56px}
-.menu a span{font-family:var(--t);font-weight:800;font-size:clamp(28px,6vw,64px);letter-spacing:-.01em;text-transform:uppercase;transition:color .3s,transform .3s}
+.menu{overflow-y:auto}
+.menu a{display:flex;align-items:baseline;gap:16px;text-decoration:none;padding:6px 0;border-bottom:1px solid var(--linha)}
+.menu a b{font-family:"Rakis Outline";font-weight:400;font-size:24px;color:var(--ciano);width:52px}
+.menu a span{font-family:var(--t);font-weight:800;font-size:clamp(22px,4.6vw,52px);letter-spacing:-.01em;text-transform:uppercase;transition:color .3s,transform .3s}
 .menu a:hover span{color:var(--ciano);transform:translateX(8px)}
 .menu .mclose{position:absolute;top:16px;right:var(--pad)}
 .menu .mfoot{margin-top:28px;font-size:13px;color:var(--muted);letter-spacing:.1em}
@@ -96,6 +97,19 @@ canvas.ink{position:absolute;inset:0;width:100%;height:100%;display:block}
 .cria .sub{margin-top:28px;max-width:30em;color:var(--muted);font-size:clamp(16px,1.6vw,20px)}
 .cria .sub b{color:var(--cal);font-weight:500}
 
+.cria{position:relative}
+.cria .word,.cria .sub{position:relative;z-index:2}
+.mq{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:9svh 0;pointer-events:none;z-index:1}
+.mq p{font-family:var(--t);font-weight:900;font-size:clamp(54px,15vw,190px);line-height:1;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(0,255,218,.22);text-transform:uppercase}
+.mq .r2,.mq .r3{-webkit-text-stroke-color:rgba(242,239,233,.10)}
+.mq .r2{margin-top:-2svh}.mq .r3{margin-bottom:-2svh}
+@media(min-width:701px){.mq{padding:6svh 0}.mq .r2,.mq .r3,.mq .r5,.mq .r6{display:none}}
+.mq .r5{-webkit-text-stroke-color:rgba(255,46,147,.18)}
+@media(max-width:700px){
+  .word{flex-direction:column;align-items:center;font-size:27vw;line-height:.88}
+  .word .tail{width:auto;padding-top:0;margin-top:0;line-height:1.08}
+  .cria .sub{margin-top:22px}
+}
 /* section heads */
 .sh{display:flex;align-items:flex-end;gap:clamp(14px,3vw,36px);padding:clamp(80px,12vw,160px) 0 clamp(36px,5vw,64px)}
 .num{position:relative;font-family:"Rakis Outline";font-size:clamp(96px,18vw,240px);line-height:.78;color:var(--ciano)}
@@ -166,6 +180,7 @@ canvas.ink{position:absolute;inset:0;width:100%;height:100%;display:block}
 .ratio span{position:absolute;left:10px;bottom:8px;font-size:12px;font-weight:600;letter-spacing:.06em}
 .gradbox{height:clamp(220px,34vw,420px);background:var(--grad);background-size:200% 200%;position:relative;overflow:hidden;animation:gshift 9s ease-in-out infinite alternate}
 @keyframes gshift{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+.gradbox .gcover{position:absolute;inset:0;background:var(--cal);transform-origin:100% 50%;z-index:2}
 .gradbox .lg{position:absolute;left:50%;top:50%;width:min(60%,520px);transform:translate(-50%,-50%)}
 .pairs{display:grid;gap:10px}
 @media(min-width:760px){.pairs{grid-template-columns:1fr 1fr}}
@@ -204,6 +219,97 @@ canvas.ink{position:absolute;inset:0;width:100%;height:100%;display:block}
 .rules li{list-style:none;display:flex;gap:14px;align-items:flex-start;font-size:15px;padding:14px;background:rgba(14,15,17,.07)}
 .rules li b{font-family:"Rakis";font-weight:400;font-size:26px;line-height:1}
 
+/* essência */
+.purpose{font-family:var(--t);font-weight:900;font-size:clamp(34px,7.4vw,108px);line-height:.95;text-transform:uppercase;letter-spacing:-.02em;padding-bottom:clamp(40px,6vw,80px)}
+.purpose .w{display:inline-block;overflow:hidden;vertical-align:top;padding-top:.08em;margin-top:-.08em}
+.purpose .w i{display:inline-block;font-style:normal}
+.purpose em{font-style:normal;color:var(--ciano)}
+.pil{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:620px){.pil{grid-template-columns:1fr 1fr}}
+@media(min-width:1100px){.pil{grid-template-columns:repeat(4,1fr)}}
+.pil article{background:#121316;border:1px solid var(--linha);padding:22px 20px 24px;position:relative;overflow:hidden;min-height:220px;display:flex;flex-direction:column;justify-content:flex-end}
+.pil article b{position:absolute;top:14px;right:16px;font-family:"Rakis Outline";font-weight:400;font-size:64px;line-height:.8;color:rgba(0,255,218,.35)}
+.pil article h4{font-family:var(--t);font-weight:800;font-size:22px;text-transform:uppercase;margin-bottom:8px}
+.pil article p{font-size:15px;color:var(--muted)}
+.pil article:before{content:"";position:absolute;left:0;top:0;height:3px;width:100%;background:var(--grad);transform-origin:0 50%;transform:scaleX(var(--k,0))}
+.sliders{display:grid;gap:22px;margin-top:8px}
+.sl{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.sl span:last-child{text-align:right;color:var(--muted)}
+.sl span:first-child{color:var(--cal);font-weight:600}
+.sl .bar{width:min(46vw,420px);height:2px;background:var(--linha);position:relative}
+.sl .bar i{position:absolute;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;background:var(--ciano);clip-path:polygon(30% 0,100% 0,70% 100%,0 100%);left:50%}
+/* voz */
+.traits{display:grid;gap:12px;margin-bottom:clamp(40px,6vw,70px)}
+@media(min-width:760px){.traits{grid-template-columns:repeat(3,1fr)}}
+.traits div{border-top:2px solid var(--asfalto);padding-top:14px}
+.traits h4{font-family:var(--t);font-weight:800;font-size:clamp(22px,3vw,34px);text-transform:uppercase}
+.traits p{font-size:15px;color:rgba(14,15,17,.68);margin-top:6px}
+.say{display:grid;gap:10px}
+.say .row{display:grid;grid-template-columns:1fr;gap:0;overflow:hidden}
+@media(min-width:760px){.say .row{grid-template-columns:1fr 1fr}}
+.say .yes,.say .no2{padding:18px 18px 18px 52px;position:relative;font-size:clamp(16px,1.7vw,20px);line-height:1.35}
+.say .yes{background:var(--asfalto);color:var(--cal);font-weight:500}
+.say .no2{background:#E4DFD6;color:rgba(14,15,17,.5);text-decoration:line-through;text-decoration-color:var(--magenta);text-decoration-thickness:2px}
+.say .yes:before,.say .no2:before{position:absolute;left:18px;top:18px;font-weight:700;font-size:14px;text-decoration:none;display:inline-block}
+.say .yes:before{content:"✓";color:var(--ciano)}
+.say .no2:before{content:"✕";color:var(--magenta)}
+.words{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.words span{font-weight:600;font-size:14px;letter-spacing:.06em;padding:8px 12px;background:var(--asfalto);color:var(--ciano)}
+.words.bad span{background:transparent;color:rgba(14,15,17,.45);box-shadow:inset 0 0 0 1px rgba(14,15,17,.2);text-decoration:line-through}
+/* motion */
+.mgrid{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:760px){.mgrid{grid-template-columns:1fr 1fr}}
+.mdemo{background:#121316;border:1px solid var(--linha);overflow:hidden}
+.mdemo .stg{height:clamp(200px,30vw,280px);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid var(--linha)}
+.mdemo .txt{padding:16px 18px 20px}
+.mdemo h4{font-family:var(--t);font-weight:800;font-size:20px;text-transform:uppercase;margin-bottom:6px}
+.mdemo h4 b{font-family:"Rakis";font-weight:400;color:var(--ciano);margin-right:8px}
+.mdemo p{font-size:15px;color:var(--muted)}
+.mdemo svg.mlogo{width:72%}
+.wipe{position:absolute;inset:0;background:var(--ciano);display:flex;align-items:center;justify-content:center}
+.wipe .lg{width:60%}
+.punch{font-family:var(--t);font-weight:900;font-size:clamp(40px,7vw,72px);text-transform:uppercase;color:var(--cal)}
+.punch em{font-style:normal;color:var(--magenta)}
+.dot{position:absolute;width:12px;height:12px;background:var(--ciano)}
+.tok{margin-top:clamp(40px,6vw,70px);border:1px solid var(--linha)}
+.tok div{display:grid;grid-template-columns:1fr auto;gap:14px;padding:14px 16px;border-bottom:1px solid var(--linha);font-size:14px;align-items:center}
+.tok div:last-child{border:0}
+.tok code{font-family:var(--s);font-weight:600;color:var(--ciano);font-size:13px}
+.tok .cv{width:64px;height:22px}
+/* social */
+.ig{max-width:560px;margin:0 auto;background:#FBFAF7;border:1px solid rgba(14,15,17,.1);padding:18px 0 0}
+.ig .top{display:flex;gap:16px;align-items:center;padding:0 16px 16px}
+.ig .av{width:72px;height:72px;border-radius:50%;background:var(--asfalto);display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 0 0 2px #FBFAF7,0 0 0 4px var(--ciano)}
+.ig .av .lg{width:78%}
+.ig .who b{display:block;font-size:16px}
+.ig .who span{font-size:13px;color:rgba(14,15,17,.6);display:block;line-height:1.4}
+.feed{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.feed .t{aspect-ratio:4/5;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;padding:10%}
+.feed .t .lg{width:84%}
+.feed .t h6{font-family:var(--t);font-weight:900;font-size:clamp(12px,3.4vw,22px);line-height:.95;text-transform:uppercase}
+.feed .t small{position:absolute;left:8%;bottom:6%;font-size:clamp(7px,1.6vw,10px);letter-spacing:.16em;font-weight:600;text-transform:uppercase}
+.feed .t .rk1{font-family:"Rakis Outline";font-size:clamp(40px,12vw,84px);line-height:.8;color:var(--ciano)}
+.stories{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:clamp(40px,6vw,70px)}
+.stories .phone{height:auto;width:min(28vw,220px);min-width:150px}
+.stories .phone .scr{aspect-ratio:9/19.5;height:auto}
+.stories .phone .scr h5{font-size:clamp(13px,3.4vw,21px)}
+.stories .phone .scr p{font-size:9px}
+.stories .cap2{text-align:center;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(14,15,17,.6);margin-top:10px}
+/* papelaria extra */
+.sheet{height:88%;aspect-ratio:210/297;background:#FBFAF7;position:relative;padding:8% 9%;display:flex;flex-direction:column;box-shadow:0 24px 50px rgba(0,0,0,.45)}
+.sheet .lg{width:38%}
+.sheet .ln{height:5px;background:#E2DED6;margin-top:7px}
+.sheet .corner{position:absolute;right:0;bottom:0;width:34%;height:9%;background:var(--ciano);clip-path:polygon(18% 0,100% 0,100% 100%,0 100%)}
+.sheet .ft{position:absolute;left:9%;bottom:3.4%;font-size:clamp(5px,.9vh,8px);letter-spacing:.14em;color:#777;text-transform:uppercase}
+.mail{width:min(88%,460px);background:#fff;color:#111;padding:18px;box-shadow:0 24px 50px rgba(0,0,0,.45);font-size:13px}
+.mail .hd{display:flex;gap:8px;align-items:center;padding-bottom:12px;border-bottom:1px solid #eee;color:#666;font-size:12px}
+.mail .hd i{width:9px;height:9px;border-radius:50%;background:#ddd;display:inline-block}
+.mail .body{padding:14px 0;color:#555;line-height:1.6}
+.sig{display:flex;gap:14px;align-items:stretch;border-top:1px solid #eee;padding-top:14px}
+.sig .bk{background:var(--asfalto);padding:10px 12px;display:flex;align-items:center;width:120px;flex:none;clip-path:polygon(0 0,100% 0,100% 80%,86% 100%,0 100%)}
+.sig b{font-family:var(--t);font-weight:800;font-size:13px;text-transform:uppercase;display:block}
+.sig span{display:block;font-size:11px;color:#666;line-height:1.5}
+.sig em{font-style:normal;color:#D41A74;font-weight:600}
 /* applications */
 .apps{overflow:hidden}
 .track{display:flex;gap:clamp(16px,3vw,40px);padding:0 var(--pad) 40px;width:max-content;align-items:center}
@@ -261,12 +367,16 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 <nav class="menu" id="menu" aria-label="Seções">
   <button class="mbtn cut mclose" id="mclose">FECHAR</button>
   <a href="#inicio"><b>00</b><span>Início</span></a>
-  <a href="#logo"><b>01</b><span>Logotipo</span></a>
-  <a href="#cores"><b>02</b><span>Cores</span></a>
-  <a href="#tipografia"><b>03</b><span>Tipografia</span></a>
-  <a href="#elementos"><b>04</b><span>Elementos</span></a>
-  <a href="#aplicacoes"><b>05</b><span>Aplicações</span></a>
-  <a href="#arquivos"><b>06</b><span>Arquivos</span></a>
+  <a href="#essencia"><b>01</b><span>Essência</span></a>
+  <a href="#voz"><b>02</b><span>Tom de voz</span></a>
+  <a href="#logo"><b>03</b><span>Logotipo</span></a>
+  <a href="#cores"><b>04</b><span>Cores</span></a>
+  <a href="#tipografia"><b>05</b><span>Tipografia</span></a>
+  <a href="#elementos"><b>06</b><span>Elementos</span></a>
+  <a href="#motion"><b>07</b><span>Motion</span></a>
+  <a href="#social"><b>08</b><span>Social</span></a>
+  <a href="#aplicacoes"><b>09</b><span>Aplicações</span></a>
+  <a href="#arquivos"><b>10</b><span>Arquivos</span></a>
   <p class="mfoot">CRIAS STUDIO · BRAND KIT 2026</p>
 </nav>
 
@@ -281,6 +391,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 </section>
 
 <section class="cria" id="cria">
+  <div class="mq" aria-hidden="true"><p class="r1">CRIAÇÃO · CRIA · CRIAÇÃO · CRIA · CRIAÇÃO · CRIA ·</p><p class="r2">CRIAR · CRIAÇÃO · CRIAR · CRIAÇÃO · CRIAR ·</p><p class="r3">CRIA · CRIAÇÃO · CRIA · CRIAÇÃO · CRIA ·</p><p class="r4">CRIAÇÃO · CRIAR · CRIAÇÃO · CRIAR · CRIAÇÃO ·</p><p class="r5">CRIAR · CRIA · CRIAÇÃO · CRIAR · CRIA ·</p><p class="r6">CRIA · CRIAÇÃO · CRIAR · CRIAÇÃO · CRIA ·</p></div>
   <div class="word" aria-label="Criação"><span>CRIA</span><span class="tail">ÇÃO</span></div>
   <p class="sub">Do verbo <b>criar</b>. Tudo que sai daqui nasce do zero: <b>marca, campanha, filme</b>. Feito com atitude, entregue com acabamento.</p>
 </section>
@@ -292,10 +403,57 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
   <p class="tr-sub">Todo projeto começa no papel, a mão. O acabamento vem depois.</p>
 </section>
 
-<!-- 01 LOGO -->
+<!-- 01 ESSÊNCIA -->
+<section id="essencia">
+  <div class="wrap">
+    <div class="sh"><div class="num">01<span class="fill" aria-hidden="true">01</span></div><div><p class="eyebrow">Essência</p><h2>Por que a gente existe</h2></div></div>
+    <p class="purpose" id="purpose"><span class="w"><i>Criar</i></span> <span class="w"><i>marcas</i></span> <span class="w"><i>que</i></span> <span class="w"><i><em>ninguém</em></i></span> <span class="w"><i><em>esquece.</em></i></span></p>
+    <h3 class="h3">Pilares</h3>
+    <div class="pil blk" id="pil">
+      <article><b>01</b><h4>Do zero</h4><p>Nada de template. Tudo nasce aqui, autoral, pensado pra marca de quem contrata.</p></article>
+      <article><b>02</b><h4>Atitude</h4><p>Ideia com coragem. A gente propõe o que ninguém tá fazendo ainda.</p></article>
+      <article><b>03</b><h4>Acabamento</h4><p>Detalhe de galeria em tudo: do pixel ao impresso, nada sai pela metade.</p></article>
+      <article><b>04</b><h4>Resultado</h4><p>Criação que vende. Bonito é o mínimo, o objetivo é a marca crescer.</p></article>
+    </div>
+    <h3 class="h3">Personalidade</h3>
+    <p class="lead" style="margin-bottom:26px">Onde a CRIAS fica entre os extremos.</p>
+    <div class="sliders blk" id="sliders">
+      <div class="sl"><span>Ousada</span><div class="bar"><i data-v="18"></i></div><span>Contida</span></div>
+      <div class="sl"><span>Rua</span><div class="bar"><i data-v="44"></i></div><span>Galeria</span></div>
+      <div class="sl"><span>Direta</span><div class="bar"><i data-v="14"></i></div><span>Rebuscada</span></div>
+      <div class="sl"><span>Moderna</span><div class="bar"><i data-v="22"></i></div><span>Clássica</span></div>
+      <div class="sl"><span>Próxima</span><div class="bar"><i data-v="30"></i></div><span>Distante</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 VOZ -->
+<section id="voz" class="light paper">
+  <div class="wrap">
+    <div class="sh"><div class="num">02<span class="fill" aria-hidden="true">02</span></div><div><p class="eyebrow">Tom de voz</p><h2>Como a gente fala</h2></div></div>
+    <div class="traits" id="traits">
+      <div><h4>Direta</h4><p>Fala o que é, sem rodeio e sem jargão.</p></div>
+      <div><h4>Confiante</h4><p>Sabe o que faz, sem precisar se gabar.</p></div>
+      <div><h4>Próxima</h4><p>Fala como gente, com gíria na medida.</p></div>
+    </div>
+    <h3 class="h3">Fala assim, não assim</h3>
+    <div class="say blk" id="say">
+      <div class="row"><p class="yes">Bora tirar sua marca do papel.</p><p class="no2">Oferecemos soluções inovadoras de branding.</p></div>
+      <div class="row"><p class="yes">A gente cria do zero.</p><p class="no2">Desenvolvemos ativos visuais customizados.</p></div>
+      <div class="row"><p class="yes">Pronto pra rodar.</p><p class="no2">Entregáveis finalizados conforme escopo.</p></div>
+      <div class="row"><p class="yes">Sua marca, do jeito que ela merece.</p><p class="no2">Potencialize sua presença digital com sinergia.</p></div>
+    </div>
+    <div class="split blk" style="align-items:start">
+      <div><h3 class="h3">Palavras da casa</h3><div class="words"><span>criar</span><span>do zero</span><span>recorte</span><span>rodar</span><span>acabamento</span><span>na rua</span><span>bora</span></div></div>
+      <div><h3 class="h3">Fora do vocabulário</h3><div class="words bad"><span>sinergia</span><span>disruptivo</span><span>soluções</span><span>alavancar</span><span>inovador</span><span>empoderar</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 LOGO -->
 <section id="logo">
   <div class="wrap">
-    <div class="sh"><div class="num">01<span class="fill" aria-hidden="true">01</span></div><div><p class="eyebrow">Logotipo</p><h2>A assinatura</h2></div></div>
+    <div class="sh"><div class="num">03<span class="fill" aria-hidden="true">03</span></div><div><p class="eyebrow">Logotipo</p><h2>A assinatura</h2></div></div>
 
     <div class="split blk">
       <div>
@@ -344,7 +502,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 <!-- 02 CORES -->
 <section id="cores" class="light paper">
   <div class="wrap">
-    <div class="sh"><div class="num">02<span class="fill" aria-hidden="true">02</span></div><div><p class="eyebrow">Cores</p><h2>Paleta</h2></div></div>
+    <div class="sh"><div class="num">04<span class="fill" aria-hidden="true">04</span></div><div><p class="eyebrow">Cores</p><h2>Paleta</h2></div></div>
     <p class="lead" style="margin-bottom:26px">O ciano é a cor da marca e sempre aparece primeiro. Magenta é a segunda voz, pra destaque e chamada. O azul serve de ponte entre os dois, no gradiente. Toque numa cor pra copiar o código.</p>
     <div class="grid g3 blk" id="swatches"></div>
 
@@ -354,7 +512,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 
     <h3 class="h3">Gradiente Cria</h3>
     <p class="lead" style="margin-bottom:20px">Ciano → azul → magenta. Pra fundos grandes e momentos de impacto. Nunca atrás de texto pequeno.</p>
-    <div class="gradbox cut blk" style="padding:0;margin-bottom:clamp(56px,8vw,110px)"><div class="lg" data-lg="preto"></div></div>
+    <div class="gradbox cut blk" style="padding:0;margin-bottom:clamp(56px,8vw,110px)"><div class="lg" data-lg="preto"></div><i class="gcover" aria-hidden="true"></i></div>
 
     <h3 class="h3">Leitura</h3>
     <p class="lead" style="margin-bottom:20px">Combinações testadas pelo padrão de contraste da web (WCAG). Acima de 4.5 serve pra texto; entre 3 e 4.5, só pra texto grande.</p>
@@ -365,7 +523,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 <!-- 03 TIPOGRAFIA -->
 <section id="tipografia">
   <div class="wrap">
-    <div class="sh"><div class="num">03<span class="fill" aria-hidden="true">03</span></div><div><p class="eyebrow">Tipografia</p><h2>Duas vozes</h2></div></div>
+    <div class="sh"><div class="num">05<span class="fill" aria-hidden="true">05</span></div><div><p class="eyebrow">Tipografia</p><h2>Duas vozes</h2></div></div>
     <p class="lead" style="margin-bottom:26px">Duas fontes de trabalho e um tempero. Menos fonte, mais presença.</p>
 
     <div class="font">
@@ -409,7 +567,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 <!-- 04 ELEMENTOS -->
 <section id="elementos" class="cyan">
   <div class="wrap">
-    <div class="sh"><div class="num">04<span class="fill" aria-hidden="true">04</span></div><div><p class="eyebrow">Elementos</p><h2>Recorte</h2></div></div>
+    <div class="sh"><div class="num">06<span class="fill" aria-hidden="true">06</span></div><div><p class="eyebrow">Elementos</p><h2>Recorte</h2></div></div>
     <div class="split blk">
       <div>
         <h3 class="h3">Cunhas</h3>
@@ -426,14 +584,64 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
   </div>
 </section>
 
-<!-- 05 APLICACOES -->
+<!-- 07 MOTION -->
+<section id="motion">
+  <div class="wrap">
+    <div class="sh"><div class="num">07<span class="fill" aria-hidden="true">07</span></div><div><p class="eyebrow">Motion</p><h2>Como a marca se mexe</h2></div></div>
+    <p class="lead" style="margin-bottom:26px">Nada aparece do nada. Na CRIAS tudo se monta, corta ou é pintado em cena.</p>
+    <div class="mgrid" id="mgrid">
+      <div class="mdemo cut"><div class="stg" id="dm1"><svg class="mlogo" viewBox="616 458 688 164"></svg></div><div class="txt"><h4><b>01</b>Monta, não aparece</h4><p>Elementos entram em peças e se encaixam. O logo nunca surge pronto.</p></div></div>
+      <div class="mdemo cut"><div class="stg" id="dm2"><div class="wipe"><div class="lg" data-lg="preto"></div></div></div><div class="txt"><h4><b>02</b>Corta em 12°</h4><p>Transições de cena usam o ângulo da marca, nunca um fade comum.</p></div></div>
+      <div class="mdemo cut"><div class="stg" id="dm3"><canvas class="ink" id="inkDemo"></canvas></div><div class="txt"><h4><b>03</b>Tinta muda de cena</h4><p>Pra trocar de assunto, a tinta toma a tela. Usar uma vez por peça.</p></div></div>
+      <div class="mdemo cut"><div class="stg" id="dm4"><i class="dot"></i><p class="punch">Bora<em>?</em></p></div><div class="txt"><h4><b>04</b>Respira antes do impacto</h4><p>Uma pausa curta antes do momento forte. O silêncio faz o impacto.</p></div></div>
+    </div>
+    <div class="tok blk" style="padding-bottom:0;margin-bottom:clamp(56px,8vw,110px)">
+      <div><span>Entrada<br><code>0.8s · cubic-bezier(.16, 1, .3, 1)</code></span><svg class="cv" viewBox="0 0 64 22"><path d="M2 20 C12 0 20 2 62 2" fill="none" stroke="#00FFDA" stroke-width="2"/></svg></div>
+      <div><span>Saída<br><code>0.5s · cubic-bezier(.7, 0, .84, 0)</code></span><svg class="cv" viewBox="0 0 64 22"><path d="M2 20 C44 20 54 20 62 2" fill="none" stroke="#FF2E93" stroke-width="2"/></svg></div>
+      <div><span>Corte 12°<br><code>0.6s · cubic-bezier(.87, 0, .13, 1)</code></span><svg class="cv" viewBox="0 0 64 22"><path d="M2 20 C56 20 8 2 62 2" fill="none" stroke="#4D7CFF" stroke-width="2"/></svg></div>
+      <div><span>Atraso entre peças<br><code>60–90 ms</code></span><svg class="cv" viewBox="0 0 64 22"><rect x="2" y="8" width="10" height="6" fill="#00FFDA"/><rect x="18" y="8" width="10" height="6" fill="#00FFDA" opacity=".7"/><rect x="34" y="8" width="10" height="6" fill="#00FFDA" opacity=".45"/><rect x="50" y="8" width="10" height="6" fill="#00FFDA" opacity=".25"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 SOCIAL -->
+<section id="social" class="light paper">
+  <div class="wrap">
+    <div class="sh"><div class="num">08<span class="fill" aria-hidden="true">08</span></div><div><p class="eyebrow">Social</p><h2>No feed</h2></div></div>
+    <p class="lead" style="margin-bottom:26px">O feed alterna fundo escuro, cor chapada e respiro claro. Nunca duas cores iguais lado a lado.</p>
+    <div class="ig cut">
+      <div class="top"><div class="av"><div class="lg" data-lg="principal"></div></div><div class="who"><b>@criasstudio</b><span>Estúdio criativo · Goiânia</span><span>Identidade · Campanha · Audiovisual</span></div></div>
+      <div class="feed" id="feed">
+        <div class="t" style="background:var(--ciano)"><div class="lg" data-lg="preto"></div></div>
+        <div class="t" style="background:var(--asfalto)"><div><div class="rk1">01</div><small style="color:var(--cal)">Case · Identidade</small></div></div>
+        <div class="t" style="background:var(--grad)"><h6 style="color:var(--asfalto)">Marcas<br>que<br>ficam.</h6></div>
+        <div class="t" style="background:var(--cal)"><svg class="stz" viewBox="616 458 688 164" style="width:86%"></svg><small style="color:#5B3FD9">Processo</small></div>
+        <div class="t" style="background:radial-gradient(circle at 30% 30%,rgba(77,124,255,.6),transparent 60%),radial-gradient(circle at 70% 75%,rgba(255,46,147,.5),transparent 55%),var(--asfalto)"><h6 style="color:var(--cal)">Bastidores</h6></div>
+        <div class="t" style="background:var(--magenta)"><h6 style="color:var(--asfalto);font-size:clamp(18px,6vw,40px)">Bora?</h6></div>
+        <div class="t" style="background:var(--asfalto);padding:0"><svg class="wz" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%"></svg></div>
+        <div class="t" style="background:var(--cal)"><h6 style="color:var(--asfalto)">Criado pra<br><span style="color:#D41A74">ser visto.</span></h6></div>
+        <div class="t" style="background:var(--ciano)"><h6 style="color:var(--asfalto)">Novo<br>projeto<br>no ar.</h6></div>
+      </div>
+    </div>
+    <div class="stories blk" id="storiesRow">
+      <div><div class="phone"><div class="scr"><div class="lg" data-lg="preto"></div><h5>Novo<br>projeto<br>no ar.</h5><p>@criasstudio</p></div></div><p class="cap2">Lançamento</p></div>
+      <div><div class="phone"><div class="scr" style="background:var(--asfalto);padding:0"><canvas class="ink" id="inkStory"></canvas><div style="position:absolute;inset:0;padding:16% 9% 12%;display:flex;flex-direction:column;justify-content:space-between"><div class="lg" data-lg="principal"></div><h5 style="color:var(--cal)">Por trás<br>do <span style="color:var(--ciano)">recorte.</span></h5><p style="color:var(--cal)">Bastidores</p></div></div></div><p class="cap2">Bastidores</p></div>
+      <div><div class="phone"><div class="scr paper" style="background:var(--cal)"><div class="lg" data-lg="preto"></div><h5>Qual<br>marca<br>a gente<br><span style="color:#D41A74">cria</span><br>agora?</h5><p>Responde aí ↓</p></div></div><p class="cap2">Interação</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 APLICACOES -->
 <section id="aplicacoes" class="apps">
-  <div class="wrap"><div class="sh"><div class="num">05<span class="fill" aria-hidden="true">05</span></div><div><p class="eyebrow">Aplicações</p><h2>Na rua</h2></div></div></div>
+  <div class="wrap"><div class="sh"><div class="num">09<span class="fill" aria-hidden="true">09</span></div><div><p class="eyebrow">Aplicações</p><h2>Na rua</h2></div></div></div>
   <div class="track" id="track">
     <div class="panel"><div class="stage cut"><div class="phone"><div class="scr"><div class="lg" data-lg="preto"></div><h5>Novo<br>projeto<br>no ar.</h5><p>@criasstudio</p></div></div></div><div class="cap"><b>Stories</b><span>1080 × 1920</span></div></div>
     <div class="panel"><div class="stage cut"><div class="post"><div class="rkn">01</div><h5>Marcas<br>que <em>ficam.</em></h5><div style="display:flex;justify-content:space-between;align-items:flex-end"><div class="lg" data-lg="principal"></div><span style="font-size:11px;letter-spacing:.16em;color:var(--muted)">IDENTIDADE</span></div></div></div><div class="cap"><b>Feed</b><span>1080 × 1350</span></div></div>
     <div class="panel"><div class="stage cut"><div class="card3d" id="bcard"><div class="f fr"><div class="lg" data-lg="principal"></div></div><div class="f bk"><div><h6>Nome Sobrenome</h6><p style="letter-spacing:.14em;text-transform:uppercase;font-size:11px">Direção criativa</p></div><p>(62) 9 0000-0000<br>nome@dominio.com<br>Goiânia · GO</p></div></div></div><div class="cap"><b>Cartão</b><span>85 × 55 mm</span></div></div>
+    <div class="panel"><div class="stage cut" style="background:#18191c"><div class="sheet"><div class="lg" data-lg="preto"></div><div style="margin-top:16%"><div class="ln" style="width:40%;background:#cfcac0"></div><div class="ln" style="margin-top:14px"></div><div class="ln"></div><div class="ln" style="width:86%"></div><div class="ln"></div><div class="ln" style="width:62%"></div><div class="ln" style="margin-top:14px"></div><div class="ln" style="width:90%"></div><div class="ln" style="width:70%"></div></div><p class="ft">CRIAS STUDIO · Goiânia · GO</p><i class="corner"></i></div></div><div class="cap"><b>Papel timbrado</b><span>A4</span></div></div>
+    <div class="panel"><div class="stage cut"><div class="mail"><div class="hd"><i></i><i></i><i></i><span style="margin-left:8px">Nova mensagem</span></div><div class="body">Fala, tudo certo? Segue a proposta do projeto em anexo. Qualquer dúvida, bora conversar.</div><div class="sig"><div class="bk"><div class="lg" data-lg="principal" style="width:100%"></div></div><div><b>Nome Sobrenome</b><span>Direção criativa</span><span>(62) 9 0000-0000</span><span><em>@criasstudio</em></span></div></div></div></div><div class="cap"><b>Assinatura de e-mail</b><span>600 × 200</span></div></div>
     <div class="panel"><div class="stage cut"><svg class="tee" id="tee" viewBox="0 0 400 420"></svg></div><div class="cap"><b>Camiseta</b><span>Silk 1 cor</span></div></div>
+    <div class="panel"><div class="stage cut" style="background:#1d1e21"><svg class="tee" id="bag" viewBox="0 0 400 440"></svg></div><div class="cap"><b>Ecobag</b><span>Algodão cru</span></div></div>
     <div class="panel"><div class="stage cut" style="background:var(--grafite)"><svg class="stk" id="stk" viewBox="596 438 728 204"></svg></div><div class="cap"><b>Adesivo</b><span>Corte especial</span></div></div>
   </div>
 </section>
@@ -441,7 +649,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 <!-- 06 ARQUIVOS -->
 <section id="arquivos" class="light paper">
   <div class="wrap">
-    <div class="sh"><div class="num">06<span class="fill" aria-hidden="true">06</span></div><div><p class="eyebrow">Arquivos</p><h2>Pronto pra usar</h2></div></div>
+    <div class="sh"><div class="num">10<span class="fill" aria-hidden="true">10</span></div><div><p class="eyebrow">Arquivos</p><h2>Pronto pra usar</h2></div></div>
     <p class="lead">Logos em SVG e PNG, paleta, grafismos e modelos, tudo organizado em pastas. O guia completo sai em PDF.</p>
     <div class="dl blk" style="margin-top:26px">
       <button class="btn p cut" id="bZip"><span>Baixar arquivos (.zip)</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v13M6 11l6 6 6-6M4 21h16"/></svg></button>
@@ -579,7 +787,15 @@ const inkHero=makeInk(document.getElementById("inkHero"),{scale:.5,dim:.8});
 if(inkHero)document.querySelector(".hero").classList.add("gl");
 const inkFlood=makeInk(document.getElementById("inkFlood"),{scale:.5,dim:.9});
 if(!inkFlood)document.getElementById("flood").style.background="var(--ciano)";
+const inkDemo=makeInk(document.getElementById("inkDemo"),{scale:.6,dim:1});
+const inkStory=makeInk(document.getElementById("inkStory"),{scale:.6,dim:.95});
 if(reduceInk){inkHero&&inkHero.stop();}
+
+/* motion demo logo + social bits */
+document.querySelector("#dm1 .mlogo").innerHTML=ORDER.map(k=>`<path class="mp" fill="${C.ciano}" d="${PATHS.main[k]}"/>`).join("")+`<g fill="${C.cal}" class="ms">${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g>`;
+document.querySelectorAll(".stz").forEach(sv=>sv.innerHTML=`<g fill="none" stroke="#5B3FD9" stroke-width="3">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}</g>`);
+document.querySelectorAll(".wz").forEach(sv=>{const t=Math.tan(12*Math.PI/180);let g="";const cols=[C.ciano,C.magenta,C.cal,C.azul];for(let r=0;r<11;r++)for(let c=0;c<6;c++){const x=c*72-30,y=r*48-20,w=60,h=38,sk=w*t,col=cols[(r*3+c*5)%4],f=(r+c)%2;const pts=f?`${x},${y} ${x+w},${y+sk} ${x+w},${y+h+sk} ${x},${y+h}`:`${x},${y+sk} ${x+w},${y} ${x+w},${y+h} ${x},${y+h+sk}`;g+=`<polygon points="${pts}" fill="${(r*7+c*3)%4===0?col:"none"}" stroke="${col}" stroke-width="2"/>`}sv.innerHTML=g});
+document.getElementById("bag").innerHTML=`<path d="M130 120 Q130 30 200 30 Q270 30 270 120" fill="none" stroke="#d9cfb7" stroke-width="16"/><path d="M60 120 L340 120 L330 430 L70 430 Z" fill="#E8DFC9"/><path d="M60 120 L340 120 L338 150 L62 150 Z" fill="#ddd2b8"/><g transform="translate(200 270) scale(.33) translate(-960 -540)">${ORDER.map(k=>`<path fill="${C.asfalto}" d="${PATHS.main[k]}"/>`).join("")}${PATHS.studio.map(d=>`<path fill="${C.asfalto}" d="${d}"/>`).join("")}</g><polygon points="70,402 150,388 150,430 70,430" fill="${C.ciano}"/>`;
 
 /* toast + copy */
 const toast=document.getElementById("toast");let tt;
@@ -633,10 +849,13 @@ if(window.gsap&&window.ScrollTrigger){
   /* CRIA -> CRIAÇÃO */
   const tail=document.querySelector(".word .tail");
   if(!reduce){
-    gsap.set(tail,{width:0});gsap.set(".cria .sub",{opacity:0,y:24});
+    const mob=matchMedia("(max-width:700px)").matches,dim=mob?"height":"width";
+    gsap.set(tail,{[dim]:0});gsap.set(".cria .sub",{opacity:0,y:24});
+    gsap.fromTo(".mq p:nth-child(odd)",{xPercent:0},{xPercent:-35,ease:"none",scrollTrigger:{trigger:"#cria",start:"top bottom",end:"+=260%",scrub:1}});
+    gsap.fromTo(".mq p:nth-child(even)",{xPercent:-40},{xPercent:-5,ease:"none",scrollTrigger:{trigger:"#cria",start:"top bottom",end:"+=260%",scrub:1}});
     gsap.fromTo(".word span:first-child",{yPercent:70,opacity:0},{yPercent:0,opacity:1,ease:"power3.out",scrollTrigger:{trigger:"#cria",start:"top 85%",end:"top 25%",scrub:1}});
     const tc=gsap.timeline({scrollTrigger:{trigger:"#cria",start:"top top",end:"+=100%",scrub:1,pin:true,invalidateOnRefresh:true}});
-    tc.to(tail,{width:()=>tail.scrollWidth,duration:.6,ease:"power2.inOut"},0)
+    tc.to(tail,{[dim]:()=>mob?tail.scrollHeight:tail.scrollWidth,duration:.6,ease:"power2.inOut"},0)
       .fromTo(tail,{color:C.cal},{color:C.ciano,duration:.3},.2)
       .to(".cria .sub",{opacity:1,y:0,duration:.35},.6)
       .to({},{duration:.3});
@@ -658,6 +877,39 @@ if(window.gsap&&window.ScrollTrigger){
     if(inkFlood){gsap.timeline({scrollTrigger:{trigger:"#flood",start:"top top",end:"+=110%",scrub:1,pin:true}})
       .fromTo(inkFlood.st,{fill:0},{fill:1,duration:1,ease:"power1.in"}).to({},{duration:.15});}
   }
+
+  /* essência */
+  gsap.fromTo("#purpose .w i",{yPercent:110},{yPercent:0,stagger:.08,duration:1.1,ease:"expo.out",scrollTrigger:{trigger:"#purpose",start:"top 80%"}});
+  gsap.utils.toArray("#pil article").forEach((a,i)=>{
+    gsap.fromTo(a,{y:60,opacity:0},{y:0,opacity:1,duration:.9,delay:(i%4)*.08,ease:"power3.out",scrollTrigger:{trigger:"#pil",start:"top 82%"}});
+    gsap.fromTo(a,{"--k":0},{"--k":1,duration:1.2,delay:.3+(i%4)*.1,ease:"expo.out",scrollTrigger:{trigger:"#pil",start:"top 82%"}});
+  });
+  gsap.utils.toArray("#sliders i").forEach(k=>gsap.fromTo(k,{left:"50%"},{left:k.dataset.v+"%",ease:"power2.out",scrollTrigger:{trigger:k.closest(".sl"),start:"top 92%",end:"top 60%",scrub:1}}));
+  /* voz */
+  gsap.from("#traits div",{y:40,opacity:0,stagger:.1,duration:.9,ease:"power3.out",scrollTrigger:{trigger:"#traits",start:"top 85%"}});
+  gsap.utils.toArray("#say .row").forEach(r=>{
+    gsap.fromTo(r.querySelector(".yes"),{xPercent:-12,opacity:0},{xPercent:0,opacity:1,duration:.8,ease:"power3.out",scrollTrigger:{trigger:r,start:"top 90%"}});
+    gsap.fromTo(r.querySelector(".no2"),{xPercent:12,opacity:0},{xPercent:0,opacity:1,duration:.8,delay:.1,ease:"power3.out",scrollTrigger:{trigger:r,start:"top 90%"}});
+  });
+  gsap.from(".words span",{y:20,opacity:0,stagger:.03,duration:.5,scrollTrigger:{trigger:".words",start:"top 90%"}});
+  /* motion demos (loops só quando visíveis) */
+  const mp=gsap.utils.toArray("#dm1 .mp");
+  const d1=gsap.timeline({repeat:-1,repeatDelay:.6,paused:true});
+  d1.fromTo(mp,{x:i=>[-220,140,-60,30,200,260][i],y:i=>[-160,180,-200,150,-140,120][i],rotation:i=>[-90,70,140,-60,110,-80][i],opacity:0,transformOrigin:"50% 50%"},{x:0,y:0,rotation:0,opacity:1,duration:1,stagger:.08,ease:"expo.out"})
+    .fromTo("#dm1 .ms",{opacity:0,x:20},{opacity:1,x:0,duration:.4},"-=.4").to({},{duration:1.2}).to(mp,{opacity:0,duration:.3}).to("#dm1 .ms",{opacity:0,duration:.3},"<");
+  const wp={v:-30};const wipeEl=document.querySelector("#dm2 .wipe");
+  const setW=()=>{const a=wp.v,b=a+22;wipeEl.style.clipPath=`polygon(0 0,${b}% 0,${a}% 100%,0 100%)`};setW();
+  const d2=gsap.timeline({repeat:-1,repeatDelay:.5,paused:true,onUpdate:setW});
+  d2.fromTo(wp,{v:-30},{v:110,duration:.9,ease:"expo.inOut",onUpdate:setW}).to({},{duration:1}).to(wp,{v:-30,duration:.7,ease:"expo.inOut",onUpdate:setW});
+  const d4=gsap.timeline({repeat:-1,repeatDelay:.4,paused:true});
+  d4.set(".punch",{opacity:0,scale:1.6}).fromTo(".dot",{scale:0,opacity:1},{scale:1,duration:.25,ease:"back.out(3)"}).to(".dot",{scale:.6,duration:.5,yoyo:true,repeat:1,ease:"sine.inOut"}).to(".dot",{scale:0,duration:.15})
+    .to(".punch",{opacity:1,scale:1,duration:.45,ease:"expo.out"}).to({},{duration:1.2}).to(".punch",{opacity:0,duration:.3});
+  [["#dm1",d1],["#dm2",d2],["#dm4",d4]].forEach(([s,tl])=>ScrollTrigger.create({trigger:s,start:"top bottom",end:"bottom top",onToggle:e=>e.isActive?tl.play():tl.pause()}));
+  gsap.from("#mgrid .mdemo",{y:60,opacity:0,stagger:.1,duration:.9,ease:"power3.out",scrollTrigger:{trigger:"#mgrid",start:"top 85%"}});
+  gsap.from(".tok div",{x:-20,opacity:0,stagger:.08,duration:.6,scrollTrigger:{trigger:".tok",start:"top 88%"}});
+  /* social */
+  gsap.from("#feed .t",{rotateY:-90,opacity:0,transformPerspective:700,transformOrigin:"0% 50%",stagger:{each:.07,grid:[3,3],from:"start"},duration:.8,ease:"power3.out",scrollTrigger:{trigger:"#feed",start:"top 80%"}});
+  gsap.from("#storiesRow > div",{y:80,opacity:0,stagger:.12,duration:1,ease:"expo.out",scrollTrigger:{trigger:"#storiesRow",start:"top 85%"}});
 
   /* números de seção: outline -> preenchido */
   gsap.utils.toArray(".sh").forEach(sh=>{
@@ -686,8 +938,8 @@ if(window.gsap&&window.ScrollTrigger){
     gsap.from(sw.querySelector(".nm"),{y:30,opacity:0,duration:.8,delay:.4+(i%3)*.12,scrollTrigger:{trigger:sw,start:"top 85%"}});
   });
   gsap.from("#ratio div",{scaleX:0,stagger:.1,duration:1.1,ease:"expo.out",scrollTrigger:{trigger:"#ratio",start:"top 85%"}});
-  gsap.from(".gradbox",{clipPath:"polygon(0 0,0 0,0 100%,0 100%)",duration:1.4,ease:"expo.inOut",scrollTrigger:{trigger:".gradbox",start:"top 80%"}});
-  gsap.from(".gradbox .lg",{scale:1.4,opacity:0,duration:1.2,delay:.5,ease:"expo.out",scrollTrigger:{trigger:".gradbox",start:"top 80%"}});
+  gsap.fromTo(".gradbox .gcover",{scaleX:1},{scaleX:0,ease:"none",scrollTrigger:{trigger:".gradbox",start:"top 90%",end:"top 35%",scrub:1}});
+  gsap.fromTo(".gradbox .lg",{scale:1.25,opacity:0},{scale:1,opacity:1,ease:"power2.out",scrollTrigger:{trigger:".gradbox",start:"top 60%",end:"top 25%",scrub:1}});
   gsap.from("#pairs .pair",{x:-30,opacity:0,stagger:.05,duration:.6,scrollTrigger:{trigger:"#pairs",start:"top 85%"}});
 
   /* tipografia */
@@ -773,7 +1025,18 @@ async function buildPdf(){
   const head=(x,n,eb,t,dark=true)=>{txt(x,n,120,330,"260px 'Rakis Outline'",dark?C.ciano:C.asfalto);txt(x,eb,120,420,"500 26px 'Space Grotesk'",dark?C.magenta:"#D41A74",5);txt(x,t,120,520,"800 84px Unbounded",dark?C.cal:C.asfalto)};
   await page(async x=>{x.fillStyle=C.asfalto;x.fillRect(0,0,W,H);const g=x.createRadialGradient(960,540,0,960,540,900);g.addColorStop(0,"rgba(77,124,255,.35)");g.addColorStop(.5,"rgba(255,46,147,.12)");g.addColorStop(1,"rgba(14,15,17,0)");x.fillStyle=g;x.fillRect(0,0,W,H);
     await drawLogo(x,"principal",960,500,1000);txt(x,"BRAND KIT · 2026",960,760,"600 28px 'Space Grotesk'",C.cal,12,"center");txt(x,"Identidade · Campanha · Audiovisual",960,810,"400 26px 'Space Grotesk'","rgba(242,239,233,.6)",2,"center")});
-  await page(async x=>{x.fillStyle=C.asfalto;x.fillRect(0,0,W,H);head(x,"01","LOGOTIPO","A ASSINATURA");
+  await page(async x=>{x.fillStyle=C.asfalto;x.fillRect(0,0,W,H);head(x,"01","ESSÊNCIA","POR QUE EXISTE");
+    txt(x,"CRIAR MARCAS QUE",120,650,"900 56px Unbounded",C.cal);txt(x,"NINGUÉM ESQUECE.",120,720,"900 56px Unbounded",C.ciano);
+    const P=[["DO ZERO","Tudo autoral, nada de template."],["ATITUDE","Ideia com coragem."],["ACABAMENTO","Detalhe de galeria em tudo."],["RESULTADO","Criação que vende."]];
+    P.forEach(([t,d],i)=>{const cx=1000+(i%2)*420,cy=150+Math.floor(i/2)*400;x.fillStyle="#121316";x.fillRect(cx,cy,390,360);x.fillStyle=gradFill(x,390,6);x.fillRect(cx,cy,390,6);
+      txt(x,"0"+(i+1),cx+290,cy+110,"90px 'Rakis Outline'","rgba(0,255,218,.4)");txt(x,t,cx+28,cy+290,"800 32px Unbounded",C.cal);txt(x,d,cx+28,cy+330,"400 22px 'Space Grotesk'","rgba(242,239,233,.65)")})});
+  await page(async x=>{x.fillStyle=C.cal;x.fillRect(0,0,W,H);head(x,"02","TOM DE VOZ","COMO FALA",false);
+    txt(x,"DIRETA · CONFIANTE · PRÓXIMA",120,620,"800 34px Unbounded",C.asfalto);
+    const S=[["Bora tirar sua marca do papel.","Oferecemos soluções inovadoras de branding."],["A gente cria do zero.","Desenvolvemos ativos visuais customizados."],["Pronto pra rodar.","Entregáveis finalizados conforme escopo."],["Sua marca, do jeito que ela merece.","Potencialize sua presença digital com sinergia."]];
+    S.forEach(([a,b],i)=>{const y=150+i*190;x.fillStyle=C.asfalto;x.fillRect(900,y,500,160);txt(x,"✓",930,y+60,"700 26px 'Space Grotesk'",C.ciano);txt(x,a,970,y+60,"500 24px 'Space Grotesk'",C.cal);
+      x.fillStyle="#E4DFD6";x.fillRect(1400,y,420,160);txt(x,"✕",1430,y+60,"700 26px 'Space Grotesk'",C.magenta);x.font="400 20px 'Space Grotesk'";const ws=b.split(" ");let line="",ly=y+60;ws.forEach(w=>{if(x.measureText(line+w).width>320){txt(x,line,1465,ly,"400 20px 'Space Grotesk'","rgba(14,15,17,.5)");line="";ly+=30}line+=w+" "});txt(x,line,1465,ly,"400 20px 'Space Grotesk'","rgba(14,15,17,.5)")});
+    txt(x,"Da casa: criar · do zero · recorte · rodar · acabamento · bora",120,720,"500 22px 'Space Grotesk'",C.asfalto);txt(x,"Fora: sinergia · disruptivo · soluções · alavancar · inovador",120,760,"500 22px 'Space Grotesk'","#D41A74")});
+  await page(async x=>{x.fillStyle=C.asfalto;x.fillRect(0,0,W,H);head(x,"03","LOGOTIPO","A ASSINATURA");
     txt(x,"Cada letra é um bloco recortado. Os cortes seguem",120,640,"400 30px 'Space Grotesk'","rgba(242,239,233,.7)");txt(x,"sempre a mesma inclinação: 12°.",120,684,"400 30px 'Space Grotesk'","rgba(242,239,233,.7)");
     const vs=[[C.asfalto,"principal","PRINCIPAL"],[C.grafite,"branco","NEGATIVA"],[C.cal,"preto","POSITIVA"],[C.ciano,"preto","SOBRE CIANO"]];
     for(let i=0;i<4;i++){const cx=960+(i%2)*440,cy=170+Math.floor(i/2)*400;x.fillStyle=vs[i][0];x.fillRect(cx,cy,410,370);x.strokeStyle="rgba(242,239,233,.15)";x.strokeRect(cx,cy,410,370);await drawLogo(x,vs[i][1],cx+205,cy+185,320);txt(x,vs[i][2],cx+20,cy+350,"500 18px 'Space Grotesk'",vs[i][0]===C.cal||vs[i][0]===C.ciano?C.asfalto:C.cal,4)}});
@@ -781,19 +1044,35 @@ async function buildPdf(){
     const lw=1000,s=lw/VBW,ox=460,oy=300;x.save();x.setLineDash([12,10]);x.strokeStyle=C.magenta;x.lineWidth=2;x.strokeRect(ox+(7-31)*s,oy+(7-31)*s,(1297-623+62)*s,(150+62)*s);x.restore();await drawLogo(x,"principal",ox+lw/2,oy+VBH*s/2,lw);
     txt(x,"TAMANHO MÍNIMO",120,860,"800 40px Unbounded",C.cal);txt(x,"Digital: 96 px de largura   ·   Impresso: 25 mm de largura",120,912,"400 28px 'Space Grotesk'","rgba(242,239,233,.7)");
     txt(x,"NÃO FAÇA: distorcer · girar · trocar as cores · ciano em fundo claro · sombra e brilho · fundo poluído",120,990,"500 24px 'Space Grotesk'",C.magenta,1)});
-  await page(async x=>{x.fillStyle=C.cal;x.fillRect(0,0,W,H);head(x,"02","CORES","PALETA",false);
+  await page(async x=>{x.fillStyle=C.cal;x.fillRect(0,0,W,H);head(x,"04","CORES","PALETA",false);
     SW.forEach(([n,h],i)=>{const cx=760+(i%3)*380,cy=120+Math.floor(i/3)*420;x.fillStyle=h;x.fillRect(cx,cy,350,250);if(h===C.cal){x.strokeStyle="rgba(14,15,17,.2)";x.strokeRect(cx,cy,350,250)}const r=hexRgb(h);
       txt(x,n.toUpperCase(),cx,cy+290,"800 24px Unbounded",C.asfalto);txt(x,"HEX "+h,cx,cy+326,"500 20px 'Space Grotesk'",C.asfalto);txt(x,"RGB "+r.join(" · "),cx,cy+354,"400 20px 'Space Grotesk'","rgba(14,15,17,.65)");txt(x,"CMYK "+cmyk(r).join(" · "),cx,cy+382,"400 20px 'Space Grotesk'","rgba(14,15,17,.65)")});
     x.fillStyle=gradFill(x,560,140);x.fillRect(120,640,560,140);txt(x,"GRADIENTE CRIA",120,830,"800 26px Unbounded",C.asfalto);txt(x,"#00FFDA → #4D7CFF → #FF2E93",120,866,"400 22px 'Space Grotesk'","rgba(14,15,17,.65)");
     let ax=120;RT.forEach(([n,p,b])=>{const w=560*p/100;x.fillStyle=b;x.fillRect(ax,930,w,50);ax+=w});txt(x,"PROPORÇÃO 55 · 20 · 15 · 6 · 4",120,1020,"500 20px 'Space Grotesk'","rgba(14,15,17,.65)",3)});
-  await page(async x=>{x.fillStyle=C.asfalto;x.fillRect(0,0,W,H);head(x,"03","TIPOGRAFIA","DUAS VOZES");
+  await page(async x=>{x.fillStyle=C.asfalto;x.fillRect(0,0,W,H);head(x,"05","TIPOGRAFIA","DUAS VOZES");
     txt(x,"Aa",900,440,"900 240px Unbounded",C.cal);txt(x,"UNBOUNDED · TÍTULOS",1400,300,"800 30px Unbounded",C.ciano);txt(x,"Bold · ExtraBold · Black",1400,346,"400 26px 'Space Grotesk'","rgba(242,239,233,.7)");
     txt(x,"Aa",900,800,"500 280px 'Space Grotesk'",C.cal);txt(x,"SPACE GROTESK",1400,660,"800 30px Unbounded",C.ciano);txt(x,"Texto, labels e botões",1400,706,"400 26px 'Space Grotesk'","rgba(242,239,233,.7)");
     txt(x,"01 +120",120,960,"150px 'Rakis Outline'",C.ciano);txt(x,"RAKIS · só números e impacto",120,1020,"500 24px 'Space Grotesk'",C.magenta,3)});
-  await page(async x=>{x.fillStyle=C.ciano;x.fillRect(0,0,W,H);head(x,"04","ELEMENTOS","RECORTE",false);
+  await page(async x=>{x.fillStyle=C.ciano;x.fillRect(0,0,W,H);head(x,"06","ELEMENTOS","RECORTE",false);
     txt(x,"12° em toda inclinação · nada de canto arredondado",120,640,"500 28px 'Space Grotesk'",C.asfalto);txt(x,"No máximo duas cores por grafismo",120,684,"500 28px 'Space Grotesk'",C.asfalto);
     x.save();x.translate(1000,120);x.fillStyle=C.asfalto;x.fillRect(0,0,800,840);x.beginPath();x.rect(0,0,800,840);x.clip();wedges(x,800,840);x.restore()});
-  await page(async x=>{x.fillStyle=C.asfalto;x.fillRect(0,0,W,H);txt(x,"05",120,250,"200px 'Rakis Outline'",C.ciano);txt(x,"APLICAÇÕES",120,330,"800 54px Unbounded",C.cal);
+  await page(async x=>{x.fillStyle=C.asfalto;x.fillRect(0,0,W,H);head(x,"07","MOTION","COMO SE MEXE");
+    const M=[["01","MONTA, NÃO APARECE","Elementos entram em peças e se encaixam."],["02","CORTA EM 12°","Transições usam o ângulo da marca."],["03","TINTA MUDA DE CENA","A tinta toma a tela pra trocar de assunto."],["04","RESPIRA ANTES DO IMPACTO","Pausa curta, depois o momento forte."]];
+    M.forEach(([n,t,d],i)=>{const y=140+i*200;txt(x,n,960,y+70,"80px Rakis",C.ciano);txt(x,t,1110,y+40,"800 30px Unbounded",C.cal);txt(x,d,1110,y+84,"400 24px 'Space Grotesk'","rgba(242,239,233,.65)")});
+    txt(x,"Entrada 0.8s · cubic-bezier(.16,1,.3,1)    Saída 0.5s    Corte 0.6s    Atraso 60–90 ms",120,1010,"500 22px 'Space Grotesk'",C.ciano)});
+  await page(async x=>{x.fillStyle=C.cal;x.fillRect(0,0,W,H);head(x,"08","SOCIAL","NO FEED",false);
+    const T=[C.ciano,C.asfalto,"grad",C.cal,C.asfalto,C.magenta,C.asfalto,C.cal,C.ciano];const tw=250,th=312;
+    for(let i=0;i<9;i++){const cx=1000+(i%3)*(tw+6),cy=60+Math.floor(i/3)*(th+6),b=T[i];x.fillStyle=b==="grad"?gradFill(x,tw,th):b;x.save();x.translate(cx,cy);if(b==="grad")x.fillStyle=gradFill(x,tw,th);x.fillRect(0,0,tw,th);x.restore();}
+    await drawLogo(x,"preto",1000+tw/2,60+th/2,200);txt(x,"01",1000+tw+6+40,60+200,"120px 'Rakis Outline'",C.ciano);
+    txt(x,"MARCAS",1000+2*(tw+6)+30,60+140,"900 30px Unbounded",C.asfalto);txt(x,"QUE",1000+2*(tw+6)+30,60+178,"900 30px Unbounded",C.asfalto);txt(x,"FICAM.",1000+2*(tw+6)+30,60+216,"900 30px Unbounded",C.asfalto);
+    txt(x,"BORA?",1000+2*(tw+6)+40,60+th+6+175,"900 44px Unbounded",C.asfalto);txt(x,"BASTIDORES",1000+tw+6+30,60+th+6+170,"900 26px Unbounded",C.cal);
+    x.save();x.translate(1000,60+2*(th+6));x.beginPath();x.rect(0,0,tw,th);x.clip();wedges(x,tw,th);x.restore();
+    txt(x,"NOVO",1000+2*(tw+6)+30,60+2*(th+6)+120,"900 34px Unbounded",C.asfalto);txt(x,"PROJETO",1000+2*(tw+6)+30,60+2*(th+6)+160,"900 34px Unbounded",C.asfalto);txt(x,"NO AR.",1000+2*(tw+6)+30,60+2*(th+6)+200,"900 34px Unbounded",C.asfalto);
+    txt(x,"CRIADO PRA",1000+tw+6+24,60+2*(th+6)+150,"900 26px Unbounded",C.asfalto);txt(x,"SER VISTO.",1000+tw+6+24,60+2*(th+6)+186,"900 26px Unbounded","#D41A74");
+    {const sv=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${VB}" width="688" height="164"><g fill="none" stroke="#5B3FD9" stroke-width="3">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}</g></svg>`;const im=await loadImg(sv);x.drawImage(im,1000+20,60+th+6+th/2-26,210,50)}
+    txt(x,"PROCESSO",1000+24,60+th+6+280,"600 18px 'Space Grotesk'","#5B3FD9",4);
+    txt(x,"Alternar escuro, cor chapada e respiro claro.",120,640,"400 26px 'Space Grotesk'","rgba(14,15,17,.7)");txt(x,"Nunca duas cores iguais lado a lado.",120,680,"400 26px 'Space Grotesk'","rgba(14,15,17,.7)")});
+  await page(async x=>{x.fillStyle=C.asfalto;x.fillRect(0,0,W,H);txt(x,"09",120,250,"200px 'Rakis Outline'",C.ciano);txt(x,"APLICAÇÕES",120,330,"800 54px Unbounded",C.cal);
     const s=await stories(),p=await post();x.drawImage(s,700,90,506,900);x.drawImage(p,1290,90,720*1080/1350,720);
     txt(x,"STORIES 1080 × 1920",700,1030,"500 20px 'Space Grotesk'","rgba(242,239,233,.6)",3);txt(x,"FEED 1080 × 1350",1290,850,"500 20px 'Space Grotesk'","rgba(242,239,233,.6)",3)});
   return pdf.output("blob");
