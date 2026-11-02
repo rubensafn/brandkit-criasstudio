@@ -73,8 +73,7 @@ section{position:relative}
 canvas.ink{position:absolute;inset:0;width:100%;height:100%;display:block}
 .hero.gl .orb{display:none}
 .paper{position:relative;isolation:isolate}
-.paper:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.55;mix-blend-mode:multiply;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.035 .06' numOctaves='5' seed='7'/%3E%3CfeDiffuseLighting lighting-color='%23F2EFE9' surfaceScale='1.4'%3E%3CfeDistantLight azimuth='40' elevation='62'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E")}
+.paper:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.6;mix-blend-mode:multiply;background:url(img/papel.webp) repeat;background-size:900px 900px}
 /* traço */
 .trace{height:100svh;background:var(--cal);color:var(--asfalto);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:0 var(--pad);text-align:center}
 .trace .eyebrow{color:#5B3FD9}
@@ -89,6 +88,42 @@ canvas.ink{position:absolute;inset:0;width:100%;height:100%;display:block}
 .tr-cap em{font-style:normal;color:#5B3FD9}
 .tr-sub{margin-top:14px;color:rgba(14,15,17,.62);font-size:clamp(15px,1.5vw,18px);max-width:28em}
 .flood{height:100svh;position:relative;overflow:hidden;background:var(--asfalto)}
+/* mergulho */
+.dive{height:100svh;position:relative;overflow:hidden;background:var(--asfalto)}
+.dive picture,.dive .dimg{position:absolute;inset:0;width:100%;height:100%}
+.dive .dimg{object-fit:cover;transform-origin:50% 50%}
+.dive .dmask{position:absolute;inset:0;width:100%;height:100%;display:block}
+.dive .dcopy{position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(40px,9svh,90px);z-index:3}
+.dive .dcopy h2{font-family:var(--t);font-weight:900;font-size:clamp(40px,9vw,120px);line-height:.9;text-transform:uppercase;letter-spacing:-.02em;margin:10px 0 12px}
+.dive .dcopy p:last-child{max-width:26em;color:rgba(242,239,233,.85);font-size:clamp(16px,1.6vw,19px)}
+.dive:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(14,15,17,0) 45%,rgba(14,15,17,.85) 100%);opacity:var(--sh,0)}
+/* laje */
+.laje{height:100svh;position:relative;overflow:hidden;background:#1a1030}
+.laje img{position:absolute;left:0;width:100%;height:108%;top:-4%;object-fit:cover;object-position:50% 58%;will-change:transform}
+.laje .lt{position:absolute;left:0;right:0;top:13svh;text-align:center;font-family:var(--t);font-weight:900;font-size:clamp(46px,14vw,190px);line-height:.88;text-transform:uppercase;letter-spacing:-.02em;color:var(--cal);will-change:transform}
+.laje .lt em{font-style:normal;color:var(--ciano)}
+.laje .lcap{position:absolute;left:var(--pad);bottom:22px;z-index:5;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(242,239,233,.75)}
+@media(min-width:900px){
+  .laje .l2,.laje .l3{width:auto;aspect-ratio:941/1672;left:50%;margin-left:calc(-54svh*941/1672);height:108%;object-fit:contain;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%)}
+  .laje .lt{top:10svh;font-size:clamp(80px,11vw,200px)}
+}
+/* na rua */
+.ruas{background:var(--asfalto)}
+.stack{height:100svh;position:relative;overflow:hidden}
+.sk{position:absolute;left:50%;top:50%;width:min(88vw,calc(76svh*.8));aspect-ratio:4/5;transform:translate(-50%,-46%);margin:0}
+.sk img{width:100%;height:100%;object-fit:cover;display:block}
+.sk figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 16px 14px;display:flex;align-items:baseline;gap:12px;background:linear-gradient(180deg,transparent,rgba(14,15,17,.85));font-family:var(--t);font-weight:800;font-size:clamp(16px,2.2vw,22px);text-transform:uppercase}
+.sk figcaption b{font-family:"Rakis";font-weight:400;color:var(--ciano);font-size:1.4em}
+.stack .cnt{position:absolute;right:var(--pad);top:calc(50% - min(44vw,38svh) - 34px);font-size:12px;letter-spacing:.2em;color:var(--muted);z-index:20}
+@media(max-width:600px){.stack .cnt{top:84px}}
+.cta{height:100svh;position:relative;overflow:hidden;display:flex;align-items:flex-end;background:var(--asfalto)}
+.cta img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.cta:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(14,15,17,.1) 30%,rgba(14,15,17,.9) 100%)}
+.cta .cc{position:relative;z-index:2;padding:0 var(--pad) clamp(50px,10svh,100px)}
+.cta h2{font-family:var(--t);font-weight:900;font-size:clamp(44px,10vw,140px);line-height:.88;text-transform:uppercase;letter-spacing:-.02em}
+.cta h2 em{font-style:normal;color:var(--ciano)}
+.cta .cc p{margin-top:14px;color:rgba(242,239,233,.8);letter-spacing:.2em;font-size:12px;text-transform:uppercase}
 /* cria -> criação */
 .cria{height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;text-align:center;padding:0 var(--pad)}
 .word{font-family:var(--t);font-weight:900;font-size:clamp(38px,12vw,200px);line-height:.9;letter-spacing:-.02em;white-space:nowrap;display:flex}
@@ -376,7 +411,8 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
   <a href="#motion"><b>07</b><span>Motion</span></a>
   <a href="#social"><b>08</b><span>Social</span></a>
   <a href="#aplicacoes"><b>09</b><span>Aplicações</span></a>
-  <a href="#arquivos"><b>10</b><span>Arquivos</span></a>
+  <a href="#narua"><b>10</b><span>Na rua</span></a>
+  <a href="#arquivos"><b>11</b><span>Arquivos</span></a>
   <p class="mfoot">CRIAS STUDIO · BRAND KIT 2026</p>
 </nav>
 
@@ -396,11 +432,25 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
   <p class="sub">Do verbo <b>criar</b>. Tudo que sai daqui nasce do zero: <b>marca, campanha, filme</b>. Feito com atitude, entregue com acabamento.</p>
 </section>
 
+<section class="dive" id="mergulho">
+  <picture><source media="(min-aspect-ratio: 1/1)" srcset="img/mergulho-h.webp"><img class="dimg" src="img/mergulho-v.webp" alt="O estúdio CRIAS à noite: mesa com câmera, sprays, máquina de tatuagem e o logo no monitor" decoding="async"></picture>
+  <svg class="dmask" id="dmask" viewBox="596 380 728 320" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+  <div class="dcopy"><p class="eyebrow" style="color:var(--ciano)">O estúdio</p><h2>Aqui<br>dentro.</h2><p>Câmera, tinta, papel e tela. É daqui que sai cada marca.</p></div>
+</section>
+
 <section class="trace paper" id="traco">
   <p class="eyebrow">Processo</p>
   <div class="tr-stage"><svg id="trStencil" viewBox="616 458 688 164" aria-hidden="true"></svg><svg id="trFinal" viewBox="616 458 688 164" role="img" aria-label="CRIAS Studio"></svg><i class="needle" aria-hidden="true"></i></div>
   <p class="tr-cap">Do traço <em>à marca.</em></p>
   <p class="tr-sub">Todo projeto começa no papel, a mão. O acabamento vem depois.</p>
+</section>
+
+<section class="laje" id="laje" aria-label="De Goiânia pro mundo">
+  <img class="l1" src="img/laje-fundo.webp" alt="" decoding="async">
+  <h2 class="lt">De Goiânia<br><em>pro mundo.</em></h2>
+  <img class="l2" src="img/laje-meio.webp" alt="Laje com caixa d'água, varal com camiseta CRIAS e letreiro neon CRIAS na parede de tijolo" decoding="async">
+  <img class="l3" src="img/laje-frente.webp" alt="" decoding="async">
+  <p class="lcap">Goiânia · GO</p>
 </section>
 
 <!-- 01 ESSÊNCIA -->
@@ -646,10 +696,32 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
   </div>
 </section>
 
+<!-- 10 NA RUA -->
+<section id="narua" class="ruas">
+  <div class="wrap"><div class="sh"><div class="num">10<span class="fill" aria-hidden="true">10</span></div><div><p class="eyebrow">Na rua</p><h2>No mundo real</h2></div></div></div>
+  <div class="stack" id="stack">
+    <p class="cnt" id="skc">01 / 09</p>
+      <figure class="sk"><img src="img/mk/cartao.webp" alt="Mockup CRIAS: Cartão de visita" loading="lazy" decoding="async"><figcaption><b>01</b>Cartão de visita</figcaption></figure>
+      <figure class="sk"><img src="img/mk/camiseta.webp" alt="Mockup CRIAS: Camiseta" loading="lazy" decoding="async"><figcaption><b>02</b>Camiseta</figcaption></figure>
+      <figure class="sk"><img src="img/mk/bone.webp" alt="Mockup CRIAS: Boné" loading="lazy" decoding="async"><figcaption><b>03</b>Boné</figcaption></figure>
+      <figure class="sk"><img src="img/mk/adesivo.webp" alt="Mockup CRIAS: Adesivo" loading="lazy" decoding="async"><figcaption><b>04</b>Adesivo</figcaption></figure>
+      <figure class="sk"><img src="img/mk/ecobag.webp" alt="Mockup CRIAS: Ecobag" loading="lazy" decoding="async"><figcaption><b>05</b>Ecobag</figcaption></figure>
+      <figure class="sk"><img src="img/mk/instagram.webp" alt="Mockup CRIAS: Instagram" loading="lazy" decoding="async"><figcaption><b>06</b>Instagram</figcaption></figure>
+      <figure class="sk"><img src="img/mk/cracha.webp" alt="Mockup CRIAS: Crachá de evento" loading="lazy" decoding="async"><figcaption><b>07</b>Crachá de evento</figcaption></figure>
+      <figure class="sk"><img src="img/mk/caneca.webp" alt="Mockup CRIAS: Caneca" loading="lazy" decoding="async"><figcaption><b>08</b>Caneca</figcaption></figure>
+      <figure class="sk"><img src="img/mk/lambe.webp" alt="Mockup CRIAS: Lambe-lambe" loading="lazy" decoding="async"><figcaption><b>09</b>Lambe-lambe</figcaption></figure>
+  </div>
+</section>
+
+<section class="cta" id="cta">
+  <img src="img/parede.webp" alt="Parede do estúdio com o letreiro neon CRIAS" loading="lazy" decoding="async">
+  <div class="cc"><h2>Bora<br><em>criar?</em></h2><p>CRIAS STUDIO · Goiânia · GO</p></div>
+</section>
+
 <!-- 06 ARQUIVOS -->
 <section id="arquivos" class="light paper">
   <div class="wrap">
-    <div class="sh"><div class="num">10<span class="fill" aria-hidden="true">10</span></div><div><p class="eyebrow">Arquivos</p><h2>Pronto pra usar</h2></div></div>
+    <div class="sh"><div class="num">11<span class="fill" aria-hidden="true">11</span></div><div><p class="eyebrow">Arquivos</p><h2>Pronto pra usar</h2></div></div>
     <p class="lead">Logos em SVG e PNG, paleta, grafismos e modelos, tudo organizado em pastas. O guia completo sai em PDF.</p>
     <div class="dl blk" style="margin-top:26px">
       <button class="btn p cut" id="bZip"><span>Baixar arquivos (.zip)</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v13M6 11l6 6 6-6M4 21h16"/></svg></button>
@@ -740,6 +812,9 @@ document.getElementById("pairs").innerHTML=PR.map(([f,b,n,u])=>{const r=ratio(f,
 /* tee + sticker */
 document.getElementById("tee").innerHTML=`<path d="M120 20 L160 8 Q200 40 240 8 L280 20 L390 80 L350 160 L310 140 L310 410 L90 410 L90 140 L50 160 L10 80 Z" fill="#151618" stroke="#2a2b2e" stroke-width="2"/><path d="M160 8 Q200 40 240 8" fill="none" stroke="#2a2b2e" stroke-width="6"/><g transform="translate(200 130) scale(.24) translate(-960 -540)">${ORDER.map(k=>`<path fill="${C.ciano}" d="${PATHS.main[k]}"/>`).join("")}${PATHS.studio.map(d=>`<path fill="${C.cal}" d="${d}"/>`).join("")}</g><polygon points="330,98 372,107 362,128 322,119" fill="${C.ciano}"/>`;
 document.getElementById("stk").innerHTML=`<g fill="#fff" stroke="#fff" stroke-width="36" stroke-linejoin="miter">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g><g fill="${C.ciano}">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}</g><g fill="${C.asfalto}">${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g>`;
+
+/* máscara do mergulho */
+document.getElementById("dmask").innerHTML=`<defs><mask id="dmk" maskUnits="userSpaceOnUse" x="-50000" y="-50000" width="100000" height="100000"><rect x="-50000" y="-50000" width="100000" height="100000" fill="#fff"/><g fill="#000">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g></mask></defs><rect x="-50000" y="-50000" width="100000" height="100000" fill="#0E0F11" mask="url(#dmk)"/><g fill="none" stroke="#00FFDA" stroke-width="1" vector-effect="non-scaling-stroke" class="dline">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}</g>`;
 
 /* traço */
 document.getElementById("trStencil").innerHTML=`<g class="bleed" transform="translate(1.6 1.2)">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}</g><g class="ln">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g>`;
@@ -861,6 +936,43 @@ if(window.gsap&&window.ScrollTrigger){
       .to({},{duration:.3});
   }
 
+  /* mergulho: zoom pra dentro do "i" */
+  if(!reduce){
+    const dm=document.getElementById("dmask"),Z={z:0};
+    const V0={cx:960,cy:540,w:728,h:320},V1={cx:942.7,cy:561,w:2.2};
+    const setVB=()=>{const z=Z.z,w=V0.w*Math.pow(V1.w/V0.w,z),h=w*V0.h/V0.w,cx=V0.cx+(V1.cx-V0.cx)*Math.min(1,z*1.6),cy=V0.cy+(V1.cy-V0.cy)*Math.min(1,z*1.6);dm.setAttribute("viewBox",`${cx-w/2} ${cy-h/2} ${w} ${h}`);dm.style.display=z>=.995?"none":"block"};setVB();
+    gsap.set(".dive .dcopy > *",{opacity:0,y:30});
+    gsap.timeline({scrollTrigger:{trigger:"#mergulho",start:"top top",end:"+=200%",scrub:1,pin:true}})
+      .fromTo(".dive .dimg",{scale:1.35,filter:"brightness(.55)"},{scale:1.05,filter:"brightness(1)",duration:1,ease:"none"},0)
+      .fromTo(Z,{z:0},{z:1,duration:1,ease:"power2.in",onUpdate:setVB},0)
+      .to(".dive .dline",{opacity:0,duration:.2},.15)
+      .to(".dive .dimg",{scale:1,duration:.6,ease:"none"},1)
+      .to(".dive",{"--sh":1,duration:.3},1)
+      .to(".dive .dcopy > *",{opacity:1,y:0,stagger:.08,duration:.3},1.05)
+      .to({},{duration:.25});
+  }
+  /* laje: paralaxe */
+  if(!reduce){
+    gsap.timeline({scrollTrigger:{trigger:"#laje",start:"top top",end:"+=160%",scrub:1,pin:true}})
+      .fromTo("#laje .l1",{yPercent:0,scale:1.05},{yPercent:-3,scale:1,ease:"none"},0)
+      .fromTo("#laje .lt",{yPercent:60,opacity:0},{yPercent:-55,opacity:1,ease:"none"},0)
+      .fromTo("#laje .l2",{yPercent:6,scale:1.1,transformOrigin:"50% 100%"},{yPercent:-2,scale:matchMedia("(max-width:700px)").matches?.86:1,ease:"none"},0)
+      .fromTo("#laje .l3",{yPercent:14,scale:1.1},{yPercent:-22,scale:1.35,ease:"none"},0);
+  }
+  /* na rua: pilha com corte 12° */
+  if(!reduce){
+    const sks=gsap.utils.toArray("#stack .sk"),cnt=document.getElementById("skc");
+    const clip=(el,a)=>{el.style.clipPath=`polygon(0 ${a+17}%,100% ${a}%,100% 120%,0 120%)`};
+    sks.forEach((el,i)=>{if(i>0)clip(el,100)});
+    const tl=gsap.timeline({scrollTrigger:{trigger:"#stack",start:"top top",end:()=>"+="+(sks.length-1)*innerHeight*.75,scrub:1,pin:true,onUpdate:st=>{const k=Math.min(sks.length,Math.round(st.progress*(sks.length-1))+1);cnt.textContent=String(k).padStart(2,"0")+" / "+String(sks.length).padStart(2,"0")}}});
+    sks.forEach((el,i)=>{if(!i)return;const o={a:100};
+      tl.to(o,{a:-17,duration:1,ease:"power2.inOut",onUpdate:()=>clip(el,o.a)},i-1)
+        .fromTo(el.querySelector("img"),{scale:1.25},{scale:1,duration:1,ease:"power2.out"},i-1)
+        .to(sks[i-1],{scale:.9,rotation:i%2?-3:3,filter:"brightness(.35)",duration:1,ease:"power2.inOut"},i-1)});
+    gsap.fromTo("#cta img",{scale:1.25},{scale:1,ease:"none",scrollTrigger:{trigger:"#cta",start:"top bottom",end:"bottom bottom",scrub:1}});
+    gsap.fromTo("#cta h2",{yPercent:40,opacity:0},{yPercent:0,opacity:1,ease:"power3.out",scrollTrigger:{trigger:"#cta",start:"top 40%",end:"top top",scrub:1}});
+  }
+
   /* traço -> marca */
   if(!reduce){
     const ln=gsap.utils.toArray("#trStencil path");
@@ -965,6 +1077,8 @@ if(window.gsap&&window.ScrollTrigger){
 
   /* arquivos */
   gsap.from(".dl .btn",{y:40,opacity:0,stagger:.12,duration:.9,ease:"power3.out",scrollTrigger:{trigger:".dl",start:"top 88%"}});
+  ScrollTrigger.sort((a,b)=>{const ea=a.trigger||document.body,eb=b.trigger||document.body;if(ea===eb)return 0;return ea.compareDocumentPosition(eb)&Node.DOCUMENT_POSITION_FOLLOWING?-1:1});
+  ScrollTrigger.refresh();
   const hdr=document.getElementById("hdr");
   ScrollTrigger.create({trigger:"#cria",start:"top 70%",onEnter:()=>hdr.classList.add("on"),onLeaveBack:()=>hdr.classList.remove("on")});
   addEventListener("load",()=>ScrollTrigger.refresh());
@@ -1016,6 +1130,7 @@ async function buildZip(){
   {const s=document.getElementById("patSvg").cloneNode(true);s.querySelectorAll(".wd").forEach(p=>p.removeAttribute("style"));s.querySelectorAll("g").forEach(g=>g.remove());s.setAttribute("xmlns","http://www.w3.org/2000/svg");
    E.file("CR_cunhas_padrao.svg",s.outerHTML.replace(/ class="wd"/g,""));
    const[c,x]=canvas(1080,1080);x.fillStyle=C.asfalto;x.fillRect(0,0,1080,1080);wedges(x,1080,1080);E.file("CR_cunhas_padrao_1080.png",await toBlob(c))}
+  try{const Mf=root.folder("06_mockups");for(const k of ["cartao","camiseta","bone","adesivo","ecobag","instagram","cracha","caneca","lambe","parede"]){const r=await fetch(`img/dl/CR_mockup_${k}.jpg`);if(r.ok)Mf.file(`CR_mockup_${k}.jpg`,await r.blob())}}catch(e){}
   const P=root.folder("05_aplicacoes");P.file("CR_stories_1080x1920.png",await toBlob(await stories()));P.file("CR_post_1080x1350.png",await toBlob(await post()));
   return z.generateAsync({type:"blob",compression:"DEFLATE"});
 }
@@ -1075,6 +1190,12 @@ async function buildPdf(){
   await page(async x=>{x.fillStyle=C.asfalto;x.fillRect(0,0,W,H);txt(x,"09",120,250,"200px 'Rakis Outline'",C.ciano);txt(x,"APLICAÇÕES",120,330,"800 54px Unbounded",C.cal);
     const s=await stories(),p=await post();x.drawImage(s,700,90,506,900);x.drawImage(p,1290,90,720*1080/1350,720);
     txt(x,"STORIES 1080 × 1920",700,1030,"500 20px 'Space Grotesk'","rgba(242,239,233,.6)",3);txt(x,"FEED 1080 × 1350",1290,850,"500 20px 'Space Grotesk'","rgba(242,239,233,.6)",3)});
+  try{const loadU=src=>new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=src});
+    const ks=["cartao","camiseta","bone","adesivo","lambe","cracha"];const ims=[];for(const k of ks)ims.push(await loadU(`img/mk/${k}.webp`));
+    await page(async x=>{x.fillStyle=C.asfalto;x.fillRect(0,0,W,H);txt(x,"10",120,250,"200px 'Rakis Outline'",C.ciano);txt(x,"NA RUA",120,330,"800 54px Unbounded",C.cal);
+      ims.forEach((im,i)=>{const w=300,h=375,cx=720+(i%3)*(w+20),cy=120+Math.floor(i/3)*(h+20);x.drawImage(im,cx,cy,w,h)})});
+    const pw=await loadU("img/parede.webp");await page(async x=>{x.drawImage(pw,0,0,W,H);const g=x.createLinearGradient(0,H*.4,0,H);g.addColorStop(0,"rgba(14,15,17,0)");g.addColorStop(1,"rgba(14,15,17,.9)");x.fillStyle=g;x.fillRect(0,0,W,H);txt(x,"BORA",120,880,"900 120px Unbounded",C.cal);txt(x,"CRIAR?",120,1000,"900 120px Unbounded",C.ciano)});
+  }catch(e){}
   return pdf.output("blob");
 }
 async function run(btn,label,fn){const sp=btn.querySelector("span"),old=sp.textContent;btn.disabled=true;sp.textContent=label;note.textContent="";
