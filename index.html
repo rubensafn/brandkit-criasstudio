@@ -240,7 +240,13 @@ footer .flogo{width:100%;overflow:visible}
 .sw .use{grid-column:1/-1;margin-top:8px;color:rgba(14,15,17,.62);font-size:13px}
 .sw .cp{position:absolute;top:12px;right:12px;z-index:3;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:6px 9px;background:rgba(14,15,17,.85);color:var(--cal);opacity:0;transition:opacity .25s}
 .sw:hover .cp,.sw:focus-visible .cp{opacity:1}
-.ratio{display:flex;height:84px;margin-top:18px;overflow:hidden}
+.ratio{display:flex;height:56px;margin-top:18px;overflow:hidden}
+.rleg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+@media(min-width:760px){.rleg{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.ri{display:grid;grid-template-columns:22px 1fr;grid-template-rows:auto auto;column-gap:10px;align-items:center;background:#FBFAF7;border:1px solid rgba(14,15,17,.1);padding:12px}
+.ri i{grid-row:1/3;width:22px;height:100%;min-height:40px;display:block}
+.ri b{font-family:var(--t);font-weight:800;font-size:22px;line-height:1}
+.ri span{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(14,15,17,.6);margin-top:4px}
 .ratio div{height:100%;position:relative;transform-origin:0 50%}
 .ratio span{position:absolute;left:10px;bottom:8px;font-size:12px;font-weight:600;letter-spacing:.06em}
 .gradbox{height:clamp(220px,34vw,420px);background:var(--grad);background-size:200% 200%;position:relative;overflow:hidden;animation:gshift 9s ease-in-out infinite alternate}
@@ -420,15 +426,16 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 .totop{position:fixed;right:16px;bottom:18px;z-index:72;width:46px;height:46px;display:flex;align-items:center;justify-content:center;background:rgba(14,15,17,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--ciano);border:1px solid var(--linha);opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .35s,transform .35s}
 .totop.on{opacity:1;transform:none;pointer-events:auto}
 .totop svg{width:20px;height:20px}
-.snav{position:fixed;right:8px;top:50%;transform:translateY(-50%);z-index:72;display:flex;flex-direction:column;gap:2px;align-items:flex-end;opacity:0;transition:opacity .4s;pointer-events:none}
-.snav.on{opacity:1;pointer-events:auto}
+.snav{position:fixed;right:8px;top:50%;transform:translateY(-50%) translateX(8px);z-index:72;display:flex;flex-direction:column;gap:2px;padding:16px 7px 8px;background:rgba(14,15,17,.62);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--linha);clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));align-items:flex-end;opacity:0;transition:opacity .4s;pointer-events:none}
+.snav.on{opacity:1;pointer-events:auto;transform:translateY(-50%)}
+.snav{transition:opacity .4s,transform .4s,background .4s}
 .snav a{display:block;position:relative;height:12px;text-decoration:none;padding:5px 0}
 .snav a i{display:block;margin-left:auto;width:10px;height:2px;background:rgba(242,239,233,.38);transform:skewY(-12deg);transition:width .35s,background .35s}
 .snav a b{position:absolute;right:0;bottom:calc(100% - 2px);font-family:var(--s);font-weight:600;font-size:10px;letter-spacing:.06em;line-height:1;color:var(--ciano);opacity:0;transform:translateY(4px);transition:opacity .3s,transform .3s}
 .snav a.on i{width:22px;background:var(--ciano)}
 .snav a.on b{opacity:1;transform:none}
-.snav.lt a i{background:rgba(14,15,17,.35)}.snav.lt a.on i{background:var(--asfalto)}.snav.lt a b{color:var(--asfalto)}
-@media(max-width:700px){.snav{right:5px;gap:0}.snav a i{width:6px}.snav a.on i{width:14px}.snav a b{font-size:9px}}
+.snav.lt{background:rgba(242,239,233,.72);border-color:rgba(14,15,17,.12)}.snav.lt a i{background:rgba(14,15,17,.35)}.snav.lt a.on i{background:var(--asfalto)}.snav.lt a b{color:var(--asfalto)}
+@media(max-width:700px){.snav{right:4px;gap:0;padding:14px 5px 6px}.snav a i{width:6px}.snav a.on i{width:14px}.snav a b{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.gradbox{animation:none}.hero .hint i{animation:none}}
 </style>
 </head>
@@ -607,7 +614,8 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 
     <h3 class="h3">Proporção</h3>
     <p class="lead">Muito escuro, bastante respiro claro, cor na medida certa.</p>
-    <div class="ratio cut blk" id="ratio" style="padding-bottom:0;margin-bottom:clamp(56px,8vw,110px)"></div>
+    <div class="ratio cut" id="ratio"></div>
+    <div class="rleg blk" id="rleg" style="padding-bottom:0;margin-bottom:clamp(56px,8vw,110px)"></div>
 
     <h3 class="h3">Gradiente Cria</h3>
     <p class="lead" style="margin-bottom:20px">Ciano → azul → magenta. Pra fundos grandes e momentos de impacto. Nunca atrás de texto pequeno.</p>
@@ -858,7 +866,8 @@ const SW=[
 ];
 document.getElementById("swatches").innerHTML=SW.map(([n,h,u,tx])=>{const rgb=hexRgb(h),ck=cmyk(rgb);return `<button class="sw cut" data-hex="${h}" aria-label="Copiar ${n} ${h}"><div class="chip"><div class="ink" style="background:${h}"></div><span class="nm" style="color:${tx}">${n}</span><span class="cp">Copiar</span></div><dl class="meta"><dt>HEX</dt><dd>${h}</dd><dt>RGB</dt><dd>${rgb.join(" · ")}</dd><dt>CMYK</dt><dd>${ck.join(" · ")}</dd><p class="use">${u}</p></dl></button>`}).join("");
 const RT=[["Asfalto",55,C.asfalto,C.cal],["Cal",20,C.cal,C.asfalto],["Ciano",15,C.ciano,C.asfalto],["Magenta",6,C.magenta,C.asfalto],["Azul",4,C.azul,C.asfalto]];
-document.getElementById("ratio").innerHTML=RT.map(([n,p,b,t])=>`<div style="width:${p}%;background:${b};${b===C.cal?"box-shadow:inset 0 0 0 1px rgba(14,15,17,.15)":""}"><span style="color:${t}">${p>=15?n+" "+p+"%":p+"%"}</span></div>`).join("");
+document.getElementById("ratio").innerHTML=RT.map(([n,p,b])=>`<div style="width:${p}%;background:${b};${b===C.cal?"box-shadow:inset 0 0 0 1px rgba(14,15,17,.15)":""}"></div>`).join("");
+document.getElementById("rleg").innerHTML=RT.map(([n,p,b])=>`<div class="ri cut cs"><i style="background:${b};${b===C.cal?"box-shadow:inset 0 0 0 1px rgba(14,15,17,.2)":""}"></i><b>${p}%</b><span>${n}</span></div>`).join("");
 const PR=[[C.ciano,C.asfalto,"Ciano sobre asfalto","Texto, logo, tudo"],[C.cal,C.asfalto,"Cal sobre asfalto","Texto corrido"],[C.asfalto,C.ciano,"Asfalto sobre ciano","Texto e botões"],[C.magenta,C.asfalto,"Magenta sobre asfalto","Títulos e destaques"],[C.azul,C.asfalto,"Azul sobre asfalto","Destaques"],["#FFFFFF",C.magenta,"Branco sobre magenta","Só texto grande"],[C.ciano,C.cal,"Ciano sobre cal","Não usar"],["#FFFFFF",C.ciano,"Branco sobre ciano","Não usar"]];
 document.getElementById("pairs").innerHTML=PR.map(([f,b,n,u])=>{const r=ratio(f,b),ok=r>=4.5,mid=r>=3&&r<4.5;return `<div class="pair cut"><div class="aa" style="background:${b};color:${f};${b===C.cal?"box-shadow:inset 0 0 0 1px rgba(14,15,17,.15)":""}">Aa</div><p>${n}<small>${u}</small></p><span class="st ${ok||mid?"ok":"bad"}">${r.toFixed(1)} ${ok?"✓":mid?"TÍTULO":"✕"}</span></div>`}).join("");
 
@@ -1260,7 +1269,9 @@ if(window.gsap&&window.ScrollTrigger){
   /* seções ativas na lateral */
   const zones=[["inicio","inicio"],["cria","inicio"],["mergulho","inicio"],["traco","inicio"],["laje","inicio"],["essencia","essencia"],["voz","voz"],["montagem","logo"],["logo","logo"],["cores","cores"],["tipografia","tipografia"],["flood","tipografia"],["elementos","elementos"],["motion","motion"],["social","social"],["aplicacoes","aplicacoes"],["narua","narua"],["cta","narua"],["arquivos","arquivos"],["foot","arquivos"]];
   zones.forEach(([el,id])=>{let node=document.getElementById(el);if(!node)return;if(node.parentElement.classList.contains("pin-spacer"))node=node.parentElement;ScrollTrigger.create({trigger:node,start:"top 50%",end:"bottom 50%",onToggle:e=>{if(e.isActive){setSnav(id);snav.classList.toggle("lt",LIGHT.has(el))}}})});
-  ScrollTrigger.create({start:()=>innerHeight*.8,end:"max",onToggle:e=>{totop.classList.toggle("on",e.isActive);snav.classList.toggle("on",e.isActive)}});
+  let pastHero=false,idleT;const wake=()=>{if(!pastHero)return;snav.classList.add("on");clearTimeout(idleT);idleT=setTimeout(()=>{if(!snav.matches(":hover"))snav.classList.remove("on")},1500)};
+  addEventListener("scroll",wake,{passive:true});snav.addEventListener("mouseleave",wake);
+  ScrollTrigger.create({start:()=>innerHeight*.8,end:"max",onToggle:e=>{pastHero=e.isActive;totop.classList.toggle("on",e.isActive);if(e.isActive)wake();else snav.classList.remove("on")}});
   const hdr=document.getElementById("hdr");
   ScrollTrigger.create({trigger:"#cria",start:"top 70%",onEnter:()=>hdr.classList.add("on"),onLeaveBack:()=>hdr.classList.remove("on")});
   addEventListener("load",()=>ScrollTrigger.refresh());
