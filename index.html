@@ -19,7 +19,9 @@
   --t:"Unbounded",system-ui,sans-serif;--s:"Space Grotesk",system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;overflow-x:clip}
+body{overflow-x:clip}
+.grid>*,.split>*,.pil>*,.mgrid>*,.pairs>*{min-width:0}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
 body{background:var(--asfalto);color:var(--cal);font-family:var(--s);font-size:17px;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
@@ -27,7 +29,7 @@ img,svg{display:block;max-width:100%}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 a{color:inherit}
 ::selection{background:var(--ciano);color:var(--asfalto)}
-.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:90;opacity:.07;mix-blend-mode:overlay;
+.grain{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:90;opacity:.07;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .cut-r{clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut))}
 .cut{clip-path:polygon(0 0,calc(100% - var(--cut)) 0,100% var(--cut),100% 100%,var(--cut) 100%,0 calc(100% - var(--cut)))}
@@ -88,6 +90,14 @@ canvas.ink{position:absolute;inset:0;width:100%;height:100%;display:block}
 .tr-cap em{font-style:normal;color:#5B3FD9}
 .tr-sub{margin-top:14px;color:rgba(14,15,17,.62);font-size:clamp(15px,1.5vw,18px);max-width:28em}
 .flood{height:100svh;position:relative;overflow:hidden;background:var(--asfalto)}
+/* preloader */
+.pre{position:fixed;inset:0;z-index:200;background:var(--asfalto);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;clip-path:polygon(0 0,100% 0,100% 122%,0 100%)}
+.pre svg{width:min(70vw,520px);overflow:visible}
+.pre svg path{fill:transparent;stroke:var(--ciano);stroke-width:1.3;vector-effect:non-scaling-stroke}
+.pre .pct{font-family:"Rakis";font-size:clamp(44px,8vw,72px);line-height:1;color:var(--cal);font-variant-numeric:tabular-nums;min-width:3ch;text-align:center}
+.pre .pl{font-size:11px;letter-spacing:.3em;color:var(--muted);text-transform:uppercase}
+/* footer */
+footer .flogo{width:100%;overflow:visible}
 /* mergulho */
 .dive{height:100svh;position:relative;overflow:hidden;background:var(--asfalto)}
 .dive picture,.dive .dimg{position:absolute;inset:0;width:100%;height:100%}
@@ -110,16 +120,20 @@ canvas.ink{position:absolute;inset:0;width:100%;height:100%;display:block}
 }
 /* na rua */
 .ruas{background:var(--asfalto)}
-.stack{height:100svh;position:relative;overflow:hidden}
-.sk{position:absolute;left:50%;top:50%;width:min(88vw,calc(76svh*.8));aspect-ratio:4/5;transform:translate(-50%,-46%);margin:0}
-.sk img{width:100%;height:100%;object-fit:cover;display:block}
-.sk figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 16px 14px;display:flex;align-items:baseline;gap:12px;background:linear-gradient(180deg,transparent,rgba(14,15,17,.85));font-family:var(--t);font-weight:800;font-size:clamp(16px,2.2vw,22px);text-transform:uppercase}
-.sk figcaption b{font-family:"Rakis";font-weight:400;color:var(--ciano);font-size:1.4em}
-.stack .cnt{position:absolute;right:var(--pad);top:calc(50% - min(44vw,38svh) - 34px);font-size:12px;letter-spacing:.2em;color:var(--muted);z-index:20}
-@media(max-width:600px){.stack .cnt{top:84px}}
+.stack{height:100svh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.bigt{position:absolute;inset:0;pointer-events:none}
+.bigt p{position:absolute;left:0;top:50%;white-space:nowrap;font-family:var(--t);font-weight:900;font-size:clamp(110px,30vw,360px);line-height:1;text-transform:uppercase;color:transparent;-webkit-text-stroke:1.5px rgba(0,255,218,.28);transform:translateY(-50%);opacity:0}
+.frame{position:relative;width:min(84vw,calc(70svh*.8));aspect-ratio:4/5;overflow:hidden;background:#111215;box-shadow:0 40px 80px rgba(0,0,0,.55);z-index:2}
+.sc{position:absolute;inset:0}
+.slc{position:absolute;inset:0;display:block;will-change:transform}
+.slc img{width:100%;height:100%;object-fit:cover;display:block}
+.skbar{position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(18px,4svh,40px);display:flex;align-items:baseline;gap:12px;z-index:3;font-family:var(--t);font-weight:800;font-size:clamp(16px,2.4vw,24px);text-transform:uppercase}
+.skbar b{font-family:"Rakis";font-weight:400;color:var(--ciano);font-size:1.6em;line-height:.8}
+.skbar em{font-style:normal;margin-left:auto;font-family:var(--s);font-weight:500;font-size:12px;letter-spacing:.2em;color:var(--muted)}
 .cta{height:100svh;position:relative;overflow:hidden;display:flex;align-items:flex-end;background:var(--asfalto)}
 .cta img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
 .cta:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(14,15,17,.1) 30%,rgba(14,15,17,.9) 100%)}
+.cta img.pan{width:auto;max-width:none;height:100%;right:auto;transform-origin:0 0;object-fit:fill}
 .cta .cc{position:relative;z-index:2;padding:0 var(--pad) clamp(50px,10svh,100px)}
 .cta h2{font-family:var(--t);font-weight:900;font-size:clamp(44px,10vw,140px);line-height:.88;text-transform:uppercase;letter-spacing:-.02em}
 .cta h2 em{font-style:normal;color:var(--ciano)}
@@ -382,7 +396,7 @@ canvas.ink{position:absolute;inset:0;width:100%;height:100%;display:block}
 .btn svg{width:22px;height:22px;flex:none}
 .btn[disabled]{opacity:.6;cursor:wait}
 .note{font-size:14px;margin-top:16px;color:rgba(14,15,17,.6);min-height:1.5em}
-footer{padding:60px var(--pad) 40px;display:flex;flex-direction:column;gap:22px;border-top:1px solid var(--linha)}
+footer{overflow:hidden;min-height:70svh;justify-content:flex-end;padding:80px var(--pad) 40px;display:flex;flex-direction:column;gap:22px;border-top:1px solid var(--linha)}
 footer .lg{width:150px}
 footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
 .toast{visibility:hidden;position:fixed;left:50%;bottom:24px;transform:translate(-50%,140%);background:var(--ciano);color:var(--asfalto);font-weight:600;font-size:14px;padding:12px 18px;z-index:95;transition:transform .35s cubic-bezier(.2,.9,.3,1)}
@@ -391,8 +405,8 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 </style>
 </head>
 <body>
+<div class="pre" id="pre" aria-hidden="true"><svg id="preSvg" viewBox="616 458 688 164"></svg><p class="pct" id="pct">00</p><p class="pl">Montando a marca</p></div>
 <div class="grain" aria-hidden="true"></div>
-<div class="prog" aria-hidden="true"></div>
 
 <header class="hdr" id="hdr">
   <a href="#inicio" class="mini cut-r" aria-label="CRIAS Studio, voltar ao início" data-lg="principal"></a>
@@ -683,7 +697,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 
 <!-- 09 APLICACOES -->
 <section id="aplicacoes" class="apps">
-  <div class="wrap"><div class="sh"><div class="num">09<span class="fill" aria-hidden="true">09</span></div><div><p class="eyebrow">Aplicações</p><h2>Na rua</h2></div></div></div>
+  <div class="wrap"><div class="sh"><div class="num">09<span class="fill" aria-hidden="true">09</span></div><div><p class="eyebrow">Aplicações</p><h2>Peças da marca</h2></div></div></div>
   <div class="track" id="track">
     <div class="panel"><div class="stage cut"><div class="phone"><div class="scr"><div class="lg" data-lg="preto"></div><h5>Novo<br>projeto<br>no ar.</h5><p>@criasstudio</p></div></div></div><div class="cap"><b>Stories</b><span>1080 × 1920</span></div></div>
     <div class="panel"><div class="stage cut"><div class="post"><div class="rkn">01</div><h5>Marcas<br>que <em>ficam.</em></h5><div style="display:flex;justify-content:space-between;align-items:flex-end"><div class="lg" data-lg="principal"></div><span style="font-size:11px;letter-spacing:.16em;color:var(--muted)">IDENTIDADE</span></div></div></div><div class="cap"><b>Feed</b><span>1080 × 1350</span></div></div>
@@ -700,16 +714,19 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 <section id="narua" class="ruas">
   <div class="wrap"><div class="sh"><div class="num">10<span class="fill" aria-hidden="true">10</span></div><div><p class="eyebrow">Na rua</p><h2>No mundo real</h2></div></div></div>
   <div class="stack" id="stack">
-    <p class="cnt" id="skc">01 / 09</p>
-      <figure class="sk"><img src="img/mk/cartao.webp" alt="Mockup CRIAS: Cartão de visita" loading="lazy" decoding="async"><figcaption><b>01</b>Cartão de visita</figcaption></figure>
-      <figure class="sk"><img src="img/mk/camiseta.webp" alt="Mockup CRIAS: Camiseta" loading="lazy" decoding="async"><figcaption><b>02</b>Camiseta</figcaption></figure>
-      <figure class="sk"><img src="img/mk/bone.webp" alt="Mockup CRIAS: Boné" loading="lazy" decoding="async"><figcaption><b>03</b>Boné</figcaption></figure>
-      <figure class="sk"><img src="img/mk/adesivo.webp" alt="Mockup CRIAS: Adesivo" loading="lazy" decoding="async"><figcaption><b>04</b>Adesivo</figcaption></figure>
-      <figure class="sk"><img src="img/mk/ecobag.webp" alt="Mockup CRIAS: Ecobag" loading="lazy" decoding="async"><figcaption><b>05</b>Ecobag</figcaption></figure>
-      <figure class="sk"><img src="img/mk/instagram.webp" alt="Mockup CRIAS: Instagram" loading="lazy" decoding="async"><figcaption><b>06</b>Instagram</figcaption></figure>
-      <figure class="sk"><img src="img/mk/cracha.webp" alt="Mockup CRIAS: Crachá de evento" loading="lazy" decoding="async"><figcaption><b>07</b>Crachá de evento</figcaption></figure>
-      <figure class="sk"><img src="img/mk/caneca.webp" alt="Mockup CRIAS: Caneca" loading="lazy" decoding="async"><figcaption><b>08</b>Caneca</figcaption></figure>
-      <figure class="sk"><img src="img/mk/lambe.webp" alt="Mockup CRIAS: Lambe-lambe" loading="lazy" decoding="async"><figcaption><b>09</b>Lambe-lambe</figcaption></figure>
+    <div class="bigt" aria-hidden="true"><p>Cartão</p><p>Camiseta</p><p>Boné</p><p>Adesivo</p><p>Ecobag</p><p>Feed</p><p>Crachá</p><p>Caneca</p><p>Lambe</p></div>
+    <div class="frame cut" id="frame">
+      <div class="sc" data-t="Cartão de visita" role="img" aria-label="Mockup CRIAS: Cartão de visita"><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i></div>
+      <div class="sc" data-t="Camiseta" role="img" aria-label="Mockup CRIAS: Camiseta"><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i></div>
+      <div class="sc" data-t="Boné" role="img" aria-label="Mockup CRIAS: Boné"><i class="slc"><img src="img/mk/bone.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/bone.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/bone.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/bone.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/bone.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/bone.webp" alt="" loading="lazy" decoding="async"></i></div>
+      <div class="sc" data-t="Adesivo" role="img" aria-label="Mockup CRIAS: Adesivo"><i class="slc"><img src="img/mk/adesivo.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/adesivo.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/adesivo.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/adesivo.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/adesivo.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/adesivo.webp" alt="" loading="lazy" decoding="async"></i></div>
+      <div class="sc" data-t="Ecobag" role="img" aria-label="Mockup CRIAS: Ecobag"><i class="slc"><img src="img/mk/ecobag.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/ecobag.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/ecobag.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/ecobag.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/ecobag.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/ecobag.webp" alt="" loading="lazy" decoding="async"></i></div>
+      <div class="sc" data-t="Instagram" role="img" aria-label="Mockup CRIAS: Instagram"><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i></div>
+      <div class="sc" data-t="Crachá de evento" role="img" aria-label="Mockup CRIAS: Crachá de evento"><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i></div>
+      <div class="sc" data-t="Caneca" role="img" aria-label="Mockup CRIAS: Caneca"><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i></div>
+      <div class="sc" data-t="Lambe-lambe" role="img" aria-label="Mockup CRIAS: Lambe-lambe"><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i></div>
+    </div>
+    <div class="skbar"><b id="skn">01</b><span id="skt">Cartão de visita</span><em id="skc">/ 09</em></div>
   </div>
 </section>
 
@@ -732,8 +749,8 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 </section>
 </main>
 
-<footer>
-  <div class="lg" data-lg="principal"></div>
+<footer id="foot">
+  <svg class="flogo" id="flogo" viewBox="616 458 688 164" role="img" aria-label="CRIAS Studio"></svg>
   <p>© 2026 CRIAS STUDIO · Goiânia · GO</p>
 </footer>
 <div class="toast" id="toast" role="status"></div>
@@ -759,6 +776,13 @@ document.querySelectorAll("[data-lg]").forEach(el=>{const v=LOGOS[el.dataset.lg]
 const hero=document.getElementById("heroLogo");
 hero.innerHTML=ORDER.map(k=>`<path class="pc" data-k="${k}" d="${PATHS.main[k]}"/>`).join("")+`<g class="st">${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g>`;
 
+document.getElementById("preSvg").innerHTML=ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")+PATHS.studio.map(d=>`<path d="${d}"/>`).join("");
+document.getElementById("flogo").innerHTML=ORDER.map(k=>`<path class="fp" fill="${C.ciano}" d="${PATHS.main[k]}"/>`).join("")+`<g class="fst" fill="${C.cal}">${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g>`;
+/* preloader */
+const PRE=document.getElementById("pre");let preDone=false;const preCbs=[];
+function onPre(f){preDone?f():preCbs.push(f)}
+function endPre(){if(preDone)return;preDone=true;PRE.remove();preCbs.forEach(f=>f())}
+setTimeout(()=>{if(!preDone)endPre()},4500);
 /* construction */
 (function(){
   const s=document.getElementById("consSvg");
@@ -897,8 +921,17 @@ const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 if(window.gsap&&window.ScrollTrigger){
   gsap.registerPlugin(ScrollTrigger);
   if(window.Lenis&&!reduce){lenis=new Lenis({lerp:.09,smoothWheel:true});lenis.on("scroll",ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0)}
-  gsap.to(".prog",{scaleX:1,ease:"none",scrollTrigger:{trigger:document.body,start:"top top",end:"bottom bottom",scrub:.3}});
 
+
+  /* PRELOADER */
+  {const pp=gsap.utils.toArray("#preSvg path");pp.forEach(l=>{const L=l.getTotalLength();gsap.set(l,{strokeDasharray:L,strokeDashoffset:L})});
+   const cnt={v:0},pe=document.getElementById("pct");if(lenis)lenis.stop();
+   gsap.timeline({delay:.15,onComplete:()=>{if(lenis)lenis.start();endPre()}})
+    .to(pp,{strokeDashoffset:0,duration:1.3,stagger:.05,ease:"power2.inOut"},0)
+    .to(cnt,{v:100,duration:1.5,ease:"power1.inOut",onUpdate:()=>pe.textContent=String(Math.round(cnt.v)).padStart(2,"0")},0)
+    .to(pp,{fill:C.ciano,duration:.35,stagger:.03},1.15)
+    .to(".pre .pct,.pre .pl",{opacity:0,y:-10,duration:.25},1.6)
+    .to(PRE,{clipPath:"polygon(0 0,100% 0,100% 0%,0 -22%)",duration:.8,ease:"expo.inOut"},1.75);}
 
   /* HERO: peças se montam */
   const pcs=gsap.utils.toArray("#heroLogo .pc");
@@ -908,7 +941,7 @@ if(window.gsap&&window.ScrollTrigger){
     pcs.forEach((p,i)=>{const[s0,s1,r,sc]=seeds[i];gsap.set(p,{x:s0,y:s1,rotation:r,scale:sc})});
     gsap.set("#heroLogo .st",{opacity:0,x:30});gsap.set(".hero .tag p",{opacity:0,y:20});
     /* respiro inicial: peças entram flutuando */
-    gsap.from(pcs,{opacity:0,duration:1.4,stagger:.08,ease:"power2.out"});
+    gsap.set(pcs,{opacity:0});gsap.to(pcs,{opacity:1,duration:1.4,stagger:.08,ease:"power2.out",delay:2.35});
     const tl=gsap.timeline({scrollTrigger:{trigger:".hero",start:"top top",end:"+=170%",scrub:1,pin:true,anticipatePin:1}});
     tl.to(pcs,{x:0,y:0,rotation:0,scale:1,duration:1,ease:"power3.inOut",stagger:{each:.06,from:"random"}},0)
       .to(pcs,{fillOpacity:1,duration:.35,stagger:.04},.62)
@@ -956,22 +989,47 @@ if(window.gsap&&window.ScrollTrigger){
     gsap.timeline({scrollTrigger:{trigger:"#laje",start:"top top",end:"+=160%",scrub:1,pin:true}})
       .fromTo("#laje .l1",{yPercent:0,scale:1.05},{yPercent:-3,scale:1,ease:"none"},0)
       .fromTo("#laje .lt",{yPercent:60,opacity:0},{yPercent:-55,opacity:1,ease:"none"},0)
-      .fromTo("#laje .l2",{yPercent:6,scale:1.1,transformOrigin:"50% 100%"},{yPercent:-2,scale:matchMedia("(max-width:700px)").matches?.86:1,ease:"none"},0)
-      .fromTo("#laje .l3",{yPercent:14,scale:1.1},{yPercent:-22,scale:1.35,ease:"none"},0);
+      .fromTo("#laje .l2",{yPercent:6,scale:1.1,transformOrigin:"50% 100%"},{yPercent:-2,scale:matchMedia("(max-width:700px)").matches?.93:1,ease:"none"},0)
+      .fromTo("#laje .l3",{yPercent:-6,scale:1.12,transformOrigin:"50% 100%"},{yPercent:38,scale:1.3,ease:"none"},0);
   }
-  /* na rua: pilha com corte 12° */
+  /* na rua: montagem em fatias 12° */
   if(!reduce){
-    const sks=gsap.utils.toArray("#stack .sk"),cnt=document.getElementById("skc");
-    const clip=(el,a)=>{el.style.clipPath=`polygon(0 ${a+17}%,100% ${a}%,100% 120%,0 120%)`};
-    sks.forEach((el,i)=>{if(i>0)clip(el,100)});
-    const tl=gsap.timeline({scrollTrigger:{trigger:"#stack",start:"top top",end:()=>"+="+(sks.length-1)*innerHeight*.75,scrub:1,pin:true,onUpdate:st=>{const k=Math.min(sks.length,Math.round(st.progress*(sks.length-1))+1);cnt.textContent=String(k).padStart(2,"0")+" / "+String(sks.length).padStart(2,"0")}}});
-    sks.forEach((el,i)=>{if(!i)return;const o={a:100};
-      tl.to(o,{a:-17,duration:1,ease:"power2.inOut",onUpdate:()=>clip(el,o.a)},i-1)
-        .fromTo(el.querySelector("img"),{scale:1.25},{scale:1,duration:1,ease:"power2.out"},i-1)
-        .to(sks[i-1],{scale:.9,rotation:i%2?-3:3,filter:"brightness(.35)",duration:1,ease:"power2.inOut"},i-1)});
-    gsap.fromTo("#cta img",{scale:1.25},{scale:1,ease:"none",scrollTrigger:{trigger:"#cta",start:"top bottom",end:"bottom bottom",scrub:1}});
-    gsap.fromTo("#cta h2",{yPercent:40,opacity:0},{yPercent:0,opacity:1,ease:"power3.out",scrollTrigger:{trigger:"#cta",start:"top 40%",end:"top top",scrub:1}});
+    const scs=gsap.utils.toArray("#frame .sc"),bigs=gsap.utils.toArray(".bigt p"),N=scs.length,n=6,sh=26.6,step=(100+sh)/n;
+    scs.forEach((sc,i)=>{sc.style.zIndex=i+1;sc.querySelectorAll(".slc").forEach((el,k)=>{const x0=-sh+k*step,x1=x0+step+.4;el.style.clipPath=`polygon(${x0+sh}% 0,${x1+sh}% 0,${x1}% 100%,${x0}% 100%)`})});
+    const dir=k=>k%2?-1:1;
+    scs.forEach((sc,i)=>gsap.set(sc.querySelectorAll(".slc"),{yPercent:k=>dir(k)*118}));
+    const skn=document.getElementById("skn"),skt=document.getElementById("skt");let cur=-1;
+    const setCap=i=>{if(i===cur)return;cur=i;skn.textContent=String(i+1).padStart(2,"0");skt.textContent=scs[i].dataset.t;gsap.fromTo([skn,skt],{yPercent:60,opacity:0},{yPercent:0,opacity:1,duration:.45,stagger:.05,ease:"power3.out",overwrite:true})};
+    const tl=gsap.timeline({scrollTrigger:{trigger:"#stack",start:"top top",end:()=>"+="+N*innerHeight*.8,scrub:1,pin:true,
+      onUpdate:st=>setCap(Math.min(N-1,Math.floor(st.progress*N*.999)))}});
+    gsap.set(bigs,{xPercent:0});
+    for(let i=0;i<N;i++){const sl=scs[i].querySelectorAll(".slc"),im=scs[i].querySelectorAll("img"),t=i;
+      tl.to(sl,{yPercent:0,duration:.55,ease:"power3.out",stagger:{each:.05,from:"center"}},t+(i?.18:0))
+        .fromTo(im,{scale:1.25},{scale:1,duration:1,ease:"none"},t)
+        .fromTo(bigs[i],{opacity:0,xPercent:12},{opacity:1,xPercent:-38,duration:1,ease:"none"},t)
+        .to(bigs[i],{opacity:0,duration:.15},t+.85);
+      if(i<N-1)tl.to(sl,{yPercent:k=>-dir(k)*118,duration:.5,ease:"power3.in",stagger:{each:.04,from:"edges"}},t+.72);}
+    tl.fromTo("#frame",{rotation:-2.5},{rotation:2.5,duration:N,ease:"none"},0);
+    setCap(0);
+    if(matchMedia("(max-width:700px)").matches){
+      const ci=document.querySelector("#cta img");ci.classList.add("pan");
+      const iw=()=>innerHeight*1672/941,s1=()=>innerWidth/iw();
+      gsap.set("#cta .cc",{opacity:0,y:30});
+      gsap.timeline({scrollTrigger:{trigger:"#cta",start:"top top",end:"+=180%",scrub:1,pin:true,invalidateOnRefresh:true}})
+        .fromTo(ci,{x:0,y:0,scale:1},{x:()=>-(iw()-innerWidth),duration:1.4,ease:"none"})
+        .to(ci,{x:0,y:()=>innerHeight*.26,scale:s1,duration:.8,ease:"power2.inOut"})
+        .to("#cta .cc",{opacity:1,y:0,duration:.4},"-=.2").to({},{duration:.2});
+    }else{
+      gsap.fromTo("#cta img",{scale:1.25},{scale:1,ease:"none",scrollTrigger:{trigger:"#cta",start:"top bottom",end:"bottom bottom",scrub:1}});
+      gsap.fromTo("#cta h2",{yPercent:40,opacity:0},{yPercent:0,opacity:1,ease:"power3.out",scrollTrigger:{trigger:"#cta",start:"top 40%",end:"top top",scrub:1}});
+    }
   }
+
+  /* rodapé: logo se monta */
+  if(!reduce){const fp=gsap.utils.toArray("#flogo .fp");
+    gsap.timeline({scrollTrigger:{trigger:"#foot",start:"top bottom",end:"bottom bottom",scrub:1}})
+      .fromTo(fp,{x:i=>[-300,180,-80,60,260,340][i],y:i=>[-160,220,-260,140,-200,120][i],rotation:i=>[-120,80,160,-70,140,-90][i],transformOrigin:"50% 50%"},{x:0,y:0,rotation:0,ease:"power3.out",stagger:.04})
+      .fromTo("#flogo .fst",{opacity:0,x:30},{opacity:1,x:0,duration:.3},"-=.2");}
 
   /* traço -> marca */
   if(!reduce){
