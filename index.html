@@ -46,9 +46,9 @@ section{position:relative}
 .prog{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--grad);z-index:80}
 .hdr{position:fixed;top:0;left:0;right:0;z-index:70;display:flex;align-items:center;justify-content:space-between;padding:16px var(--pad);pointer-events:none}
 .hdr>*{pointer-events:auto}
-.hdr .mini{width:132px;padding:10px 14px;background:rgba(14,15,17,.6);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--linha);opacity:0;transform:translateY(-8px);transition:opacity .4s,transform .4s}
+.hdr .mini{width:132px;padding:10px 14px;background:rgba(14,15,17,.9);border:1px solid var(--linha);opacity:0;transform:translateY(-8px);transition:opacity .4s,transform .4s}
 .hdr.on .mini{opacity:1;transform:none}
-.mbtn{display:flex;align-items:center;gap:10px;font-weight:600;font-size:12px;letter-spacing:.2em;padding:12px 16px;background:rgba(14,15,17,.6);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--linha)}
+.mbtn{display:flex;align-items:center;gap:10px;font-weight:600;font-size:12px;letter-spacing:.2em;padding:12px 16px;background:rgba(14,15,17,.9);border:1px solid var(--linha)}
 .mbtn i{display:block;width:18px;height:2px;background:var(--ciano);position:relative;transform:skewY(-12deg)}
 .mbtn i:after{content:"";position:absolute;left:0;top:6px;width:12px;height:2px;background:var(--ciano)}
 .menu{position:fixed;inset:0;z-index:75;background:var(--asfalto);display:flex;flex-direction:column;justify-content:center;padding:80px var(--pad) 40px;clip-path:polygon(0 0,100% 0,100% 0,0 0);visibility:hidden}
@@ -79,7 +79,7 @@ section{position:relative}
 canvas.ink{position:absolute;inset:0;width:100%;height:100%;display:block}
 .hero.gl .orb{display:none}
 .paper{position:relative;isolation:isolate}
-.paper:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.6;mix-blend-mode:multiply;background:url(img/papel.webp) repeat;background-size:900px 900px}
+.paper{background-image:url(img/papel.webp);background-size:900px 900px}
 /* traço */
 .trace{height:100svh;background:var(--cal);color:var(--asfalto);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:0 var(--pad);text-align:center}
 .trace .eyebrow{color:#5B3FD9}
@@ -113,7 +113,7 @@ footer .flogo{width:100%;overflow:visible}
 .smbox{overflow:hidden;background:#141518}
 .smpop{pointer-events:none;z-index:2;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 7%,#000 93%,transparent 100%),linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(180deg,transparent 0,#000 7%,#000 93%,transparent 100%),linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);mask-composite:intersect}
 .smin{position:absolute;inset:0;transform-origin:50% 45%;will-change:transform}
-.smin img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;will-change:opacity}
+.smin img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .smc{position:absolute;left:var(--pad);top:84px;z-index:3;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(242,239,233,.75)}
 .smc b{font-family:"Rakis";font-weight:400;font-size:18px;color:var(--ciano);letter-spacing:0}
 .smt{position:absolute;left:var(--pad);bottom:clamp(110px,16svh,170px);z-index:3;font-family:var(--t);font-weight:900;font-size:clamp(44px,10vw,120px);line-height:.88;text-transform:uppercase;letter-spacing:-.02em;clip-path:inset(0 100% 0 0)}
@@ -146,7 +146,7 @@ footer .flogo{width:100%;overflow:visible}
 .bigt p{position:absolute;left:0;top:50%;white-space:nowrap;font-family:var(--t);font-weight:900;font-size:clamp(110px,30vw,360px);line-height:1;text-transform:uppercase;color:transparent;-webkit-text-stroke:1.5px rgba(0,255,218,.28);transform:translateY(-50%);opacity:0}
 .frame{position:relative;width:min(84vw,calc(70svh*.8));aspect-ratio:4/5;overflow:hidden;background:#111215;box-shadow:0 40px 80px rgba(0,0,0,.55);z-index:2}
 .sc{position:absolute;inset:0}
-.slc{position:absolute;inset:0;display:block;will-change:transform}
+.slc{position:absolute;inset:0;display:block}
 .slc img{width:100%;height:100%;object-fit:cover;display:block}
 .skbar{position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(18px,4svh,40px);display:flex;align-items:baseline;gap:12px;z-index:3;font-family:var(--t);font-weight:800;font-size:clamp(16px,2.4vw,24px);text-transform:uppercase}
 .skbar b{font-family:"Rakis";font-weight:400;color:var(--ciano);font-size:1.6em;line-height:.8}
@@ -429,10 +429,10 @@ footer .lg{width:150px}
 footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
 .toast{visibility:hidden;position:fixed;left:50%;bottom:24px;transform:translate(-50%,140%);background:var(--ciano);color:var(--asfalto);font-weight:600;font-size:14px;padding:12px 18px;z-index:95;transition:transform .35s cubic-bezier(.2,.9,.3,1)}
 .toast.on{transform:translate(-50%,0);visibility:visible}
-.totop{position:fixed;right:16px;bottom:18px;z-index:72;width:46px;height:46px;display:flex;align-items:center;justify-content:center;background:rgba(14,15,17,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--ciano);border:1px solid var(--linha);opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .35s,transform .35s}
+.totop{position:fixed;right:16px;bottom:18px;z-index:72;width:46px;height:46px;display:flex;align-items:center;justify-content:center;background:rgba(14,15,17,.92);color:var(--ciano);border:1px solid var(--linha);opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .35s,transform .35s}
 .totop.on{opacity:1;transform:none;pointer-events:auto}
 .totop svg{width:20px;height:20px}
-.snav{position:fixed;right:8px;top:50%;transform:translateY(-50%) translateX(8px);z-index:72;display:flex;flex-direction:column;gap:2px;padding:16px 7px 8px;background:rgba(14,15,17,.62);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--linha);clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));align-items:flex-end;opacity:0;transition:opacity .4s;pointer-events:none}
+.snav{position:fixed;right:8px;top:50%;transform:translateY(-50%) translateX(8px);z-index:72;display:flex;flex-direction:column;gap:2px;padding:16px 7px 8px;background:rgba(14,15,17,.9);border:1px solid var(--linha);clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));align-items:flex-end;opacity:0;transition:opacity .4s;pointer-events:none}
 .snav.on{opacity:1;pointer-events:auto;transform:translateY(-50%)}
 .snav{transition:opacity .4s,transform .4s,background .4s}
 .snav a{display:block;position:relative;height:12px;text-decoration:none;padding:5px 0}
@@ -440,14 +440,13 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 .snav a b{position:absolute;right:0;bottom:calc(100% - 2px);font-family:var(--s);font-weight:600;font-size:10px;letter-spacing:.06em;line-height:1;color:var(--ciano);opacity:0;transform:translateY(4px);transition:opacity .3s,transform .3s}
 .snav a.on i{width:22px;background:var(--ciano)}
 .snav a.on b{opacity:1;transform:none}
-.snav.lt{background:rgba(242,239,233,.72);border-color:rgba(14,15,17,.12)}.snav.lt a i{background:rgba(14,15,17,.35)}.snav.lt a.on i{background:var(--asfalto)}.snav.lt a b{color:var(--asfalto)}
+.snav.lt{background:rgba(242,239,233,.94);border-color:rgba(14,15,17,.12)}.snav.lt a i{background:rgba(14,15,17,.35)}.snav.lt a.on i{background:var(--asfalto)}.snav.lt a b{color:var(--asfalto)}
 @media(max-width:700px){.snav{right:4px;gap:0;padding:14px 5px 6px}.snav a i{width:6px}.snav a.on i{width:14px}.snav a b{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.gradbox{animation:none}.hero .hint i{animation:none}}
 </style>
 </head>
 <body>
 <div class="pre" id="pre" aria-hidden="true"><svg id="preSvg" viewBox="616 458 688 164"></svg><p class="pct" id="pct">00</p><p class="pl">Montando a marca</p></div>
-<div class="grain" aria-hidden="true"></div>
 
 <header class="hdr" id="hdr">
   <a href="#inicio" class="mini cut-r" aria-label="CRIAS Studio, voltar ao início" data-lg="principal"></a>
@@ -489,7 +488,6 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 
 <section class="dive" id="mergulho">
   <div class="dstage" id="dstage"><img class="dimg" id="dimg" src="img/mergulho-v.webp" alt="O estúdio CRIAS à noite: mesa com câmera, sprays, máquina de tatuagem e o monitor ligando com o logo" decoding="async"><svg class="dscr" id="dscr" aria-hidden="true"></svg></div>
-  <svg class="dmask" id="dmask" viewBox="596 380 728 320" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
   <div class="dcopy"><p class="eyebrow" style="color:var(--ciano)">O estúdio</p><h2>Aqui<br>dentro.</h2><p>Câmera, tinta, papel e tela. É daqui que sai cada marca.</p></div>
 </section>
 
@@ -557,8 +555,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 
 <section class="smo" id="montagem" aria-label="Stop-motion: as letras do CRIAS em acrílico se montando sobre a mesa até acender em neon">
   <div class="smbg" id="smbg"></div>
-  <div class="smf" id="smf"><div class="smbox" id="smbox"><div class="smin"><img src="img/sm/s1.webp" alt="" decoding="async"><img src="img/sm/s2.webp" alt="" decoding="async"><img src="img/sm/s3.webp" alt="" decoding="async"><img src="img/sm/s4.webp" alt="" decoding="async"><img src="img/sm/s5.webp" alt="" decoding="async"><img src="img/sm/s6.webp" alt="" decoding="async"><img src="img/sm/s7.webp" alt="" decoding="async"><img src="img/sm/s8.webp" alt="" decoding="async"><img src="img/sm/s9.webp" alt="" decoding="async"><img src="img/sm/s10.webp" alt="" decoding="async"><img src="img/sm/s11.webp" alt="" decoding="async"></div></div><div class="smpop"><div class="smin"><img src="img/sm/p1.webp" alt="" decoding="async"><img src="img/sm/p2.webp" alt="" decoding="async"><img src="img/sm/p3.webp" alt="" decoding="async"><img src="img/sm/p4.webp" alt="" decoding="async"><img src="img/sm/p5.webp" alt="" decoding="async"><img src="img/sm/p6.webp" alt="" decoding="async"><img src="img/sm/p7.webp" alt="" decoding="async"><img src="img/sm/p8.webp" alt="" decoding="async"><img src="img/sm/p9.webp" alt="" decoding="async"><img src="img/sm/p10.webp" alt="" decoding="async"><img src="img/sm/p11.webp" alt="" decoding="async"></div></div></div>
-  <p class="smc">Quadro <b id="smn">01</b> / 11</p>
+  <div class="smf" id="smf"><div class="smbox" id="smbox"><div class="smin"><img src="img/sm/s11.webp" alt="" loading="lazy" decoding="async"></div></div><div class="smpop"><div class="smin"><img src="img/sm/p11.webp" alt="" loading="lazy" decoding="async"></div></div></div>
   <h2 class="smt" id="smt">Peça<br>por <em>peça.</em></h2>
 </section>
 
@@ -765,15 +762,15 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
   <div class="stack" id="stack">
     <div class="bigt" aria-hidden="true"><p>Cartão</p><p>Camiseta</p><p>Boné</p><p>Adesivo</p><p>Ecobag</p><p>Feed</p><p>Crachá</p><p>Caneca</p><p>Cartaz</p></div>
     <div class="frame cut" id="frame">
-      <div class="sc" data-t="Cartão de visita" role="img" aria-label="Mockup CRIAS: Cartão de visita"><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i></div>
-      <div class="sc" data-t="Camiseta" role="img" aria-label="Mockup CRIAS: Camiseta"><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i></div>
-      <div class="sc" data-t="Boné" role="img" aria-label="Mockup CRIAS: Boné"><i class="slc"><img src="img/mk/bone.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/bone.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/bone.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/bone.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/bone.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/bone.webp" alt="" loading="lazy" decoding="async"></i></div>
-      <div class="sc" data-t="Adesivo" role="img" aria-label="Mockup CRIAS: Adesivo"><i class="slc"><img src="img/mk/adesivo.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/adesivo.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/adesivo.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/adesivo.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/adesivo.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/adesivo.webp" alt="" loading="lazy" decoding="async"></i></div>
-      <div class="sc" data-t="Ecobag" role="img" aria-label="Mockup CRIAS: Ecobag"><i class="slc"><img src="img/mk/ecobag.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/ecobag.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/ecobag.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/ecobag.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/ecobag.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/ecobag.webp" alt="" loading="lazy" decoding="async"></i></div>
-      <div class="sc" data-t="Instagram" role="img" aria-label="Mockup CRIAS: Instagram"><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i></div>
-      <div class="sc" data-t="Crachá de evento" role="img" aria-label="Mockup CRIAS: Crachá de evento"><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i></div>
-      <div class="sc" data-t="Caneca" role="img" aria-label="Mockup CRIAS: Caneca"><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i></div>
-      <div class="sc" data-t="Cartaz de rua" role="img" aria-label="Mockup CRIAS: Cartaz de rua"><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i></div>
+      <div class="sc" data-t="Cartão de visita" role="img" aria-label="Mockup CRIAS: Cartão de visita"><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i><i class="slc"><img src="img/mk/cartao.webp" alt="" decoding="async"></i></div>
+      <div class="sc" data-t="Camiseta" role="img" aria-label="Mockup CRIAS: Camiseta"><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/camiseta.webp" alt="" loading="lazy" decoding="async"></i></div>
+      <div class="sc" data-t="Boné" role="img" aria-label="Mockup CRIAS: Boné"><i class="slc"><img src="img/mk/bone.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/bone.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/bone.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/bone.webp" alt="" loading="lazy" decoding="async"></i></div>
+      <div class="sc" data-t="Adesivo" role="img" aria-label="Mockup CRIAS: Adesivo"><i class="slc"><img src="img/mk/adesivo.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/adesivo.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/adesivo.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/adesivo.webp" alt="" loading="lazy" decoding="async"></i></div>
+      <div class="sc" data-t="Ecobag" role="img" aria-label="Mockup CRIAS: Ecobag"><i class="slc"><img src="img/mk/ecobag.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/ecobag.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/ecobag.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/ecobag.webp" alt="" loading="lazy" decoding="async"></i></div>
+      <div class="sc" data-t="Instagram" role="img" aria-label="Mockup CRIAS: Instagram"><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/instagram.webp" alt="" loading="lazy" decoding="async"></i></div>
+      <div class="sc" data-t="Crachá de evento" role="img" aria-label="Mockup CRIAS: Crachá de evento"><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/cracha.webp" alt="" loading="lazy" decoding="async"></i></div>
+      <div class="sc" data-t="Caneca" role="img" aria-label="Mockup CRIAS: Caneca"><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/caneca.webp" alt="" loading="lazy" decoding="async"></i></div>
+      <div class="sc" data-t="Cartaz de rua" role="img" aria-label="Mockup CRIAS: Cartaz de rua"><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i><i class="slc"><img src="img/mk/lambe.webp" alt="" loading="lazy" decoding="async"></i></div>
     </div>
     <div class="skbar"><b id="skn">01</b><span id="skt">Cartão de visita</span><em id="skc">/ 09</em></div>
   </div>
@@ -918,9 +915,6 @@ function layoutDive(){const vw=innerWidth,vh=innerHeight,k=vw/vh>=1?"h":"v",d=DV
 }
 layoutDive();addEventListener("resize",layoutDive);
 
-/* máscara do mergulho */
-document.getElementById("dmask").innerHTML=`<defs><mask id="dmk" maskUnits="userSpaceOnUse" x="-50000" y="-50000" width="100000" height="100000"><rect x="-50000" y="-50000" width="100000" height="100000" fill="#fff"/><g fill="#000">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g></mask></defs><rect x="-50000" y="-50000" width="100000" height="100000" fill="#0E0F11" mask="url(#dmk)"/><g fill="none" stroke="#00FFDA" stroke-width="1" vector-effect="non-scaling-stroke" class="dline">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}</g>`;
-
 /* traço */
 document.getElementById("trStencil").innerHTML=`<g class="bleed" transform="translate(1.6 1.2)">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}</g><g class="ln">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g>`;
 document.getElementById("trFinal").innerHTML=`<g fill="${C.asfalto}">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g>`;
@@ -929,7 +923,7 @@ document.getElementById("trFinal").innerHTML=`<g fill="${C.asfalto}">${ORDER.map
 const INK_FS=`precision highp float;uniform vec2 r;uniform float t,s,fill,dim;
 float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 float n(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),u.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),u.x),u.y);}
-float fbm(vec2 p){float v=0.,a=.5;mat2 m=mat2(1.6,1.2,-1.2,1.6);for(int i=0;i<5;i++){v+=a*n(p);p=m*p;a*=.5;}return v;}
+float fbm(vec2 p){float v=0.,a=.5;mat2 m=mat2(1.6,1.2,-1.2,1.6);for(int i=0;i<4;i++){v+=a*n(p);p=m*p;a*=.5;}return v;}
 void main(){vec2 uv=(gl_FragCoord.xy-.5*r)/min(r.x,r.y);uv*=1.5-s*.5;
 float a=t*6.2831853/40.;vec2 o=vec2(cos(a),sin(a))*.9,o2=vec2(sin(a*2.),cos(a))*.7;
 vec2 q=vec2(fbm(uv+o),fbm(uv+vec2(5.2,1.3)-o));
@@ -956,19 +950,20 @@ function makeInk(cv,{scale=.5,dim=1,keep=false}={}){
   const st={s:0,fill:0,dim};let raf=0,on=false,t0=performance.now();
   function size(){const w=Math.max(2,Math.round(cv.clientWidth*scale)),h=Math.max(2,Math.round(cv.clientHeight*scale));if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;gl.viewport(0,0,w,h)}}
   function draw(t){size();gl.uniform2f(U.r,cv.width,cv.height);gl.uniform1f(U.t,t);gl.uniform1f(U.s,st.s);gl.uniform1f(U.fill,st.fill);gl.uniform1f(U.dim,st.dim);gl.drawArrays(gl.TRIANGLES,0,3)}
-  function loop(){draw((performance.now()-t0)/1000);raf=requestAnimationFrame(loop)}
-  const api={st,draw,start(){if(!on){on=true;loop()}},stop(){on=false;cancelAnimationFrame(raf)}};
+  let last=0;function loop(now){raf=requestAnimationFrame(loop);if(now-last<33)return;last=now;draw((performance.now()-t0)/1000)}
+  const api={st,draw,start(){if(!on){on=true;raf=requestAnimationFrame(loop)}},stop(){on=false;cancelAnimationFrame(raf)}};
   new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?api.start():api.stop())).observe(cv);
   addEventListener("resize",()=>draw((performance.now()-t0)/1000));
   return api;
 }
 const reduceInk=matchMedia("(prefers-reduced-motion: reduce)").matches;
-const inkHero=makeInk(document.getElementById("inkHero"),{scale:.5,dim:.8});
+const MOB=matchMedia("(pointer:coarse)").matches;
+const inkHero=makeInk(document.getElementById("inkHero"),{scale:MOB?.28:.4,dim:.8});
 if(inkHero)document.querySelector(".hero").classList.add("gl");
-const inkFlood=makeInk(document.getElementById("inkFlood"),{scale:.5,dim:.9});
+const inkFlood=makeInk(document.getElementById("inkFlood"),{scale:MOB?.28:.4,dim:.9});
 if(!inkFlood)document.getElementById("flood").style.background="var(--ciano)";
-const inkDemo=makeInk(document.getElementById("inkDemo"),{scale:.6,dim:1});
-const inkStory=makeInk(document.getElementById("inkStory"),{scale:.6,dim:.95});
+const inkDemo=null,inkStory=null;
+document.querySelectorAll("#inkDemo,#inkStory").forEach(c=>c.style.background="radial-gradient(circle at 30% 35%,rgba(0,255,218,.55),transparent 55%),radial-gradient(circle at 70% 70%,rgba(255,46,147,.5),transparent 55%),radial-gradient(circle at 60% 30%,rgba(77,124,255,.45),transparent 50%),#0E0F11");
 if(reduceInk){inkHero&&inkHero.stop();}
 
 /* motion demo logo + social bits */
@@ -1009,7 +1004,8 @@ function setSnav(id){snav.querySelectorAll("a").forEach(a=>a.classList.toggle("o
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 if(window.gsap&&window.ScrollTrigger){
   gsap.registerPlugin(ScrollTrigger);
-  if(window.Lenis&&!reduce){lenis=new Lenis({lerp:.09,smoothWheel:true});lenis.on("scroll",ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0)}
+  ScrollTrigger.config({ignoreMobileResize:true});
+  if(window.Lenis&&!reduce&&!MOB){lenis=new Lenis({lerp:.09,smoothWheel:true});lenis.on("scroll",ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0)}
 
 
   /* HERO: peças (estado espalhado = início do scroll) */
@@ -1025,7 +1021,7 @@ if(window.gsap&&window.ScrollTrigger){
     gsap.set(".hero .tag p",{opacity:0,y:20});gsap.set(".hero .hint",{opacity:0});
     /* todas as animações começam no tempo 0 com "atraso" dentro da curva: assim tudo desfaz certinho quando volta o scroll */
     const TOT=1.75,late=(st,du,e="power3.inOut")=>{const f=gsap.parseEase(e),a=st/TOT,b=(st+du)/TOT;return x=>x<=a?0:x>=b?1:f((x-a)/(b-a))};
-    const heroTL=gsap.timeline({scrollTrigger:{trigger:".hero",start:"top top",end:"+=170%",scrub:1,pin:true,anticipatePin:1}});
+    const heroTL=gsap.timeline({scrollTrigger:{trigger:".hero",start:"top top",end:"+=120%",scrub:.6,pin:true,anticipatePin:1}});
     pcs.forEach((p,i)=>{
       heroTL.fromTo(p,{x:seeds[i][0],y:seeds[i][1],rotation:seeds[i][2],scale:seeds[i][3]},{x:0,y:0,rotation:0,scale:1,duration:TOT,ease:late(i*.05,1)},0)
             .fromTo(p,{fillOpacity:0},{fillOpacity:1,duration:TOT,ease:late(.62+i*.04,.35,"none")},0)});
@@ -1077,49 +1073,33 @@ if(window.gsap&&window.ScrollTrigger){
       .to({},{duration:.3});
   }
 
-  /* mergulho: zoom pra dentro do "i" */
+  /* mergulho: entra no estúdio e o PC liga */
   if(!reduce){
-    const dm=document.getElementById("dmask"),Z={z:0};
-    const V0={cx:960,cy:540,w:728,h:320},V1={cx:942.7,cy:561,w:2.2};
-    const setVB=()=>{const z=Z.z,w=V0.w*Math.pow(V1.w/V0.w,z),h=w*V0.h/V0.w,cx=V0.cx+(V1.cx-V0.cx)*Math.min(1,z*1.6),cy=V0.cy+(V1.cy-V0.cy)*Math.min(1,z*1.6);dm.setAttribute("viewBox",`${cx-w/2} ${cy-h/2} ${w} ${h}`);dm.style.display=z>=.995?"none":"block"};setVB();
     gsap.set(".dive .dcopy > *",{opacity:0,y:30});
     gsap.utils.toArray(".ngr").forEach(g=>gsap.to(g,{attr:{x1:623+1346,x2:1296+1346},duration:5,repeat:-1,ease:"none"}));
     const Q=sel=>gsap.utils.toArray("#dstage "+sel);
-    gsap.timeline({scrollTrigger:{trigger:"#mergulho",start:"top top",end:"+=290%",scrub:1,pin:true}})
-      .fromTo("#dstage",{scale:1.35,filter:"brightness(.55)"},{scale:1.05,filter:"brightness(1)",duration:1,ease:"none"},0)
-      .fromTo(Z,{z:0},{z:1,duration:1,ease:"power2.in",onUpdate:setVB},0)
-      .to(".dive .dline",{opacity:0,duration:.2},.15)
-      .to("#dstage",{scale:1,duration:1.1,ease:"none"},1)
-      /* PC ligando */
-      .fromTo(Q(".pl"),{scaleX:0,opacity:1},{scaleX:1,duration:.1,ease:"power2.out",immediateRender:false},1.02)
-      .fromTo(Q(".pf"),{opacity:0},{opacity:.55,duration:.04,immediateRender:false},1.12)
-      .to(Q(".pl"),{opacity:0,duration:.05},1.14)
-      .to(Q(".pf"),{opacity:0,duration:.12},1.16)
-      /* neon desenha o contorno e preenche */
-      .fromTo(Q(".nline path"),{strokeDashoffset:(i,el)=>el.dataset.len},{strokeDashoffset:0,duration:.4,stagger:.02,ease:"power1.inOut",immediateRender:false},1.22)
-      .fromTo(Q(".nglow"),{opacity:0},{opacity:.9,duration:.25,immediateRender:false},1.3)
-      .fromTo(Q(".nfill"),{fillOpacity:0},{fillOpacity:1,duration:.28,immediateRender:false},1.6)
-      .to(".dive",{"--sh":1,duration:.3},1.7)
-      .to(".dive .dcopy > *",{opacity:1,y:0,stagger:.08,duration:.3},1.75)
-      .to({},{duration:.3});
+    gsap.timeline({scrollTrigger:{trigger:"#mergulho",start:"top top",end:"+=150%",scrub:.6,pin:true}})
+      .fromTo("#dstage",{scale:1.18},{scale:1,duration:1.4,ease:"none"},0)
+      .fromTo(Q(".pl"),{scaleX:0,opacity:1},{scaleX:1,duration:.1,ease:"power2.out"},.15)
+      .fromTo(Q(".pf"),{opacity:0},{opacity:.55,duration:.04},.25)
+      .fromTo(Q(".pl"),{opacity:1},{opacity:0,duration:.05,immediateRender:false},.27)
+      .fromTo(Q(".pf"),{opacity:.55},{opacity:0,duration:.12,immediateRender:false},.29)
+      .fromTo(Q(".nline path"),{strokeDashoffset:(i,el)=>el.dataset.len},{strokeDashoffset:0,duration:.4,stagger:.02,ease:"power1.inOut"},.35)
+      .fromTo(Q(".nglow"),{opacity:0},{opacity:.9,duration:.25},.45)
+      .fromTo(Q(".nfill"),{fillOpacity:0},{fillOpacity:1,duration:.28},.75)
+      .fromTo(".dive",{"--sh":0},{"--sh":1,duration:.3},.85)
+      .fromTo(".dive .dcopy > *",{opacity:0,y:30},{opacity:1,y:0,stagger:.08,duration:.3},.9)
+      .to({},{duration:.2});
   }
-  /* stop-motion com profundidade: caixa abre, imagem recua, letras saltam pra fora da caixa */
-  {const box=document.getElementById("smbox"),ins=gsap.utils.toArray("#smf .smin"),bgI=gsap.utils.toArray("#smbox img"),pI=gsap.utils.toArray("#smf .smpop img"),num=document.getElementById("smn"),tt=document.getElementById("smt"),N=bgI.length;
-   const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2,cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
-   const op=(j,o)=>{bgI[j].style.opacity=o;pI[j].style.opacity=o};
-   const setT=(t,flick)=>{const i=Math.min(N-1,Math.floor(t)),f=t-i,k=ease(cl((f-.25)/.75));
-     for(let j=0;j<N;j++)op(j,j<i?0:j===i?1:(j===i+1?k:0));
-     if(flick!=null){for(let j=0;j<N;j++)op(j,0);op(N-2,1);op(N-1,flick)}
-     num.textContent=String(Math.min(N,(flick!=null?N:i+(k>.5?2:1)))).padStart(2,"0")};
-   const setBox=k=>{const x=(1-k)*14,y=(1-k)*19,c=14;box.style.clipPath=`polygon(calc(${x}% + ${c}px) ${y}%,${100-x}% ${y}%,${100-x}% calc(${100-y}% - ${c}px),calc(${100-x}% - ${c}px) ${100-y}%,${x}% ${100-y}%,${x}% calc(${y}% + ${c}px))`};
-   setT(0);setBox(reduce?1:0);
-   if(!reduce){
-     ScrollTrigger.create({trigger:"#montagem",start:"top top",end:"+=420%",pin:true,scrub:true,onUpdate:st=>{const p=st.progress;
-       if(p<.84)setT(p/.84*(N-2));else if(p<.92){const q=(p-.84)/.08;setT(N-2,[0,1,0,1,.35,1,1,1][Math.floor(q*8)]??1)}else setT(N-2,1);
-       const kb=ease(cl(p/.55));setBox(kb);
-       const sc=1.28-.28*kb+p*.04;ins.forEach(el=>el.style.transform=`scale(${sc}) rotate(${(-.5+p).toFixed(3)}deg)`);
-       const r=cl((p-.86)/.12);tt.style.clipPath=`inset(0 ${100-r*100}% 0 0)`}});
-   }else{setT(N-2,1);gsap.set("#smt",{clipPath:"inset(0 0% 0 0)"})}
+  /* peça por peça: a caixa abre e o logo salta pra fora */
+  {const box=document.getElementById("smbox"),ins=gsap.utils.toArray("#smf .smin"),tt=document.getElementById("smt");
+   const setBox=k=>{const x=(1-k)*16,y=(1-k)*22,c=14;box.style.clipPath=`polygon(calc(${x}% + ${c}px) ${y}%,${100-x}% ${y}%,${100-x}% calc(${100-y}% - ${c}px),calc(${100-x}% - ${c}px) ${100-y}%,${x}% ${100-y}%,${x}% calc(${y}% + ${c}px))`};
+   if(!reduce){const o={k:0};setBox(0);
+     gsap.timeline({scrollTrigger:{trigger:"#montagem",start:"top 85%",end:"bottom 60%",scrub:.6}})
+       .to(o,{k:1,duration:1,ease:"power2.inOut",onUpdate:()=>setBox(o.k)},0)
+       .fromTo(ins,{scale:1.3},{scale:1,duration:1,ease:"power2.inOut"},0)
+       .fromTo(tt,{clipPath:"inset(0 100% 0 0)"},{clipPath:"inset(0 0% 0 0)",duration:.35},.7);
+   }else{setBox(1);tt.style.clipPath="none"}
   }
 
   /* laje: paralaxe */
@@ -1132,7 +1112,7 @@ if(window.gsap&&window.ScrollTrigger){
   }
   /* na rua: montagem em fatias 12° */
   if(!reduce){
-    const scs=gsap.utils.toArray("#frame .sc"),bigs=gsap.utils.toArray(".bigt p"),N=scs.length,n=6,sh=26.6,step=(100+sh)/n;
+    const scs=gsap.utils.toArray("#frame .sc"),bigs=gsap.utils.toArray(".bigt p"),N=scs.length,n=4,sh=26.6,step=(100+sh)/n;
     scs.forEach((sc,i)=>{sc.style.zIndex=i+1;sc.querySelectorAll(".slc").forEach((el,k)=>{const x0=-sh+k*step,x1=x0+step+.4;el.style.clipPath=`polygon(${x0+sh}% 0,${x1+sh}% 0,${x1}% 100%,${x0}% 100%)`})});
     const dir=k=>k%2?-1:1;
     scs.forEach((sc,i)=>gsap.set(sc.querySelectorAll(".slc"),{yPercent:k=>dir(k)*118}));
@@ -1276,7 +1256,7 @@ if(window.gsap&&window.ScrollTrigger){
   ScrollTrigger.sort((a,b)=>{const ea=a.trigger||document.body,eb=b.trigger||document.body;if(ea===eb)return 0;return ea.compareDocumentPosition(eb)&Node.DOCUMENT_POSITION_FOLLOWING?-1:1});
   ScrollTrigger.refresh();
   /* seções ativas na lateral */
-  const zones=[["inicio","inicio"],["cria","inicio"],["mergulho","inicio"],["traco","inicio"],["laje","inicio"],["essencia","essencia"],["voz","voz"],["montagem","logo"],["logo","logo"],["cores","cores"],["tipografia","tipografia"],["flood","tipografia"],["elementos","elementos"],["motion","motion"],["social","social"],["aplicacoes","aplicacoes"],["narua","narua"],["cta","narua"],["arquivos","arquivos"],["foot","arquivos"]];
+  const zones=[["inicio","inicio"],["cria","inicio"],["mergulho","inicio"],["traco","inicio"],["laje","inicio"],["essencia","essencia"],["voz","voz"],["montagem","voz"],["logo","logo"],["cores","cores"],["tipografia","tipografia"],["flood","tipografia"],["elementos","elementos"],["motion","motion"],["social","social"],["aplicacoes","aplicacoes"],["narua","narua"],["cta","narua"],["arquivos","arquivos"],["foot","arquivos"]];
   zones.forEach(([el,id])=>{let node=document.getElementById(el);if(!node)return;if(node.parentElement.classList.contains("pin-spacer"))node=node.parentElement;ScrollTrigger.create({trigger:node,start:"top 50%",end:"bottom 50%",onToggle:e=>{if(e.isActive){setSnav(id);snav.classList.toggle("lt",LIGHT.has(el))}}})});
   let pastHero=false,idleT;const wake=()=>{if(!pastHero)return;snav.classList.add("on");clearTimeout(idleT);idleT=setTimeout(()=>{if(!snav.matches(":hover"))snav.classList.remove("on")},1500)};
   addEventListener("scroll",wake,{passive:true});snav.addEventListener("mouseleave",wake);
