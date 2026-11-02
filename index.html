@@ -108,7 +108,8 @@ footer .flogo{width:100%;overflow:visible}
 .smo{height:100svh;position:relative;overflow:hidden;background:var(--asfalto)}
 .smbg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 45% at 30% 45%,rgba(0,255,218,.10),transparent 70%),radial-gradient(ellipse 60% 40% at 75% 60%,rgba(255,46,147,.10),transparent 70%)}
 .smf{position:absolute;left:0;right:0;top:50%;aspect-ratio:941/1615;transform:translateY(-50%)}
-@media(min-width:760px){.smf{right:auto;left:50%;height:90svh;transform:translate(-50%,-50%)}}
+.smsub{display:none}
+@media(min-width:900px){.smf{left:auto;right:7vw;height:88svh;transform:translateY(-50%)}.smt{left:7vw;bottom:16svh;font-size:clamp(56px,6vw,120px)}.smsub{display:block;position:absolute;left:7vw;top:22svh;max-width:24em;color:var(--muted);font-size:18px;line-height:1.6}.smsub .eyebrow{color:var(--ciano)}}
 .smf{overflow:hidden;background:#141518}
 .smf .mesa,.smf .neon{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .smf .neon{opacity:0;z-index:3}
@@ -133,10 +134,11 @@ footer .flogo{width:100%;overflow:visible}
 .laje .lt{position:absolute;left:0;right:0;top:13svh;text-align:center;font-family:var(--t);font-weight:900;font-size:clamp(46px,14vw,190px);line-height:.88;text-transform:uppercase;letter-spacing:-.02em;color:var(--cal);will-change:transform}
 .laje .lt em{font-style:normal;color:var(--ciano)}
 .laje .lcap{position:absolute;left:var(--pad);bottom:22px;z-index:5;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(242,239,233,.75)}
+.lcard{position:absolute;inset:0;clip-path:none}
 @media(min-width:900px){
-  .laje .l2,.laje .l3{width:auto;aspect-ratio:941/1672;left:50%;margin-left:calc(-54svh*941/1672);height:108%;object-fit:contain;
-    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%)}
-  .laje .lt{top:10svh;font-size:clamp(80px,11vw,200px)}
+  .lcard{inset:auto;right:7vw;top:6svh;height:88svh;aspect-ratio:941/1500;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.45);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+  .lcard img{height:108%;top:-4%;object-position:50% 50%}
+  .laje .lt{left:7vw;right:auto;top:auto;bottom:16svh;text-align:left;font-size:clamp(48px,5.4vw,104px)}
 }
 /* na rua */
 .ruas{background:var(--asfalto)}
@@ -486,7 +488,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 </section>
 
 <section class="dive" id="mergulho">
-  <div class="dstage" id="dstage"><img class="dimg" id="dimg" src="img/mergulho-v.webp" alt="O estúdio CRIAS à noite: mesa com câmera, sprays, máquina de tatuagem e o monitor ligando com o logo" decoding="async"><svg class="dscr" id="dscr" aria-hidden="true"></svg></div>
+  <div class="dstage" id="dstage"><img class="dimg" id="dimg" src="img/mergulho-v-off.webp" alt="O estúdio CRIAS à noite: mesa com câmera, sprays, máquina de tatuagem e o monitor ligando com o logo" decoding="async"><svg class="dscr" id="dscr" aria-hidden="true"></svg></div>
   <div class="dcopy"><p class="eyebrow" style="color:var(--ciano)">O estúdio</p><h2>Aqui<br>dentro.</h2><p>Câmera, tinta, papel e tela. É daqui que sai cada marca.</p></div>
 </section>
 
@@ -500,8 +502,8 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 <section class="laje" id="laje" aria-label="De Goiânia pro mundo">
   <img class="l1" src="img/laje-fundo.webp" alt="" decoding="async">
   <h2 class="lt">De Goiânia<br><em>pro mundo.</em></h2>
-  <img class="l2" src="img/laje-meio.webp" alt="Laje com caixa d'água, varal com camiseta CRIAS e letreiro neon CRIAS na parede de tijolo" decoding="async">
-  <img class="l3" src="img/laje-frente.webp" alt="" decoding="async">
+  <div class="lcard cut"><img class="l2" src="img/laje-meio.webp" alt="Laje com caixa d'água, varal com camiseta CRIAS e letreiro neon CRIAS na parede de tijolo" decoding="async">
+  <img class="l3" src="img/laje-frente.webp" alt="" decoding="async"></div>
   <p class="lcap">Goiânia · GO</p>
 </section>
 
@@ -555,6 +557,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 <section class="smo" id="montagem" aria-label="Stop-motion: as letras do CRIAS em acrílico se montando sobre a mesa até acender em neon">
   <div class="smbg" id="smbg"></div>
   <div class="smf cut" id="smf"><img class="mesa" src="img/sm/mesa.webp" alt="" decoding="async"><img class="lt" data-k="c" src="img/sm/l_c.webp" alt="" decoding="async" style="left:1.169%;top:42.786%;width:27.949%"><img class="lt" data-k="r" src="img/sm/l_r.webp" alt="" decoding="async" style="left:19.979%;top:42.848%;width:27.949%"><img class="lt" data-k="i" src="img/sm/l_i.webp" alt="" decoding="async" style="left:39.214%;top:42.786%;width:15.728%"><img class="lt" data-k="a" src="img/sm/l_a.webp" alt="" decoding="async" style="left:46.227%;top:42.848%;width:29.224%"><img class="lt" data-k="s" src="img/sm/l_s.webp" alt="" decoding="async" style="left:64.293%;top:42.91%;width:29.649%"><img class="lt" data-k="st" src="img/sm/l_st.webp" alt="" decoding="async" style="left:84.91%;top:42.786%;width:14.772%"><img class="neon" src="img/sm/neon.webp" alt="" decoding="async"></div>
+  <p class="smsub"><span class="eyebrow">Montagem</span><br>Cada letra é uma peça. Nada aparece pronto: tudo é encaixado.</p>
   <h2 class="smt" id="smt">Peça<br>por <em>peça.</em></h2>
 </section>
 
@@ -887,25 +890,24 @@ document.getElementById("tee").innerHTML=`<path d="M120 20 L160 8 Q200 40 240 8 
 document.getElementById("stk").innerHTML=`<g fill="#fff" stroke="#fff" stroke-width="36" stroke-linejoin="miter">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g><g fill="${C.ciano}">${ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")}</g><g fill="${C.asfalto}">${PATHS.studio.map(d=>`<path d="${d}"/>`).join("")}</g>`;
 
 /* palco do mergulho: imagem em "cover" com a tela do PC por cima */
-const DV={v:{src:"img/mergulho-v.webp",W:941,H:1672,quad:"178,500 806,522 806,800 178,800",line:[178,806,650],lg:[230,633,.802,.9]},
-          h:{src:"img/mergulho-h.webp",W:1672,H:941,quad:"586,172 1297,172 1297,470 586,470",line:[586,1297,374],lg:[593,300,.961,.987]}};
+const DV={v:{src:"img/mergulho-v-off.webp",W:941,H:1672,scr:[172,500,806,905],lg:[230,634,.801,.913]},
+          h:{src:"img/mergulho-h-off.webp",W:1672,H:941,scr:[528,166,1300,570],lg:[591,300,.966,.987]}};
 let dvK=null;
 (function buildScreens(){const host=document.getElementById("dstage");
-  const LG=ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join("")+PATHS.studio.map(dd=>`<path d="${dd}"/>`).join("");
+  const M=ORDER.map(k=>`<path d="${PATHS.main[k]}"/>`).join(""),ST=PATHS.studio.map(dd=>`<path d="${dd}"/>`).join("");
   host.querySelector(".dscr").remove();
-  Object.entries(DV).forEach(([k,d],n)=>{const [x0,x1,ym]=d.line,[lx,ly,sx,sy]=d.lg,tx=lx-623*sx,ty=ly-465*sy;
+  Object.entries(DV).forEach(([k,d])=>{const [x0,y0,x1,y1]=d.scr,[lx,ly,sx,sy]=d.lg,tx=lx-623*sx,ty=ly-465*sy,ym=(y0+y1)/2;
     const sv=document.createElementNS("http://www.w3.org/2000/svg","svg");sv.setAttribute("class","dscr");sv.dataset.k=k;sv.setAttribute("viewBox",`0 0 ${d.W} ${d.H}`);sv.setAttribute("preserveAspectRatio","none");sv.setAttribute("aria-hidden","true");
-    sv.innerHTML=`<defs><linearGradient id="ngr${k}" class="ngr" gradientUnits="userSpaceOnUse" x1="623" y1="0" x2="1296" y2="0" spreadMethod="reflect"><stop offset="0" stop-color="#00FFDA"/><stop offset=".5" stop-color="#4D7CFF"/><stop offset="1" stop-color="#FF2E93"/></linearGradient>
-      <filter id="nbl${k}" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="7"/></filter><filter id="qbl${k}"><feGaussianBlur stdDeviation="2.5"/></filter></defs>
-      <polygon points="${d.quad}" fill="#050608" filter="url(#qbl${k})"/>
-      <rect class="pl" x="${x0}" y="${ym-1.5}" width="${x1-x0}" height="3" fill="#E9FFFB" style="transform-origin:${(x0+x1)/2}px ${ym}px;transform:scaleX(0)"/><rect class="pf" x="${x0}" y="${ym-150}" width="${x1-x0}" height="300" fill="#bffcf2" opacity="0"/>
+    sv.innerHTML=`<defs><clipPath id="sc${k}"><rect x="${x0}" y="${y0}" width="${x1-x0}" height="${y1-y0}"/></clipPath><filter id="gl${k}" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="9"/></filter><filter id="gs${k}" x="-10%" y="-40%" width="120%" height="180%"><feGaussianBlur stdDeviation="2.5"/></filter></defs>
+      <g clip-path="url(#sc${k})"><rect class="pl" x="${x0}" y="${ym-1.5}" width="${x1-x0}" height="3" fill="#EFFFFC" style="transform-origin:${(x0+x1)/2}px ${ym}px;transform:scaleX(0)"/><rect class="pf" x="${x0}" y="${y0}" width="${x1-x0}" height="${y1-y0}" fill="#9ff7ea" opacity="0"/>
       <g transform="matrix(${sx} 0 0 ${sy} ${tx} ${ty})">
-        <g class="nglow" fill="none" stroke="url(#ngr${k})" stroke-width="10" filter="url(#nbl${k})" opacity="0">${LG}</g>
-        <g class="nfill" fill="url(#ngr${k})" fill-opacity="0">${LG}</g>
-        <g class="nline" fill="none" stroke="url(#ngr${k})" stroke-width="2.6">${LG}</g>
-      </g>`;
+        <g class="nglow" fill="none" stroke="#00FFDA" stroke-width="9" filter="url(#gl${k})" opacity="0">${M}${ST}</g>
+        <g class="nfill" fill-opacity="0"><g fill="#00FFDA">${M}</g><g fill="#F2EFE9">${ST}</g></g>
+        <g class="ntube" fill="none" stroke="#00FFDA" stroke-width="4.5" filter="url(#gs${k})">${M}${ST}</g>
+        <g class="nline" fill="none" stroke="#EFFFFC" stroke-width="1.6">${M}${ST}</g>
+      </g></g>`;
     host.appendChild(sv);
-    sv.querySelectorAll(".nline path").forEach(p=>{const L=p.getTotalLength()||800;p.style.strokeDasharray=L;p.style.strokeDashoffset=L;p.dataset.len=L});
+    sv.querySelectorAll(".nline path,.ntube path").forEach(p=>{const L=p.getTotalLength()||800;p.style.strokeDasharray=L;p.style.strokeDashoffset=L;p.dataset.len=L});
   });})();
 function layoutDive(){const vw=innerWidth,vh=innerHeight,k=vw/vh>=1?"h":"v",d=DV[k];const st=document.getElementById("dstage"),im=document.getElementById("dimg");
   const sc=Math.max(vw/d.W,vh/d.H),w=d.W*sc,h=d.H*sc,l=(vw-w)/2,t=(vh-h)/2;
@@ -1075,31 +1077,32 @@ if(window.gsap&&window.ScrollTrigger){
   /* mergulho: entra no estúdio e o PC liga */
   if(!reduce){
     gsap.set(".dive .dcopy > *",{opacity:0,y:30});
-    gsap.utils.toArray(".ngr").forEach(g=>gsap.to(g,{attr:{x1:623+1346,x2:1296+1346},duration:5,repeat:-1,ease:"none"}));
     const Q=sel=>gsap.utils.toArray("#dstage "+sel);
-    gsap.timeline({scrollTrigger:{trigger:"#mergulho",start:"top top",end:"+=150%",scrub:.6,pin:true}})
-      .fromTo("#dstage",{scale:1.18},{scale:1,duration:1.4,ease:"none"},0)
-      .fromTo(Q(".pl"),{scaleX:0,opacity:1},{scaleX:1,duration:.1,ease:"power2.out"},.15)
-      .fromTo(Q(".pf"),{opacity:0},{opacity:.55,duration:.04},.25)
-      .fromTo(Q(".pl"),{opacity:1},{opacity:0,duration:.05,immediateRender:false},.27)
-      .fromTo(Q(".pf"),{opacity:.55},{opacity:0,duration:.12,immediateRender:false},.29)
-      .fromTo(Q(".nline path"),{strokeDashoffset:(i,el)=>el.dataset.len},{strokeDashoffset:0,duration:.4,stagger:.02,ease:"power1.inOut"},.35)
-      .fromTo(Q(".nglow"),{opacity:0},{opacity:.9,duration:.25},.45)
-      .fromTo(Q(".nfill"),{fillOpacity:0},{fillOpacity:1,duration:.28},.75)
-      .fromTo(".dive",{"--sh":0},{"--sh":1,duration:.3},.85)
-      .fromTo(".dive .dcopy > *",{opacity:0,y:30},{opacity:1,y:0,stagger:.08,duration:.3},.9)
-      .to({},{duration:.2});
+    gsap.timeline({scrollTrigger:{trigger:"#mergulho",start:"top top",end:"+=170%",scrub:.6,pin:true}})
+      .fromTo("#dstage",{scale:1.15},{scale:1,duration:1.4,ease:"none"},0)
+      .fromTo(Q(".pl"),{scaleX:0,opacity:1},{scaleX:1,duration:.08,ease:"power2.out"},.12)
+      .fromTo(Q(".pf"),{opacity:0},{opacity:.35,duration:.03},.2)
+      .fromTo(Q(".pl"),{opacity:1},{opacity:0,duration:.04,immediateRender:false},.22)
+      .fromTo(Q(".pf"),{opacity:.35},{opacity:0,duration:.1,immediateRender:false},.24)
+      .fromTo(Q(".nline path,.ntube path"),{strokeDashoffset:(i,el)=>el.dataset.len},{strokeDashoffset:0,duration:.42,stagger:.012,ease:"power1.inOut"},.3)
+      .fromTo(Q(".nglow"),{opacity:0},{opacity:1,duration:.3,ease:x=>x<.3?0:x<.4?1:x<.5?.2:x<.6?1:x<.7?.4:1},.5)
+      .fromTo(Q(".nfill"),{fillOpacity:0},{fillOpacity:1,duration:.25},.82)
+      .fromTo(Q(".nline"),{opacity:1},{opacity:.25,duration:.25,immediateRender:false},.82)
+      .fromTo(".dive",{"--sh":0},{"--sh":1,duration:.3},.95)
+      .fromTo(".dive .dcopy > *",{opacity:0,y:30},{opacity:1,y:0,stagger:.08,duration:.3},1)
+      .to({},{duration:.25});
   }
   /* peça por peça: as letras de acrílico (recortadas da foto) deslizam e se encaixam de verdade */
   {const smf=document.getElementById("smf"),sp=gsap.utils.toArray("#smf .lt"),neon=smf.querySelector(".neon"),mesa=smf.querySelector(".mesa"),tt=document.getElementById("smt");
    const SEED={c:[-2,-30,-14],r:[42,-28,20],i:[-6,-26,-10],a:[-8,17,28],s:[4,29,-22],st:[-16,36,-58]},ORD=["c","r","i","a","s","st"];
    const lateE=(a,d,e="power3.inOut")=>{const f=gsap.parseEase(e);return x=>x<=a?0:x>=a+d?1:f((x-a)/d)};
    if(!reduce){
-     const tl=gsap.timeline({scrollTrigger:{trigger:"#montagem",start:"top top",end:"+=200%",scrub:.6,pin:true,invalidateOnRefresh:true}});
+     const tl=gsap.timeline({scrollTrigger:{trigger:"#montagem",start:"top top",end:"+=380%",scrub:.8,pin:true,invalidateOnRefresh:true}});
+     const bh=()=>Math.min(smf.offsetHeight,innerHeight*.95);
      tl.fromTo(mesa,{scale:1.08},{scale:1,duration:1,ease:"none"},0);
-     sp.forEach(el=>{const k=el.dataset.k,[dx,dy,r]=SEED[k],st=ORD.indexOf(k)*.085;
-       tl.fromTo(el,{x:()=>dx/100*smf.offsetWidth,y:()=>dy/100*smf.offsetHeight,rotation:r,scale:1.06},{x:0,y:0,rotation:0,scale:1,duration:1,ease:lateE(st,.38)},0)});
-     tl.fromTo(neon,{opacity:0},{opacity:1,duration:1,ease:x=>x<.84?0:x>.95?1:[0,1,0,1,.35,1,1][Math.floor((x-.84)/.11*7)]??1},0)
+     sp.forEach(el=>{const k=el.dataset.k,[dx,dy,r]=SEED[k],st=.04+ORD.indexOf(k)*.12;
+       tl.fromTo(el,{x:()=>dx/100*smf.offsetWidth,y:()=>dy/100*bh(),rotation:r,scale:1.06},{x:0,y:0,rotation:0,scale:1,duration:1,ease:lateE(st,.24)},0)});
+     tl.fromTo(neon,{opacity:0},{opacity:1,duration:1,ease:x=>x<.86?0:x>.95?1:[0,1,0,1,.35,1,1][Math.floor((x-.86)/.09*7)]??1},0)
        .fromTo(tt,{clipPath:"inset(0 100% 0 0)"},{clipPath:"inset(0 0% 0 0)",duration:1,ease:lateE(.9,.1,"power2.out")},0);
    }else{neon.style.opacity=1;tt.style.clipPath="none"}
   }
