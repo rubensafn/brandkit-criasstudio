@@ -51,8 +51,7 @@ img,svg{display:block;max-width:100%}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 a{color:inherit}
 ::selection{background:var(--ciano);color:var(--asfalto)}
-.grain{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:90;opacity:.07;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
 .cut-r{clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut))}
 .cs{--cut:6px}
 .words span,.rules li,.pair .st,.sw .cp,.toast,.feed,.traits div{clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))}
@@ -62,6 +61,7 @@ a{color:inherit}
 .wrap{padding:0 var(--pad);max-width:1440px;margin:0 auto}
 section{position:relative}
 
+.grain{position:fixed;inset:0;pointer-events:none;z-index:89;opacity:.06;background:url(img/grain.png) repeat;background-size:128px 128px;transform:translateZ(0)}
 /* progress + header */
 .prog{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--grad);z-index:80}
 .hdr{position:fixed;top:0;left:0;right:0;z-index:70;display:flex;align-items:center;justify-content:space-between;padding:16px var(--pad);pointer-events:none}
@@ -96,7 +96,8 @@ section{position:relative}
 .hero .hint i{display:block;width:1px;height:38px;margin:10px auto 0;background:linear-gradient(var(--ciano),transparent);animation:drip 1.8s infinite}
 @keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
-canvas.ink{position:absolute;inset:0;width:100%;height:100%;display:block}
+canvas.ink,video.ink{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
+html.lite .hero .orb{display:none}
 .hero.gl .orb{display:none}
 html.lite .orb{filter:none;opacity:.5;background:radial-gradient(circle at 35% 40%,rgba(0,255,218,.5),transparent 55%),radial-gradient(circle at 65% 60%,rgba(255,46,147,.45),transparent 55%),radial-gradient(circle at 50% 50%,rgba(77,124,255,.4),transparent 60%)}
 .paper{position:relative;isolation:isolate}
@@ -534,7 +535,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
 
 <main>
 <section class="hero" id="inicio">
-  <canvas class="ink" id="inkHero" aria-hidden="true"></canvas><div class="orb" aria-hidden="true"></div>
+  <canvas class="ink" id="inkHero" aria-hidden="true"></canvas><div class="orb" aria-hidden="true"></div><video class="ink vloop litev" muted loop playsinline preload="none" aria-hidden="true"><source src="vid/tinta.webm" type="video/webm"><source src="vid/tinta.mp4" type="video/mp4"></video>
   <p class="corner">Brand kit · 2026</p>
   <svg class="logo" id="heroLogo" viewBox="616 458 688 164" role="img" aria-label="CRIAS Studio"></svg>
   <div class="tag"><p>Estúdio criativo</p></div>
@@ -772,7 +773,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
     <div class="mgrid" id="mgrid">
       <div class="mdemo cut"><div class="stg" id="dm1"><svg class="mlogo" viewBox="616 458 688 164"></svg></div><div class="txt"><h4><b>01</b>Monta, não aparece</h4><p>Elementos entram em peças e se encaixam. O logo nunca surge pronto.</p></div></div>
       <div class="mdemo cut"><div class="stg" id="dm2"><div class="wipe"><div class="lg" data-lg="preto"></div></div></div><div class="txt"><h4><b>02</b>Corta em 12°</h4><p>Transições de cena usam o ângulo da marca, nunca um fade comum.</p></div></div>
-      <div class="mdemo cut"><div class="stg" id="dm3"><canvas class="ink" id="inkDemo"></canvas></div><div class="txt"><h4><b>03</b>Tinta muda de cena</h4><p>Pra trocar de assunto, a tinta toma a tela. Usar uma vez por peça.</p></div></div>
+      <div class="mdemo cut"><div class="stg" id="dm3"><video class="ink vloop" muted loop playsinline preload="none" aria-hidden="true"><source src="vid/tinta.webm" type="video/webm"><source src="vid/tinta.mp4" type="video/mp4"></video></div><div class="txt"><h4><b>03</b>Tinta muda de cena</h4><p>Pra trocar de assunto, a tinta toma a tela. Usar uma vez por peça.</p></div></div>
       <div class="mdemo cut"><div class="stg" id="dm4"><i class="dot"></i><p class="punch">Bora<em>?</em></p></div><div class="txt"><h4><b>04</b>Respira antes do impacto</h4><p>Uma pausa curta antes do momento forte. O silêncio faz o impacto.</p></div></div>
     </div>
     <div class="tok cut blk" style="padding-bottom:0;margin-bottom:clamp(56px,8vw,110px)">
@@ -805,7 +806,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
     </div>
     <div class="stories blk" id="storiesRow">
       <div><div class="phone"><div class="scr"><div class="lg" data-lg="preto"></div><h5>Novo<br>projeto<br>no ar.</h5><p>@criasstudio</p></div></div><p class="cap2">Lançamento</p></div>
-      <div><div class="phone"><div class="scr" style="background:var(--asfalto);padding:0"><canvas class="ink" id="inkStory"></canvas><div style="position:absolute;inset:0;padding:16% 9% 12%;display:flex;flex-direction:column;justify-content:space-between"><div class="lg" data-lg="principal"></div><h5 style="color:var(--cal)">Por trás<br>do <span style="color:var(--ciano)">recorte.</span></h5><p style="color:var(--cal)">Bastidores</p></div></div></div><p class="cap2">Bastidores</p></div>
+      <div><div class="phone"><div class="scr" style="background:var(--asfalto);padding:0"><video class="ink vloop" muted loop playsinline preload="none" aria-hidden="true"><source src="vid/tinta.webm" type="video/webm"><source src="vid/tinta.mp4" type="video/mp4"></video><div style="position:absolute;inset:0;padding:16% 9% 12%;display:flex;flex-direction:column;justify-content:space-between"><div class="lg" data-lg="principal"></div><h5 style="color:var(--cal)">Por trás<br>do <span style="color:var(--ciano)">recorte.</span></h5><p style="color:var(--cal)">Bastidores</p></div></div></div><p class="cap2">Bastidores</p></div>
       <div><div class="phone"><div class="scr paper" style="background:var(--cal)"><div class="lg" data-lg="preto"></div><h5>Qual<br>marca<br>a gente<br><span style="color:#D41A74">cria</span><br>agora?</h5><p>Responde aí ↓</p></div></div><p class="cap2">Interação</p></div>
     </div>
   </div>
@@ -870,6 +871,7 @@ footer p{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:u
   <svg class="flogo" id="flogo" viewBox="616 458 688 164" role="img" aria-label="CRIAS Studio"></svg>
   <p>© 2026 CRIAS STUDIO · Goiânia · GO</p>
 </footer>
+<div class="grain" aria-hidden="true"></div>
 <div class="toast" id="toast" role="status"></div>
 <div class="cur" id="cur" aria-hidden="true"></div>
 <nav class="snav" id="snav" aria-label="Seções"></nav>
@@ -1033,8 +1035,9 @@ const inkHero=LITE?null:makeInk(document.getElementById("inkHero"),{scale:MOB?.2
 if(inkHero)document.querySelector(".hero").classList.add("gl");
 const inkFlood=LITE?null:makeInk(document.getElementById("inkFlood"),{scale:MOB?.28:.4,dim:.9});
 if(!inkFlood)document.getElementById("flood").style.background="var(--ciano)";
-const inkDemo=null,inkStory=null;
-document.querySelectorAll("#inkDemo,#inkStory").forEach(c=>c.style.background="radial-gradient(circle at 30% 35%,rgba(0,255,218,.55),transparent 55%),radial-gradient(circle at 70% 70%,rgba(255,46,147,.5),transparent 55%),radial-gradient(circle at 60% 30%,rgba(77,124,255,.45),transparent 50%),#0E0F11");
+/* tinta em vídeo leve: toca só quando aparece na tela */
+{const io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting){if(v.preload!=="auto")v.preload="auto";const pr=v.play();pr&&pr.catch(()=>{})}else v.pause()}),{rootMargin:"200px"});
+ document.querySelectorAll("video.vloop").forEach(v=>{if(v.classList.contains("litev")&&!LITE){v.remove();return}io.observe(v)});}
 if(reduceInk){inkHero&&inkHero.stop();}
 
 /* motion demo logo + social bits */
