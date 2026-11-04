@@ -1394,6 +1394,11 @@ if(window.gsap&&window.ScrollTrigger){
   ScrollTrigger.create({start:()=>innerHeight*.8,end:"max",onToggle:e=>{pastHero=e.isActive;totop.classList.toggle("on",e.isActive);if(e.isActive)wake();else snav.classList.remove("on")}});
   const hdr=document.getElementById("hdr");
   ScrollTrigger.create({trigger:"#cria",start:"top 70%",onEnter:()=>hdr.classList.add("on"),onLeaveBack:()=>hdr.classList.remove("on")});
+  /* freio no celular: se o dedo vem rápido e entra numa seção que monta, para no começo dela */
+  if(MOB&&!reduce){ScrollTrigger.getAll().filter(t=>t.pin&&t.trigger&&t.trigger.id!=="inicio").forEach(t=>{
+    const brake=(y)=>{try{window.scrollTo({top:y,behavior:"instant"})}catch(e){window.scrollTo(0,y)}};
+    ScrollTrigger.create({start:()=>t.start,end:()=>t.end,
+      onEnter:self=>{if(Math.abs(self.getVelocity())>2200)brake(t.start+1)},onEnterBack:self=>{if(Math.abs(self.getVelocity())>2200)brake(t.end-1)}})})}
   addEventListener("load",()=>ScrollTrigger.refresh());
   if(document.fonts)document.fonts.ready.then(()=>ScrollTrigger.refresh());
 }else{document.getElementById("hdr").classList.add("on")}
