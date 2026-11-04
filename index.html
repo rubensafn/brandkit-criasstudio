@@ -159,7 +159,6 @@ footer .flogo{width:100%;overflow:visible}
 .laje .lt em{font-style:normal;color:var(--ciano)}
 .laje .lcap{position:absolute;left:var(--pad);bottom:22px;z-index:5;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(242,239,233,.75)}
 .lcard{position:absolute;inset:0;clip-path:none}
-.laje .l2{z-index:1}.laje .lt{z-index:2;text-shadow:0 4px 24px rgba(14,15,17,.55)}.laje .l3{z-index:3}
 @media(min-width:900px) and (min-aspect-ratio:1/1){
   .laje img{object-position:50% 50%}
   .laje .lt{top:7svh;font-size:clamp(64px,8vw,150px)}
@@ -1236,7 +1235,7 @@ if(window.gsap&&window.ScrollTrigger){
   if(!reduce){
     gsap.timeline({scrollTrigger:{trigger:"#laje",start:"top top",end:"+=160%",scrub:1,pin:true}})
       .fromTo("#laje .l1",{yPercent:0,scale:1.05},{yPercent:-3,scale:1,ease:"none"},0)
-      .fromTo("#laje .lt",{yPercent:60},{yPercent:-55,ease:"none"},0).fromTo("#laje .lt",{opacity:0},{opacity:1,duration:.2,ease:"none"},0)
+      .fromTo("#laje .lt",{yPercent:60,opacity:0},{yPercent:-55,opacity:1,ease:"none"},0)
       .fromTo("#laje .l2",{yPercent:6,scale:1.1,transformOrigin:"50% 100%"},{yPercent:-2,scale:matchMedia("(max-width:700px)").matches?.93:1,ease:"none"},0)
       .fromTo("#laje .l3",{yPercent:-6,scale:1.12,transformOrigin:"50% 100%"},{yPercent:38,scale:1.3,ease:"none"},0);
   }
